@@ -1,0 +1,130 @@
+.classroom-list {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.classroom-card {
+	position: relative;
+	overflow: hidden;
+	background: #fff;
+	border: 1px solid #e6ebf2;
+	border-radius: 8px;
+	box-shadow: 0 2px 7px rgba(15, 23, 42, 0.08);
+	display: flex;
+	flex-direction: column;
+	min-height: 212px;
+	padding: 28px 22px 22px;
+}
+
+.classroom-card::before {
+	content: "";
+	position: absolute;
+	inset: 0 0 auto;
+	height: 6px;
+	background: #155cff;
+}
+
+.classroom-card--1::before {
+	background: #5b2eff;
+}
+
+.classroom-card--2::before {
+	background: #0798b4;
+}
+
+.classroom-card--3::before {
+	background: #049f70;
+}
+
+.class-subjectcode {
+	align-self: flex-start;
+	background: #f0f4f9;
+	border-radius: 5px;
+	color: #020817;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	font-size: 10px;
+	font-weight: 800;
+	letter-spacing: 0;
+	padding: 6px 10px;
+	text-transform: uppercase;
+}
+
+
+
+.class-title {
+	color: #020817;
+	font-size: 17px;
+	line-height: 1.25;
+	font-weight: 700;
+	margin: 18px 0 10px;
+}
+
+.instructor,
+.classroom-meta {
+	color: #4e6281;
+	font-size: 14px;
+	line-height: 1.25;
+}
+
+.instructor,
+.classroom-meta span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.classroom-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin-top: 10px;
+}
+
+svg {
+	width: 15px;
+	height: 15px;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
+}
+
+.btn {
+	margin-top: auto;
+	height: 35px;
+	border: 1px solid #dfe7f1;
+	border-radius: 5px;
+	background: #f3f7fc;
+	color: #020817;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 700;
+	padding: 0 15px 0 16px;
+	cursor: pointer;
+}
+
+.btn svg {
+	color: #8aa0bc;
+	width: 16px;
+	height: 16px;
+}
+
+.empty {
+	grid-column: 1 / -1;
+	color: #4e6281;
+	background: #ffffff;
+	border: 1px solid #e6ebf2;
+	border-radius: 8px;
+	padding: 22px;
+}
+
+@media (max-width: 700px) {
+	.classroom-list {
+		grid-template-columns: 1fr;
+	}
+}
+

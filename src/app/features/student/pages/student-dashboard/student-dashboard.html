@@ -1,0 +1,35 @@
+<div class="student-dashboard">
+    <header class="dashboard-header">
+        <h1>Welcome back, {{ authService.getUserName() }}!</h1>
+        <p>Here is what is happening with your classes today.</p>
+    </header>
+
+    <app-stats-card [statsCards]="statsCards()"></app-stats-card>
+
+    <div class="dashboard-grid">
+        <section class="classrooms-section">
+            <div class="section-heading">
+                <h2>Enrolled Classrooms</h2>
+                <button class="ghost-btn" type="button">View All</button>
+            </div>
+            <app-classroom-list [classrooms]="classrooms()" (leaveClassroom)="leaveClassroom($event)"></app-classroom-list>
+        </section>
+
+        <aside class="dashboard-sidebar">
+            <section class="join-panel">
+                <h2>Join a Classroom</h2>
+                <div class="join-card">
+                    <p>Enter the join code provided by your instructor to access classroom materials and quizzes.</p>
+                    <div class="join-form">
+                        <input type="text" placeholder="E.G. CS101-2024" [(ngModel)]="classroomCode">
+                        <button class="btn" type="button" (click)="joinClassroom()">Join</button>
+                    </div>
+                </div>
+            </section>
+
+            <app-upcoming-quizzes [upcomingQuizzes]="upcomingQuizzes()"></app-upcoming-quizzes>
+            <app-quiz-activity [quizActivities]="quizActivities()"></app-quiz-activity>
+        </aside>
+    </div>
+</div>
+

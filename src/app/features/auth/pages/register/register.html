@@ -1,0 +1,56 @@
+<form [formRoot]="registerForm" class="register-form">
+	<h2>Create an account</h2>
+	<div class="row">
+		<label class="field">
+			First name
+			<input placeholder="First name" [formField]="registerForm.fname" />
+		</label>
+		<label class="field">
+			Last name
+			<input placeholder="Last name" [formField]="registerForm.lname" />
+		</label>
+	</div>
+
+	<label class="field full">
+		Email
+		<input type="email" placeholder="you@school.edu" [formField]="registerForm.email" />
+	</label>
+    @if(registerForm.email().invalid()) {
+      <div class="error">
+        
+          <p style="color: red;">hoy mali</p>
+        
+      </div>
+    }
+
+	<div class="row">
+		<label class="field">
+			Password
+			<input type="password" placeholder="Password" [formField]="registerForm.password" />
+		</label>
+		<label class="field">
+			Confirm
+			<input type="password" placeholder="Confirm password" [formField]="registerForm.confirmPassword" />
+		</label>
+
+        @if(registerForm.confirmPassword().invalid()) {
+            <p>djajja</p>
+        }
+          
+	</div>
+
+	<div class="row">
+		<label class="field">
+			Student ID
+			<input placeholder="Student ID" [formField]="registerForm.studentId" />
+		</label>
+		<label class="field">
+			Section
+			<input placeholder="Section" [formField]="registerForm.section" />
+		</label>
+	</div>
+
+	<div class="actions">
+		<button type="submit" class="primary">Register</button>
+	</div>
+</form>

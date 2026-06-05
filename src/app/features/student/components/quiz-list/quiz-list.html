@@ -1,0 +1,27 @@
+<section class="quiz-list">
+	<h3 class="quiz-list-title">Quizzes</h3>
+
+	@if(!quizzes() || quizzes()!.length === 0) {
+		<div class="empty">No quizzes available.</div>
+	} @else {
+		<ul class="quizzes">
+			@for (quiz of quizzes(); track quiz.id) {
+				<div class="quiz-main">
+					<div class="quiz-info">
+						<h4 class="quiz-title">{{ quiz.quizTitle}}</h4>
+						<div class="quiz-meta">
+							<span>{{ quiz.numberOfQuestions }} questions</span>
+							<span class="sep">•</span>
+							<span>{{ quiz.duration }} min</span>
+						</div>
+					</div>
+					<div class="quiz-side">
+						<span class="due">Due: {{ quiz.dueDate }}</span>
+						<span class="status" [ngClass]="quiz.status">{{ quiz.status }}</span>
+					</div>
+				</div>
+            }
+		</ul>
+	}
+</section>
+

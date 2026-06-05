@@ -1,0 +1,30 @@
+<div class="classroom-dialog">
+	<h3>Create Classroom</h3>
+    <form [formRoot]="classroomForm">
+        <label class="field">
+		<span>Title</span>
+		<input
+			type="text"
+			[formField]="classroomForm.classroomTitle"
+			placeholder="Enter classroom title"
+		/>
+	</label>
+	<div class="meta">{{ classroomModel().classroomTitle.length }}/50</div>
+
+	<label class="field">
+		<span>Description</span>
+		<textarea
+			[formField]="classroomForm.description"
+			placeholder="Short description (optional)"
+			rows="4"
+		></textarea>
+	</label>
+	<div class="meta">{{ classroomModel().description.length }}/100</div>
+
+	<div class="actions">
+		<button type="submit">Create</button>
+	</div>
+    </form>
+	
+</div>
+

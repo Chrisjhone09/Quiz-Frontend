@@ -1,0 +1,31 @@
+@if(upcomingQuizzes()!.length > 0) {
+    <div class="upcoming-quizzes">
+        <h2>Upcoming Quizzes</h2>
+        @for (quiz of upcomingQuizzes(); track quiz.id) {
+        <div class="quiz-card">
+            <div class="quiz-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="m10 8 6 4-6 4V8Z"></path>
+                </svg>
+            </div>
+            <div class="quiz-details">
+                <h3>{{ quiz.quizTitle }}</h3>
+                <p>{{ quiz.classroomTitle }}</p>
+                <div class="quiz-meta">
+                    <span>Due {{ quiz.dueDate }}</span>
+                    <span>{{ quiz.status }}</span>
+                </div>
+            </div>
+            <svg class="quiz-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m9 18 6-6-6-6"></path>
+            </svg>
+        </div>
+        }
+    </div>
+}
+@else {
+    <div class="no-quizzes">
+        <p>No upcoming quizzes at the moment. Check back later!</p>
+    </div>
+}

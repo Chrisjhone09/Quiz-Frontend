@@ -1,0 +1,27 @@
+
+.app-header{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:12px 20px;
+	background:#ffffff;
+	border-bottom:1px solid #e5e7eb;
+	box-sizing:border-box;
+}
+.app-title{
+	font-size:1.1rem;
+	font-weight:700;
+	color:#111827;
+}
+.header-right .user-info{
+	text-align:right;
+}
+.user-name{
+	font-weight:700;
+	color:#111827;
+}
+.user-role{
+	font-size:.85rem;
+	color:#6b7280;
+	margin-top:4px;
+}

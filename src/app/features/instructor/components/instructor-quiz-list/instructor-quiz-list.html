@@ -1,0 +1,30 @@
+<!-- Instructor Quiz List Table -->
+<table class="instructor-quiz-table" role="table" aria-label="Instructor quizzes">
+	<thead>
+		<tr>
+			<th scope="col">Title</th>
+			<th scope="col">Questions</th>
+			<th scope="col">Duration</th>
+			<th scope="col">Publish Date</th>
+			<th scope="col">Due Date</th>
+			<th scope="col">Status</th>
+			<th scope="col">Submissions</th>
+			<th scope="col">Avg Score</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for(quiz of quizzes(); track quiz.id){
+			<tr>
+			<td data-label="Title">{{ quiz.quizTitle }}</td>
+			<td class="center" data-label="Questions">{{ quiz.numberOfQuestions }}</td>
+			<td class="center" data-label="Duration">{{ quiz.duration }} min</td>
+			<td class="center" data-label="Publish Date">{{ quiz.publishDate }}</td>
+			<td class="center" data-label="Due Date">{{ quiz.dueDate }}</td>
+			<td class="center" data-label="Status">{{quiz.status}}</td>
+			<td class="center" data-label="Submissions">{{ quiz.submissions }}</td>
+			<td class="center" data-label="Avg Score">{{ quiz.averageScore }}</td>
+		</tr>
+		}
+		
+	</tbody>
+</table>

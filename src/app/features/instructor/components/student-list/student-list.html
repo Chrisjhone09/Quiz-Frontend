@@ -1,0 +1,5 @@
+@if(students().length) {
+    @for(student of students(); track student.id ){
+        <p>{{student.lastName.toUpperCase()}}, {{student.firstName}} {{student.middleName[0]}}</p>
+    }
+}

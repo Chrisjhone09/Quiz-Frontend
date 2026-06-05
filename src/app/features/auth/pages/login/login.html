@@ -1,0 +1,19 @@
+<form [formRoot]="loginForm" class="auth-form">
+    <h2>Sign in</h2>
+
+    <label class="field full">
+        Email
+        <input type="email" placeholder="you@school.edu" [formField]="loginForm.email" />
+    </label>
+
+    <label class="field full">
+        Password
+        <input type="password" placeholder="Password" [formField]="loginForm.password" />
+    </label>
+
+    <div class="actions">
+        <button type="submit" class="primary">Sign in</button>
+    </div>
+
+    <p class="muted">Don't have an account? <a href="/register">Register</a></p>
+</form>

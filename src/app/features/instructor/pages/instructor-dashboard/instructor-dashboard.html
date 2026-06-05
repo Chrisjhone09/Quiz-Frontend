@@ -1,0 +1,3 @@
+<app-stats-card [statsCards]="statsCard()"></app-stats-card>
+<button (click)="openDialog()">Create new classroom</button>
+<app-classroom-list [classrooms]="classrooms()" (leaveClassroom)="leaveClassroom($event)" (updateClassroom)="updateClassroom($event)"></app-classroom-list>

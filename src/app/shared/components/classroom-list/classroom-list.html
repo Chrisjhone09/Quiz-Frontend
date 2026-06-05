@@ -1,0 +1,55 @@
+<div class="classroom-list">
+    @if (classrooms().length > 0) {
+        @for (classroom of classrooms(); track classroom.id) {
+            <article class="classroom-card classroom-card--{{ $index }}">
+                <div class="class-subjectcode">{{ classroom.classCode }}</div>
+                <h3 class="class-title">{{ classroom.classroomTitle }}</h3>
+                @if(auth.getUserRole() !== "Instructor"){
+                    <div class="instructor">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                        <path d="M7 20a5 5 0 0 1 10 0"></path>
+                    </svg>
+                    <span>{{ classroom.instructor }}</span>
+                </div>
+                }
+                
+                <div class="classroom-meta">
+                    <span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                            <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                            <path d="M2 20a6 6 0 0 1 12 0"></path>
+                            <path d="M14 14a5.5 5.5 0 0 1 8 5"></path>
+                        </svg>
+                        {{ classroom.numberOfStudents }}
+                    </span>
+                    <span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7.5A3.5 3.5 0 0 0 4 21.5v-16Z"></path>
+                            <path d="M7.5 18H20"></path>
+                        </svg>
+                        {{ classroom.classCode }}
+                    </span>
+                </div>
+                <a class="btn" type="button" [routerLink]="[auth.getUserRole() === 'Student'? '/student-classroom': '/instructor-classroom', classroom.id]">
+                    <span>View Classroom</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                </a>
+
+                <button (click)="leaveClassroom.emit(classroom.id)">Leave</button>
+                @if(auth.getUserRole() === "Instructor" ){
+                    <button (click)="updateClassroom.emit(classroom.id)">Update</button>
+                }
+                 
+            </article>
+        }
+    }
+    @else {
+        <div class="empty">
+            No classrooms yet.
+        </div>
+    }
+</div>

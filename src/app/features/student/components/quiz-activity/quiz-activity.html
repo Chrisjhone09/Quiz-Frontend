@@ -1,0 +1,30 @@
+@if(quizActivities.length > 0) {
+    <div class="quiz-activity">
+        <h2>Quiz Activity</h2>
+        @for (activity of quizActivities; track $index) {
+        <div class="quiz-card">
+            <div class="quiz-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="m10 8 6 4-6 4V8Z"></path>
+                </svg>
+            </div>
+            <div class="quiz-details">
+                <h3>{{ activity.quizTitle }}</h3>
+                <p>{{ activity.classroomTitle }}</p>
+                <div class="quiz-meta">
+                    <span>Submitted {{ activity.dateSubmitted }}</span>
+                    <span>Score: {{ activity.score }}</span>
+                    <span>Status: {{ activity.status }}</span>
+                </div>
+            </div>
+           
+        </div>
+        }
+    </div>
+}
+@else {
+    <div class="no-quizzes">
+        <p>No quiz activity available.</p>
+    </div>
+}

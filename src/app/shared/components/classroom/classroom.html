@@ -1,0 +1,43 @@
+@if(classroom()) {
+<article class="classroom-card">
+	<header class="classroom-header">
+		<h2 class="classroom-title"> — {{ classroom()?.classroomTitle }}</h2>
+		<div class="classroom-meta">
+			<div class="instructor">
+				<svg viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+					<path d="M7 20a5 5 0 0 1 10 0"></path>
+				</svg>
+				<span>Instructor: {{ classroom()?.instructor }}</span>
+				<span class="dot">•</span>
+				<span>{{ classroom()?.numberOfStudents }} students enrolled</span>
+			</div>
+			<div class="class-code">
+				<span class="code-pill">Class Code: {{ classroom()?.classCode }}</span>
+				<!-- <button class="copy-btn" type="button" (click)="navigator.clipboard?.writeText(classroom.classCode)">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M9 9h6v6H9z"></path>
+							<path d="M5 5h8v8H5z" opacity="0.3"></path>
+						</svg>
+					</button> -->
+			</div>
+		</div>
+	</header>
+
+	<div class="classroom-body">
+		<p class="classroom-description">{{ classroom()?.description }}</p>
+	</div>
+</article>
+@if(auth.getUserRole() === "Student"){
+	<section class="quizzes-section">
+	<app-quiz-list [quizzes]="quizzes()"></app-quiz-list>
+</section>
+}
+
+<a [routerLink]="['/instructor-classroom', classroom()?.id, 'quizzes']">Quizzes</a>
+<a [routerLink]="['/instructor-classroom', classroom()?.id, 'students']">Students</a>
+<router-outlet></router-outlet>
+}
+@else {
+<div class="empty-card">Classroom not found.</div>
+}

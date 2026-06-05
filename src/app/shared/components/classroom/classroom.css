@@ -1,0 +1,89 @@
+.classroom-card {
+	background: #ffffff;
+	border: 1px solid #e6ebf2;
+	border-radius: 8px;
+	padding: 20px;
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+	max-width: 900px;
+}
+
+.classroom-header {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.classroom-title {
+	font-size: 20px;
+	color: #0b1220;
+	margin: 0;
+	font-weight: 800;
+}
+
+.classroom-meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+}
+
+.instructor {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #4e6281;
+	font-size: 13px;
+}
+
+.instructor svg {
+	width: 18px;
+	height: 18px;
+	stroke: currentColor;
+	fill: none;
+}
+
+.dot {
+	margin: 0 6px;
+	color: #9aa6b8;
+}
+
+.class-code {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.code-pill {
+	background: #f3f7fb;
+	border: 1px solid #e6eef8;
+	padding: 6px 10px;
+	border-radius: 6px;
+	font-size: 12px;
+	color: #0b1220;
+}
+
+.copy-btn {
+	background: transparent;
+	border: none;
+	padding: 6px;
+	border-radius: 6px;
+	display: inline-grid;
+	place-items: center;
+	cursor: pointer;
+	color: #6b7280;
+}
+
+.copy-btn svg { width: 16px; height: 16px; }
+
+.classroom-body {
+	margin-top: 12px;
+}
+
+.classroom-description {
+	margin: 0;
+	color: #334155;
+	line-height: 1.6;
+}
+
+.empty-card { color: #6b7280; background: #fff; padding: 14px; border-radius: 8px; border: 1px solid #e6ebf2; }
+

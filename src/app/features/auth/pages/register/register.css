@@ -1,0 +1,27 @@
+:root{
+	--bg: #f7f9fc;
+	--card: #ffffff;
+	--primary: #2563eb;
+	--muted: #6b7280;
+}
+
+.register-form{
+	max-width:520px;
+	margin:24px auto;
+	padding:20px;
+	background:var(--card);
+	border-radius:8px;
+	box-shadow:0 6px 18px rgba(15,23,42,0.06);
+	font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+.register-form h2{
+	margin:0 0 16px 0;
+	font-size:20px;
+}
+.row{display:flex;gap:12px}
+.field{display:flex;flex-direction:column;flex:1;margin-bottom:12px}
+.field.full{width:100%}
+.field input{padding:10px 12px;border:1px solid #e5e7eb;border-radius:6px;font-size:14px}
+.actions{display:flex;justify-content:flex-end;margin-top:6px}
+.primary{background:var(--primary);color:#fff;padding:10px 16px;border-radius:6px;border:none;cursor:pointer}
+.primary:active{transform:translateY(1px)}
