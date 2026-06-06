@@ -1,1 +1,86 @@
-<p>quiz-settings works!</p>
+<form [formRoot]="quizSettingsForm">
+  <aside class="settings-panel">
+    <div class="panel-title">
+      <span class="settings-icon" aria-hidden="true">+</span>
+      <h2>Quiz Settings</h2>
+    </div>
+
+    <label>
+      <span>Quiz Title</span>
+      <input type="text" [formField]="quizSettingsForm.title" />
+    </label>
+
+    <label>
+      <span>Classroom</span>
+      <select [formField]="quizSettingsForm.classroomTitle">
+        @for (classroom of classrooms(); track classroom.id) {
+          <option [value]="classroom.id">{{ classroom.classroomTitle }}</option>
+        }
+
+        @if (!classrooms().length) {
+          <option value="CS101 Data Structures">CS101 Data Structures</option>
+        }
+      </select>
+    </label>
+
+    @if (mode() === 'upload') {
+      <label>
+        <span>Number of Questions</span>
+        <input type="number" [formField]="quizSettingsForm.numberOfQuestions" />
+      </label>
+
+      <label>
+        <span>Difficulty</span>
+        <select [formField]="quizSettingsForm.difficulty">
+          <option value="Mixed">Mixed</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </label>
+
+      <div class="checkbox-group">
+        <span>Question Types</span>
+
+        @for (type of questionTypeOptions; track type) {
+          <label class="checkbox-row">
+            <input
+              type="checkbox"
+              [checked]="isQuestionTypeSelected(type)"
+              (change)="updateQuestionTypes(type, $event)"
+            />
+            <span>{{ type }}</span>
+          </label>
+        }
+      </div>
+
+      <label>
+        <span>Description</span>
+        <input type="text" [formField]="quizSettingsForm.description" />
+      </label>
+
+      <p class="hint">Leave blank to cover all topics</p>
+    }
+
+    @if (mode() === 'review') {
+      <div class="field-grid">
+        <label>
+          <span>Time Limit (min)</span>
+          <input type="number" [formField]="quizSettingsForm.timeLimit" />
+        </label>
+        <label>
+          <span>Passing Score %</span>
+          <input type="number" [formField]="quizSettingsForm.passingScore" />
+        </label>
+      </div>
+
+      <label class="toggle-row">
+        <span>
+          Show Results
+          <small>Students can see score after submit</small>
+        </span>
+        <input type="checkbox" [formField]="quizSettingsForm.autoReleaseScore" />
+      </label>
+    }
+  </aside>
+</form>

@@ -1,2 +1,54 @@
-<app-quiz-settings></app-quiz-settings>
-<input type="file">
+<section class="wizard-page upload-page">
+  <app-quiz-settings
+    mode="upload"
+    quizTitle="Midterm Quiz - Trees"
+    classroom="CS101 Data Structures"
+    (settingsSubmitted)="onQuizSettingsSubmitted($event)"
+  />
+
+  <div class="content-panel">
+    <div class="content-header">
+      <div>
+        <h2>Upload Course Material</h2>
+        <p>Upload your syllabus or lecture slides. The AI will read the content and generate relevant questions.</p>
+      </div>
+    </div>
+
+    <button class="upload-zone" type="button" (click)="onFileSelected()" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+      <span class="upload-icon" aria-hidden="true">^</span>
+      <strong>Drag & drop files here</strong>
+      <span>or click to browse from your device</span>
+      <span class="browse-button">Browse Files</span>
+      <small>Supports PDF, DOCX, PPTX</small>
+    </button>
+
+    <section class="uploaded-section">
+      <h3>Uploaded Files</h3>
+
+      @for (file of uploadedFiles(); track file.id) {
+        <article class="file-card">
+          <div class="file-meta">
+            <span class="file-icon" aria-hidden="true">PDF</span>
+            <div>
+              <strong>{{ file.name }}</strong>
+              <span>{{ file.size }}</span>
+            </div>
+          </div>
+          <span class="status-badge">{{ file.status }}</span>
+          <button class="icon-button" type="button" aria-label="Remove file" (click)="removeFile(file.id)">x</button>
+        </article>
+      }
+
+      <button class="secondary-action" type="button" (click)="onFileSelected()">+ Add More Files</button>
+    </section>
+
+    <div class="notice">
+      <strong>For best results, upload a structured syllabus or slide deck.</strong>
+      <span>The AI performs better with clearly organized content.</span>
+    </div>
+  </div>
+
+  <div class="page-actions">
+    <button class="primary-button" type="button" (click)="generateQuiz()">Generate Quiz</button>
+  </div>
+</section>

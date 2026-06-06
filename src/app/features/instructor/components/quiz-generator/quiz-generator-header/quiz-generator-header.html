@@ -1,1 +1,40 @@
-<p>quiz-generator-header works!</p>
+<header class="wizard-header">
+  <div class="header-brand">
+    <a class="back-link" routerLink="/instructor-dashboard" aria-label="Back to dashboard">
+      <span aria-hidden="true">&lt;</span>
+    </a>
+    <div>
+      <h1>AI Quiz Generator</h1>
+      <p>CS101 Data Structures</p>
+    </div>
+  </div>
+
+  <nav class="stepper" aria-label="Quiz generator progress">
+    @for (step of steps; track step.path; let index = $index) {
+      <a
+        class="step"
+        [class.step-active]="isActive(index)"
+        [class.step-completed]="isCompleted(index)"
+        [class.step-future]="!isActive(index) && !isCompleted(index)"
+        [routerLink]="step.path"
+      >
+        <span class="step-marker">
+          @if (isCompleted(index)) {
+            <span aria-hidden="true">&#10003;</span>
+          } @else {
+            {{ index + 1 }}
+          }
+        </span>
+        <span class="step-label">{{ step.label }}</span>
+      </a>
+
+      @if (index < steps.length - 1) {
+        <span
+          class="step-line"
+          [class.step-line-completed]="index < activeIndex()"
+          aria-hidden="true"
+        ></span>
+      }
+    }
+  </nav>
+</header>

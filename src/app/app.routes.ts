@@ -43,7 +43,7 @@ export const routes: Routes = [
     ]},
     {path: 'quiz-generator', component: QuizGenerator, children: 
         [
-            {path: 'upload', component: UploadSyllabusStep},
+            {path: '', component: UploadSyllabusStep},
             {path: 'processing', component: AiProcessingStep},
             {path: 'review', component: ReviewEditStep},
             {path: 'publish', component: PublishQuizStep}

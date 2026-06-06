@@ -1,0 +1,262 @@
+.review-page {
+  display: grid;
+  grid-template-columns: 340px minmax(420px, 1fr) 300px;
+  min-height: calc(100vh - 72px);
+  background: #f3f6fb;
+}
+
+.source-panel {
+  padding: 24px 28px;
+  background: #ffffff;
+}
+
+.source-panel {
+  border-left: 1px solid #e4e9f2;
+}
+
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h2 {
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.editor-panel {
+  position: relative;
+  padding: 24px 28px 36px;
+}
+
+.editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.outline-button,
+.primary-button {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 7px;
+}
+
+.outline-button {
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+}
+
+.primary-button {
+  color: #ffffff;
+  background: #2563eb;
+  border: 0;
+}
+
+.question-card {
+  margin-bottom: 18px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.type-badge {
+  padding: 4px 9px;
+  color: #2563eb;
+  background: #eff6ff;
+  border-radius: 999px;
+}
+
+.question-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.question-actions button {
+  height: 28px;
+  padding: 0 8px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.question-card h3 {
+  margin-top: 12px;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1.45;
+}
+
+.options-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.answer-option {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  min-height: 42px;
+  gap: 10px;
+  padding: 9px 12px;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  border-radius: 7px;
+}
+
+.answer-option span {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 850;
+  background: #ffffff;
+  border-radius: 999px;
+}
+
+.answer-option p {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.answer-correct {
+  background: #ecfdf5;
+  border-color: #86efac;
+}
+
+.answer-correct span,
+.answer-correct strong {
+  color: #059669;
+}
+
+.add-question {
+  width: 100%;
+  height: 46px;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 850;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+}
+
+.source-panel > p {
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.source-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.source-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.source-card > span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: #2563eb;
+  font-size: 9px;
+  font-weight: 900;
+  background: #eaf1ff;
+  border-radius: 6px;
+}
+
+.source-card strong,
+.source-card small {
+  display: block;
+}
+
+.source-card strong {
+  color: #0f172a;
+  font-size: 13px;
+}
+
+.source-card small {
+  margin-top: 3px;
+  color: #059669;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.question-count {
+  display: grid;
+  place-items: center;
+  margin-top: 22px;
+  padding: 16px;
+  background: #eff6ff;
+  border-radius: 8px;
+}
+
+.question-count strong {
+  color: #2563eb;
+  font-size: 24px;
+}
+
+.question-count span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media (max-width: 1100px) {
+  .review-page {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+
+  .source-panel {
+    grid-column: 1 / -1;
+    border-top: 1px solid #e4e9f2;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .review-page {
+    grid-template-columns: 1fr;
+  }
+
+}

@@ -1,1 +1,170 @@
-<p>publish-quiz-step works!</p>
+<section class="publish-page">
+  <aside class="summary-panel">
+    <h2>Quiz Summary</h2>
+
+    <article class="summary-card">
+      <span>Title</span>
+      <strong>{{ summary().title || 'Untitled quiz' }}</strong>
+
+      <span>Classroom</span>
+      <strong>{{ summary().classroomTitle || 'No classroom selected' }}</strong>
+
+      <div class="summary-grid">
+        <div>
+          <span>Questions</span>
+          <strong>{{ summary().numberOfQuestions }}</strong>
+        </div>
+        <div>
+          <span>Time</span>
+          <strong>{{ summary().timeLimit }} min</strong>
+        </div>
+        <div>
+          <span>Passing</span>
+          <strong>{{ summary().passingScore }}%</strong>
+        </div>
+      </div>
+
+      <span>Difficulty</span>
+      <strong>{{ summary().difficulty || 'Mixed' }}</strong>
+
+      <span>Schedule</span>
+      <strong>{{ scheduleDuration() }}</strong>
+
+      <span>Options</span>
+      <strong>
+        @if (summary().notifyStudents) {
+          Notify students
+        } @else {
+          No notification
+        }
+        /
+        @if (summary().autoReleaseScore) {
+          Auto release score
+        } @else {
+          Hold score
+        }
+      </strong>
+
+      <div class="badge-list">
+        @for (type of questionTypes(); track type) {
+          <span>{{ type }}</span>
+        }
+      </div>
+    </article>
+
+    <h3>Source Files</h3>
+    <div class="source-list">
+      @for (file of sourceFiles(); track file.id) {
+        <article class="source-card">
+          <span aria-hidden="true">PDF</span>
+          <p>{{ file.name }}</p>
+        </article>
+      }
+    </div>
+  </aside>
+
+  <form class="publish-panel" [formRoot]="publishSettingsForm">
+    <div class="top-actions">
+      <button type="button" class="outline-button" (click)="saveDraft()">Save as Draft</button>
+      <button type="button" class="primary-button" (click)="publishNow()">Publish Now</button>
+    </div>
+
+    <div class="content-header">
+      <h2>Publishing Settings</h2>
+      <p>Configure when and how students can access this quiz.</p>
+    </div>
+
+    <section class="settings-card">
+      <div class="section-heading">
+        <span aria-hidden="true">A</span>
+        <h3>Target Classroom</h3>
+      </div>
+
+      <label>
+        <span>Classroom</span>
+        <select [formField]="publishSettingsForm.classroomTitle">
+          <option value="CS101 Data Structures">CS101 Data Structures - 34 students</option>
+          @if (summary().classroomTitle && summary().classroomTitle !== 'CS101 Data Structures') {
+            <option [value]="summary().classroomTitle">{{ summary().classroomTitle }}</option>
+          }
+        </select>
+      </label>
+    </section>
+
+    <section class="settings-card">
+      <div class="section-heading">
+        <span aria-hidden="true">D</span>
+        <h3>Schedule</h3>
+      </div>
+
+      <label class="toggle-row schedule-toggle">
+        <span>
+          Set Expiration
+          <small>Quiz opens when it is published</small>
+        </span>
+        <input type="checkbox" [formField]="publishSettingsForm.scheduleEnabled" />
+      </label>
+
+      @if (summary().scheduleEnabled) {
+        <label class="toggle-row schedule-toggle">
+          <span>
+            Schedule Opening
+            <small>Choose when students can start the quiz</small>
+          </span>
+          <input type="checkbox" [formField]="publishSettingsForm.scheduledOpeningEnabled" />
+        </label>
+
+        @if (summary().scheduledOpeningEnabled) {
+          <div class="date-grid">
+            <label>
+              <span>Open Date</span>
+              <input type="date" [formField]="publishSettingsForm.openDate" />
+            </label>
+            <label>
+              <span>Open Time</span>
+              <input type="time" [formField]="publishSettingsForm.openTime" />
+            </label>
+            <label>
+              <span>Close Date</span>
+              <input type="date" [formField]="publishSettingsForm.closeDate" />
+            </label>
+            <label>
+              <span>Close Time</span>
+              <input type="time" [formField]="publishSettingsForm.closeTime" />
+            </label>
+          </div>
+        } @else {
+          <label class="expires-field">
+            <span>Expires At</span>
+            <input type="time" [formField]="publishSettingsForm.expiresAt" />
+          </label>
+        }
+      }
+
+      <p class="duration-note">{{ scheduleDuration() }}</p>
+    </section>
+
+    <section class="settings-card">
+      <div class="section-heading">
+        <span aria-hidden="true">O</span>
+        <h3>Options</h3>
+      </div>
+
+      <label class="toggle-row">
+        <span>
+          Notify Students
+          <small>Send an in-app notification when published</small>
+        </span>
+        <input type="checkbox" [formField]="publishSettingsForm.notifyStudents" />
+      </label>
+
+      <label class="toggle-row">
+        <span>
+          Auto Release Score
+          <small>Students can view scores after submitting</small>
+        </span>
+        <input type="checkbox" [formField]="publishSettingsForm.autoReleaseScore" />
+      </label>
+    </section>
+  </form>
+</section>

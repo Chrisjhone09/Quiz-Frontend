@@ -1,1 +1,67 @@
-<p>review-edit-step works!</p>
+<section class="review-page">
+  <app-quiz-settings
+    mode="review"
+    quizTitle="Week 4: Trees and Graphs"
+    classroom="CS101 Data Structures"
+    (settingsSubmitted)="onQuizSettingsSubmitted($event)"
+  />
+
+  <main class="editor-panel">
+    <div class="editor-actions">
+      <button type="button" class="outline-button" (click)="saveDraft()">Save as Draft</button>
+      <button type="button" class="primary-button" (click)="publishQuiz()">Publish to Classroom</button>
+    </div>
+
+    @for (question of questions(); track question.id) {
+      <article class="question-card">
+        <div class="question-header">
+          <span>{{ question.id }}.</span>
+          <span class="type-badge">{{ question.type }}</span>
+          <div class="question-actions">
+            <button type="button" aria-label="Edit question" (click)="editQuestion()">Edit</button>
+            <button type="button" aria-label="Duplicate question" (click)="duplicateQuestion()">Duplicate</button>
+            <button type="button" aria-label="Delete question" (click)="deleteQuestion()">Delete</button>
+          </div>
+        </div>
+
+        <h3>{{ question.text }}</h3>
+
+        <div class="options-list">
+          @for (option of question.options; track option.id) {
+            <div class="answer-option" [class.answer-correct]="option.correct">
+              <span>{{ option.id }}</span>
+              <p>{{ option.label }}</p>
+              @if (option.correct) {
+                <strong aria-label="Correct answer">ok</strong>
+              }
+            </div>
+          }
+        </div>
+      </article>
+    }
+
+    <button class="add-question" type="button" (click)="addQuestion()">+ Add Question Manually</button>
+  </main>
+
+  <aside class="source-panel">
+    <h2>Source Material</h2>
+    <p>AI used these to generate questions</p>
+
+    <div class="source-list">
+      @for (source of sourceMaterials(); track source.id) {
+        <article class="source-card">
+          <span aria-hidden="true">PDF</span>
+          <div>
+            <strong>{{ source.name }}</strong>
+            <small>{{ source.status }}</small>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="question-count">
+      <strong>{{ questionCount() }}</strong>
+      <span>Questions loaded</span>
+    </div>
+  </aside>
+</section>

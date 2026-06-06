@@ -30,7 +30,7 @@ export class InstructorDashboard implements OnInit {
     }
   ])
 
-  classrooms = signal<ClassroomModel[]>([])
+  readonly classrooms = signal<ClassroomModel[]>([])
 
 
   constructor(private classroomService: InstructorClassroomService, private matDialog: MatDialog) { }
