@@ -15,23 +15,53 @@
     @for (question of questions(); track question.id) {
       <article class="question-card">
         <div class="question-header">
-          <span>{{ question.id }}.</span>
-          <span class="type-badge">{{ question.type }}</span>
+          <span>{{ $index + 1 }}.</span>
+          <span class="type-badge">{{ question.questionType }}</span>
           <div class="question-actions">
-            <button type="button" aria-label="Edit question" (click)="editQuestion()">Edit</button>
-            <button type="button" aria-label="Duplicate question" (click)="duplicateQuestion()">Duplicate</button>
-            <button type="button" aria-label="Delete question" (click)="deleteQuestion()">Delete</button>
+            <button type="button" aria-label="Duplicate question" (click)="duplicateQuestion(question)">Duplicate</button>
+            <button type="button" aria-label="Delete question" (click)="deleteQuestion(question)">Delete</button>
           </div>
         </div>
 
-        <h3>{{ question.text }}</h3>
+        <textarea
+          class="question-text-input"
+          [value]="question.text"
+          (input)="updateQuestionText(question, $event)"
+          aria-label="Question text"
+        ></textarea>
 
         <div class="options-list">
-          @for (option of question.options; track option.id) {
-            <div class="answer-option" [class.answer-correct]="option.correct">
-              <span>{{ option.id }}</span>
-              <p>{{ option.label }}</p>
-              @if (option.correct) {
+          @if (question.choices.length) {
+            @for (option of question.choices; track option.id) {
+              <div class="answer-option" [class.answer-correct]="option.id === question.correctChoiceId">
+                <input
+                  type="radio"
+                  [name]="'correct-choice-' + question.id + '-' + $index"
+                  [checked]="option.id === question.correctChoiceId"
+                  (change)="markCorrectChoice(question, option.id)"
+                  aria-label="Mark correct answer"
+                />
+                <input
+                  type="text"
+                  [value]="option.text"
+                  (input)="updateChoiceText(question, option.id, $event)"
+                  aria-label="Answer option"
+                />
+                @if (option.id === question.correctChoiceId) {
+                  <strong aria-label="Correct answer">ok</strong>
+                }
+              </div>
+            }
+          } @else {
+            <div class="answer-option answer-correct">
+              <span>Answer</span>
+              <input
+                type="text"
+                [value]="question.correctAnswer || ''"
+                (input)="updateQuestionAnswer(question, $event)"
+                aria-label="Correct answer"
+              />
+              @if (question.correctAnswer) {
                 <strong aria-label="Correct answer">ok</strong>
               }
             </div>

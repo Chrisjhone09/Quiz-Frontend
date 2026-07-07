@@ -6,6 +6,13 @@ export interface QuizModel {
     dueDate: string;
     duration: number; 
     status: string;
+    openDate?: string | null;
+    closeDate?: string | null;
+    openTime?: string | null;
+    closeTime?: string | null;
+    score?: number | null;
+    totalPoints?: number | null;
+    autoReleaseResults?: boolean;
     averageScore? : number;
     submissions: number;
     publishDate: string;

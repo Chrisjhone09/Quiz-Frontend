@@ -1,0 +1,167 @@
+@if (loading()) {
+  <main class="quiz-shell loading-state">
+    <p>Loading quiz...</p>
+  </main>
+} @else if (result(); as submission) {
+  <main class="result-shell">
+    <section class="result-panel">
+      <p class="eyebrow">Submission received</p>
+      <h1>{{ quiz()?.title }}</h1>
+      @if (submission.scoreReleased) {
+        <div class="score-display">
+          <span>{{ submission.score }}</span>
+          <small>/ {{ submission.totalPoints }} points</small>
+        </div>
+        <p class="result-copy">Your score has been released. Correct answers are hidden for quiz integrity.</p>
+      } @else {
+        <div class="score-display muted-score">
+          <span>Submitted</span>
+        </div>
+        <p class="result-copy">Your instructor has not released scores yet. Correct answers are hidden.</p>
+      }
+      <a class="return-link" routerLink="/student-dashboard">Back to dashboard</a>
+    </section>
+  </main>
+} @else if (quiz(); as activeQuiz) {
+  <main class="quiz-shell">
+    <header class="quiz-topbar">
+      <div class="quiz-title-block">
+        <h1>{{ activeQuiz.title }}</h1>
+        <p>{{ activeQuiz.description || 'Student quiz session' }}</p>
+      </div>
+
+      <div class="topbar-status">
+        <div class="timer">
+          <span>Time Remaining</span>
+          <strong>{{ formattedTime() }}</strong>
+        </div>
+        <div class="question-count">
+          <strong>Question {{ currentIndex() + 1 }} of {{ activeQuiz.questions.length }}</strong>
+          <span>{{ answeredCount() }} answered</span>
+        </div>
+        <button class="submit-button" type="button" (click)="submitQuiz()" [disabled]="submitting()">
+          {{ submitting() ? 'Submitting...' : 'Submit Quiz' }}
+        </button>
+      </div>
+    </header>
+
+    <div class="monitor-banner">
+      <span class="warning-icon">!</span>
+      Tab switching is monitored. Stay on this page to avoid penalties.
+      @if (tabSwitchCount() > 0) {
+        <strong>{{ tabSwitchCount() }} switch detected</strong>
+      }
+    </div>
+
+    @if (submitError()) {
+      <div class="error-banner">{{ submitError() }}</div>
+    }
+
+    <section class="quiz-workspace">
+      <aside class="navigator-panel" aria-label="Question navigator">
+        <h2>Question Navigator</h2>
+        <div class="question-grid">
+          @for (question of activeQuiz.questions; track question.id; let index = $index) {
+            <button
+              type="button"
+              class="nav-number"
+              [class.active]="index === currentIndex()"
+              [class.answered]="isAnswered(question.id)"
+              [class.flagged]="isFlagged(question.id)"
+              (click)="selectQuestion(index)">
+              {{ index + 1 }}
+            </button>
+          }
+        </div>
+
+        <div class="progress-block">
+          <div class="progress-label">
+            <span>Overall Progress</span>
+            <strong>{{ progressPercentage() }}%</strong>
+          </div>
+          <div class="progress-track">
+            <span [style.width.%]="progressPercentage()"></span>
+          </div>
+        </div>
+
+        <ul class="legend">
+          <li><span class="legend-dot answered-dot"></span>Answered</li>
+          <li><span class="legend-dot unanswered-dot"></span>Unanswered</li>
+          <li><span class="legend-dot flagged-dot"></span>Flagged for review</li>
+        </ul>
+      </aside>
+
+      @if (currentQuestion(); as question) {
+        <section class="question-card">
+          <div class="question-card-header">
+            <span class="type-pill">{{ questionTypeLabel(question.questionType) }}</span>
+            <button class="flag-button" type="button" (click)="toggleFlag(question.id)">
+              {{ isFlagged(question.id) ? 'Flagged' : 'Flag for Review' }}
+            </button>
+          </div>
+
+          <div class="question-prompt">
+            <span class="question-number">{{ currentIndex() + 1 }}.</span>
+            <h2>{{ question.text }}</h2>
+          </div>
+
+          @if (question.questionType === 'multiple_choice') {
+            <div class="options-list">
+              @for (choice of question.choices; track choice.id; let choiceIndex = $index) {
+                <label class="option-row" [class.selected]="isChoiceSelected(question.id, choice.id)">
+                  <input
+                    type="radio"
+                    [name]="'question-' + question.id"
+                    [checked]="isChoiceSelected(question.id, choice.id)"
+                    (change)="selectChoice(question.id, choice.id)">
+                  <span>{{ questionLabel(choiceIndex) }}) {{ choice.text }}</span>
+                </label>
+              }
+            </div>
+          } @else if (question.questionType === 'true_false') {
+            <div class="options-list compact-options">
+              <label class="option-row" [class.selected]="getTextAnswer(question.id) === 'True'">
+                <input
+                  type="radio"
+                  [name]="'question-' + question.id"
+                  [checked]="getTextAnswer(question.id) === 'True'"
+                  (change)="selectTextAnswer(question.id, 'True')">
+                <span>True</span>
+              </label>
+              <label class="option-row" [class.selected]="getTextAnswer(question.id) === 'False'">
+                <input
+                  type="radio"
+                  [name]="'question-' + question.id"
+                  [checked]="getTextAnswer(question.id) === 'False'"
+                  (change)="selectTextAnswer(question.id, 'False')">
+                <span>False</span>
+              </label>
+            </div>
+          } @else {
+            <label class="text-answer">
+              <span>Your answer</span>
+              <textarea
+                rows="7"
+                [ngModel]="getTextAnswer(question.id)"
+                (ngModelChange)="selectTextAnswer(question.id, $event)"
+                placeholder="Type your response here"></textarea>
+            </label>
+          }
+
+          <footer class="question-actions">
+            <button type="button" class="ghost-button" (click)="previousQuestion()" [disabled]="currentIndex() === 0">
+              Previous
+            </button>
+            <button
+              type="button"
+              class="next-button"
+              (click)="nextQuestion()"
+              [disabled]="currentIndex() === activeQuiz.questions.length - 1">
+              Next
+            </button>
+          </footer>
+        </section>
+      }
+    </section>
+  </main>
+}

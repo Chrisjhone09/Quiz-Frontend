@@ -1,89 +1,143 @@
+.classroom-page {
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 8px 28px 48px;
+	color: #061226;
+}
+
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 16px;
+	color: #496286;
+	font-size: 14px;
+}
+
+.breadcrumbs a {
+	color: #496286;
+	text-decoration: none;
+}
+
+.breadcrumbs strong {
+	color: #071225;
+}
+
 .classroom-card {
 	background: #ffffff;
-	border: 1px solid #e6ebf2;
-	border-radius: 8px;
-	padding: 20px;
-	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
-	max-width: 900px;
+	border: 1px solid #dde5ef;
+	border-radius: 10px;
+	padding: 30px;
+	box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
 }
 
 .classroom-header {
-	display: flex;
-	flex-direction: column;
+	display: grid;
 	gap: 10px;
 }
 
 .classroom-title {
-	font-size: 20px;
-	color: #0b1220;
 	margin: 0;
-	font-weight: 800;
+	color: #020817;
+	font-size: 30px;
+	line-height: 1.2;
+	font-weight: 900;
 }
 
 .classroom-meta {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	gap: 12px;
-}
-
-.instructor {
-	display: flex;
-	align-items: center;
+	flex-wrap: wrap;
 	gap: 8px;
-	color: #4e6281;
-	font-size: 13px;
-}
-
-.instructor svg {
-	width: 18px;
-	height: 18px;
-	stroke: currentColor;
-	fill: none;
+	color: #526b8c;
+	font-size: 15px;
 }
 
 .dot {
-	margin: 0 6px;
-	color: #9aa6b8;
+	color: #9aa8ba;
 }
 
 .class-code {
-	display: flex;
-	align-items: center;
-	gap: 8px;
+	margin-top: 6px;
 }
 
 .code-pill {
-	background: #f3f7fb;
-	border: 1px solid #e6eef8;
-	padding: 6px 10px;
+	display: inline-flex;
+	align-items: center;
+	min-height: 24px;
+	padding: 0 12px;
+	background: #f1f5f9;
 	border-radius: 6px;
+	color: #334155;
 	font-size: 12px;
-	color: #0b1220;
 }
-
-.copy-btn {
-	background: transparent;
-	border: none;
-	padding: 6px;
-	border-radius: 6px;
-	display: inline-grid;
-	place-items: center;
-	cursor: pointer;
-	color: #6b7280;
-}
-
-.copy-btn svg { width: 16px; height: 16px; }
 
 .classroom-body {
-	margin-top: 12px;
+	margin-top: 18px;
 }
 
 .classroom-description {
+	max-width: 760px;
 	margin: 0;
-	color: #334155;
-	line-height: 1.6;
+	color: #284263;
+	font-size: 16px;
+	line-height: 1.45;
 }
 
-.empty-card { color: #6b7280; background: #fff; padding: 14px; border-radius: 8px; border: 1px solid #e6ebf2; }
+.classroom-tabs,
+.instructor-tabs {
+	display: flex;
+	gap: 18px;
+	margin-top: 22px;
+	border-bottom: 1px solid #dde5ef;
+}
 
+.tab,
+.instructor-tabs a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 42px;
+	padding: 0 8px;
+	color: #415978;
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.tab.active {
+	color: #2563eb;
+	border-bottom: 2px solid #2563eb;
+}
+
+.quizzes-section {
+	padding-bottom: 24px;
+}
+
+.empty-card {
+	max-width: 900px;
+	margin: 24px auto;
+	color: #64748b;
+	background: #ffffff;
+	padding: 18px;
+	border-radius: 8px;
+	border: 1px solid #dde5ef;
+}
+
+@media (max-width: 760px) {
+	.classroom-page {
+		padding: 8px 16px 36px;
+	}
+
+	.classroom-card {
+		padding: 22px;
+	}
+
+	.classroom-title {
+		font-size: 24px;
+	}
+
+	.classroom-tabs,
+	.instructor-tabs {
+		overflow-x: auto;
+	}
+}

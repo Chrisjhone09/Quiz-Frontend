@@ -106,6 +106,22 @@ button {
   border-radius: 6px;
 }
 
+.question-text-input {
+  width: 100%;
+  min-height: 76px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  color: #0f172a;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.45;
+  resize: vertical;
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 7px;
+}
+
 .question-card h3 {
   margin-top: 12px;
   color: #0f172a;
@@ -148,6 +164,22 @@ button {
   color: #334155;
   font-size: 14px;
   font-weight: 700;
+}
+
+.answer-option input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  color: #334155;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.answer-option input[type="radio"] {
+  justify-self: center;
 }
 
 .answer-correct {

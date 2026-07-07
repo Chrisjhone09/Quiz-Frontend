@@ -21,3 +21,40 @@ export interface QuizCreationModel {
     timeLimit: number;
     passingScore: number
 }
+
+export interface QuizChoiceModel {
+    id: number;
+    text: string;
+}
+
+export interface QuizQuestionModel {
+    id: number;
+    text: string;
+    points: number;
+    questionType: string;
+    correctAnswer?: string | null;
+    correctChoiceId?: number | null;
+    choices: QuizChoiceModel[];
+}
+
+export interface QuizResponseModel {
+    id: number;
+    title: string;
+    description?: string | null;
+    openDate: string;
+    closeDate: string;
+    openTime: string;
+    closeTime: string;
+    createdAt: string;
+    autoReleaseResults: boolean;
+    isLocked: boolean;
+    isPublished: boolean;
+    classroomId?: string | null;
+    questions: QuizQuestionModel[];
+}
+
+export interface ApiResult<T> {
+    success: boolean;
+    message: string;
+    data: T;
+}

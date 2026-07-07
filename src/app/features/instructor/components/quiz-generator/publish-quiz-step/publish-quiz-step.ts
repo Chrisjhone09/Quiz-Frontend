@@ -1,8 +1,9 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { SourceMaterial } from '../quiz-generator.models';
-import { QuizCreationModel } from '../../../interfaces/quizCreation.model';
+import { QuizCreationModel, QuizResponseModel } from '../../../interfaces/quizCreation.model';
 import { QuizSettingsService } from '../../../services/quiz-settings-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publish-quiz-step',
@@ -12,7 +13,9 @@ import { QuizSettingsService } from '../../../services/quiz-settings-service';
 })
 export class PublishQuizStep {
   private readonly quizSettingsService = inject(QuizSettingsService);
+  private readonly router = inject(Router);
   private readonly initialSchedule = this.createInitialSchedule();
+  readonly quiz = signal<QuizResponseModel | null>(this.quizSettingsService.generatedQuiz());
 
   readonly publishSettingsModel = signal<QuizCreationModel>({
     ...this.quizSettingsService.createDefaultSettings(),
@@ -71,13 +74,45 @@ export class PublishQuizStep {
   });
 
   saveDraft(): void {
-    this.submitPublishSettings();
-    // TODO: Implement draft saving
+    const settings = this.submitPublishSettings();
+    const quiz = this.quiz();
+
+    if (!quiz) {
+      return;
+    }
+
+    this.quizSettingsService.saveDraft(quiz.id, quiz, settings).subscribe({
+      next: (result) => {
+        if (result.success && result.data) {
+          this.quiz.set(result.data);
+          this.quizSettingsService.setGeneratedQuiz(result.data);
+        }
+      },
+      error: (error) => console.error('Draft save failed', error),
+    });
   }
 
   publishNow(): void {
-    this.submitPublishSettings();
-    // TODO: Implement quiz publishing
+    const settings = this.submitPublishSettings();
+    const quiz = this.quiz();
+
+    if (!quiz) {
+      return;
+    }
+
+    this.quizSettingsService.publishQuiz(quiz.id, quiz, settings).subscribe({
+      next: (result) => {
+        if (!result.success || !result.data) {
+          console.error(result.message || 'Quiz publish failed');
+          return;
+        }
+
+        this.quiz.set(result.data);
+        this.quizSettingsService.setGeneratedQuiz(result.data);
+        this.router.navigate(['/instructor-classroom', result.data.classroomId, 'quizzes']);
+      },
+      error: (error) => console.error('Quiz publish failed', error),
+    });
   }
 
   private submitPublishSettings(): QuizCreationModel {

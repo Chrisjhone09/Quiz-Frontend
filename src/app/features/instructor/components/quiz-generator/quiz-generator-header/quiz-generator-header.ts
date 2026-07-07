@@ -13,8 +13,7 @@ export class QuizGeneratorHeader {
   private readonly router = inject(Router);
 
   readonly steps = [
-    { label: 'Upload Syllabus', path: '/quiz-generator/upload' },
-    { label: 'AI Processing', path: '/quiz-generator/processing' },
+    { label: 'Upload Syllabus', path: '/quiz-generator' },
     { label: 'Review & Edit', path: '/quiz-generator/review' },
     { label: 'Publish', path: '/quiz-generator/publish' },
   ];

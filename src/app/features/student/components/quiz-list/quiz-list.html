@@ -1,27 +1,79 @@
-<section class="quiz-list">
-	<h3 class="quiz-list-title">Quizzes</h3>
+<section class="student-quizzes">
+	<h3 class="section-title">Available Quizzes</h3>
 
 	@if(!quizzes() || quizzes()!.length === 0) {
 		<div class="empty">No quizzes available.</div>
 	} @else {
-		<ul class="quizzes">
-			@for (quiz of quizzes(); track quiz.id) {
-				<div class="quiz-main">
-					<div class="quiz-info">
-						<h4 class="quiz-title">{{ quiz.quizTitle}}</h4>
-						<div class="quiz-meta">
-							<span>{{ quiz.numberOfQuestions }} questions</span>
-							<span class="sep">•</span>
-							<span>{{ quiz.duration }} min</span>
-						</div>
+		<div class="quiz-grid">
+			@for (quiz of pendingQuizzes(); track quiz.id) {
+				<article class="quiz-card" [class.disabled-card]="!isAvailable(quiz)">
+					<header class="quiz-card-header">
+						<span class="status-pill" [ngClass]="statusClass(quiz)">{{ statusLabel(quiz) }}</span>
+						<span class="date-pill" [class.due-soon]="isAvailable(quiz)" [class.past-due]="isPastDue(quiz)">
+							@if (isUpcoming(quiz)) {
+								{{ openLabel(quiz) }}
+							} @else {
+								{{ dueLabel(quiz) }}
+							}
+						</span>
+					</header>
+
+					<h4 class="quiz-title">{{ quiz.quizTitle }}</h4>
+
+					<div class="quiz-meta">
+						<span class="meta-item">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M6 3h9l3 3v15H6V3Z"></path>
+								<path d="M14 3v4h4M9 12h6M9 16h6"></path>
+							</svg>
+							{{ quiz.numberOfQuestions }} Questions
+						</span>
+						<span class="meta-item">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12 8v5l3 2"></path>
+								<path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path>
+							</svg>
+							{{ quiz.duration }} min
+						</span>
 					</div>
-					<div class="quiz-side">
-						<span class="due">Due: {{ quiz.dueDate }}</span>
-						<span class="status" [ngClass]="quiz.status">{{ quiz.status }}</span>
-					</div>
+
+					@if (isAvailable(quiz)) {
+						<a class="take-link" [routerLink]="['/student-quiz', quiz.id]">Take Quiz</a>
+					} @else {
+						<button class="take-link disabled" type="button" disabled>Take Quiz</button>
+					}
+				</article>
+			}
+		</div>
+
+		@if (pendingQuizzes().length === 0) {
+			<div class="empty">No active quizzes right now.</div>
+		}
+
+		<section class="completed-section">
+			<h3 class="section-title">Completed Quizzes</h3>
+
+			@if (completedQuizzes().length === 0) {
+				<div class="empty">No completed quizzes yet.</div>
+			} @else {
+				<div class="quiz-grid">
+					@for (quiz of completedQuizzes(); track quiz.id) {
+						<article class="quiz-card completed-card">
+							<header class="quiz-card-header">
+								<span class="status-pill completed">Completed</span>
+								<span class="score-pill">Score: {{ scoreLabel(quiz) }}</span>
+							</header>
+
+							<h4 class="quiz-title">{{ quiz.quizTitle }}</h4>
+
+							<div class="quiz-meta">
+								<span class="meta-item">{{ quiz.numberOfQuestions }} Questions</span>
+								<span class="meta-item">{{ quiz.duration }} min</span>
+							</div>
+						</article>
+					}
 				</div>
-            }
-		</ul>
+			}
+		</section>
 	}
 </section>
-

@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuizQuestion, SourceMaterial } from '../quiz-generator.models';
+import { SourceMaterial } from '../quiz-generator.models';
 import { QuizSettings } from '../quiz-settings/quiz-settings';
-import { QuizCreationModel } from '../../../interfaces/quizCreation.model';
+import { QuizCreationModel, QuizQuestionModel, QuizResponseModel } from '../../../interfaces/quizCreation.model';
 import { QuizSettingsService } from '../../../services/quiz-settings-service';
 
 @Component({
@@ -17,28 +17,8 @@ export class ReviewEditStep {
 
   readonly quizSettingsComponent = viewChild(QuizSettings);
 
-  readonly questions = signal<QuizQuestion[]>([
-    {
-      id: 4,
-      type: 'Multiple Choice',
-      text: 'What is the maximum number of nodes at level L in a binary tree? (Root is level 0)',
-      options: [
-        { id: 'A', label: '2^L', correct: true },
-        { id: 'B', label: '2^(L-1)', correct: false },
-        { id: 'C', label: '2^L - 1', correct: false },
-        { id: 'D', label: 'L^2', correct: false },
-      ],
-    },
-    {
-      id: 5,
-      type: 'True/False',
-      text: 'In a balanced binary search tree, the height difference between left and right subtrees is at most 1 for every node.',
-      options: [
-        { id: 'A', label: 'True', correct: true },
-        { id: 'B', label: 'False', correct: false },
-      ],
-    },
-  ]);
+  readonly quiz = signal<QuizResponseModel | null>(this.quizSettingsService.generatedQuiz());
+  readonly questions = computed(() => this.quiz()?.questions ?? []);
 
   readonly sourceMaterials = signal<SourceMaterial[]>([
     { id: 1, name: 'CS101_Syllabus.pdf', status: 'Processed' },
@@ -48,43 +28,115 @@ export class ReviewEditStep {
   readonly questionCount = computed(() => this.questions().length);
 
   addQuestion(): void {
-    // TODO: Implement manual question creation
+    this.updateQuestions((questions) => [
+      ...questions,
+      {
+        id: 0,
+        text: 'New question',
+        points: 1,
+        questionType: 'short_answer',
+        correctAnswer: '',
+        correctChoiceId: null,
+        choices: [],
+      },
+    ]);
   }
 
-  editQuestion(): void {
-    // TODO: Implement question editing
+  updateQuestionText(question: QuizQuestionModel, event: Event): void {
+    const text = (event.target as HTMLTextAreaElement).value;
+    this.updateQuestion(question, { text });
   }
 
-  deleteQuestion(): void {
-    // TODO: Implement question deletion
+  updateQuestionAnswer(question: QuizQuestionModel, event: Event): void {
+    const correctAnswer = (event.target as HTMLInputElement).value;
+    this.updateQuestion(question, { correctAnswer });
   }
 
-  duplicateQuestion(): void {
-    // TODO: Implement question duplication
+  updateChoiceText(question: QuizQuestionModel, choiceId: number, event: Event): void {
+    const text = (event.target as HTMLInputElement).value;
+    this.updateQuestion(question, {
+      choices: question.choices.map((choice) =>
+        choice.id === choiceId ? { ...choice, text } : choice
+      ),
+    });
+  }
+
+  markCorrectChoice(question: QuizQuestionModel, choiceId: number): void {
+    this.updateQuestion(question, { correctChoiceId: choiceId });
+  }
+
+  deleteQuestion(question: QuizQuestionModel): void {
+    this.updateQuestions((questions) => questions.filter((item) => item !== question));
+  }
+
+  duplicateQuestion(question: QuizQuestionModel): void {
+    this.updateQuestions((questions) => [
+      ...questions,
+      {
+        ...question,
+        id: 0,
+        choices: question.choices.map((choice) => ({ ...choice, id: 0 })),
+      },
+    ]);
   }
 
   saveDraft(): void {
-    this.updateQuizSettings();
-    // TODO: Implement draft saving
+    const settings = this.updateQuizSettings();
+    const quiz = this.quiz();
+
+    if (!quiz || !settings) {
+      return;
+    }
+
+    this.quizSettingsService.saveDraft(quiz.id, quiz, settings).subscribe({
+      next: (result) => {
+        if (result.success && result.data) {
+          this.quiz.set(result.data);
+          this.quizSettingsService.setGeneratedQuiz(result.data);
+        }
+      },
+      error: (error) => console.error('Draft save failed', error),
+    });
   }
 
   publishQuiz(): void {
-    this.updateQuizSettings();
     this.router.navigate(['/quiz-generator/publish']);
-    // TODO: Implement quiz publishing
   }
 
   onQuizSettingsSubmitted(settings: QuizCreationModel): void {
     this.quizSettingsService.updateSettings(settings);
   }
 
-  private updateQuizSettings(): void {
+  private updateQuizSettings(): QuizCreationModel | null {
     const settings = this.quizSettingsComponent()?.submitSettings();
 
     if (!settings) {
-      return;
+      return null;
     }
 
     this.quizSettingsService.updateSettings(settings);
+    return settings;
+  }
+
+  private updateQuestion(question: QuizQuestionModel, updates: Partial<QuizQuestionModel>): void {
+    this.updateQuestions((questions) =>
+      questions.map((item) => (item === question ? { ...item, ...updates } : item))
+    );
+  }
+
+  private updateQuestions(project: (questions: QuizQuestionModel[]) => QuizQuestionModel[]): void {
+    const quiz = this.quiz();
+
+    if (!quiz) {
+      return;
+    }
+
+    const updatedQuiz = {
+      ...quiz,
+      questions: project(quiz.questions),
+    };
+
+    this.quiz.set(updatedQuiz);
+    this.quizSettingsService.setGeneratedQuiz(updatedQuiz);
   }
 }

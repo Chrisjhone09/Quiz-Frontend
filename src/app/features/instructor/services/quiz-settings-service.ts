@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { QuizCreationModel } from '../interfaces/quizCreation.model';
+import { ApiResult, QuizCreationModel, QuizResponseModel } from '../interfaces/quizCreation.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/enviroment.developement';
 
@@ -11,13 +11,32 @@ export class QuizSettingsService {
 
   constructor (private http : HttpClient){}
   readonly quizSettings = signal<QuizCreationModel | null>(null);
+  readonly generatedQuiz = signal<QuizResponseModel | null>(null);
 
   setQuizSettings(quizSettings : QuizCreationModel) {
     this.quizSettings.set(quizSettings);
   }
 
-  uploadFiles(formData :FormData) {
-    return this.http.post(environment.apiUrl+"/api/classroom/upload-file", formData)
+  generateQuiz(formData :FormData) {
+    return this.http.post<ApiResult<QuizResponseModel>>(environment.apiUrl+"/api/classroom/generate-quiz", formData)
+  }
+
+  saveDraft(quizId: number, quiz: QuizResponseModel, quizSettings: QuizCreationModel) {
+    return this.http.put<ApiResult<QuizResponseModel>>(
+      environment.apiUrl + "/api/classroom/save-draft/" + quizId,
+      { quizSettings, questions: quiz.questions }
+    );
+  }
+
+  publishQuiz(quizId: number, quiz: QuizResponseModel, quizSettings: QuizCreationModel) {
+    return this.http.put<ApiResult<QuizResponseModel>>(
+      environment.apiUrl + "/api/classroom/publish-quiz/" + quizId,
+      { quizSettings, questions: quiz.questions }
+    );
+  }
+
+  setGeneratedQuiz(quiz: QuizResponseModel | null) {
+    this.generatedQuiz.set(quiz);
   }
 
   setSettings(quizSettings : QuizCreationModel | null){

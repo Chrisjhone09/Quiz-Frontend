@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/enviroment.developement';
@@ -21,7 +21,10 @@ export class StudentClassroomService {
   }
 
   getClassroomById(id: string){
-    return this.http.get(environment.apiUrl + '/api/student-classroom/get-classroom/' + id);
+    const studentId = this.authService.getUserId();
+    const params = studentId ? new HttpParams().set('studentId', studentId) : undefined;
+
+    return this.http.get(environment.apiUrl + '/api/student-classroom/get-classroom/' + id, { params });
   }
 
   leaveClassroom(classroomId : string) {

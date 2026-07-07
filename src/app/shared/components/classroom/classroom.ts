@@ -43,6 +43,7 @@ export class Classroom implements OnInit {
           console.error("[ERROR]", err);
         }
       });
+      return;
     }
     
     this.instructorClassroomService.getClassroom(classroomId).subscribe({

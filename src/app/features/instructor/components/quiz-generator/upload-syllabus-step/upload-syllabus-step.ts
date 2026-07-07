@@ -4,7 +4,6 @@ import { UploadedFileItem } from '../quiz-generator.models';
 import { QuizSettings } from '../quiz-settings/quiz-settings';
 import { QuizSettingsService } from '../../../services/quiz-settings-service';
 import { Router } from '@angular/router';
-import { AiProcessSignalRService } from '../../../services/ai-process-signal-rservice';
 import { QuizCreationModel } from '../../../interfaces/quizCreation.model';
 
 @Component({
@@ -17,7 +16,7 @@ export class UploadSyllabusStep{
 
 
   constructor(private quizService : QuizSettingsService,
-                     private route : Router, private signalRService : AiProcessSignalRService){}
+                     private route : Router){}
   
   readonly quizSettingsComponent = viewChild(QuizSettings);
   readonly submittedQuizSettings = signal<QuizCreationModel | null>(null);
@@ -117,20 +116,20 @@ export class UploadSyllabusStep{
 
   formData.append('quizSettings', JSON.stringify(quizSettings));
 
-  this.signalRService.startConnection();
+  this.quizService.generateQuiz(formData).subscribe({
+    next: (result) => {
+      if (!result.success || !result.data) {
+        console.error(result.message || 'Quiz generation failed');
+        return;
+      }
 
-  const connectionId = await this.signalRService.startConnection();
-
-  if (!connectionId) {
-    console.error('No SignalR connection ID yet');
-    return;
-  }
-
-  formData.append('connectionId', connectionId);
-
-  this.route.navigate(['/quiz-generator/processing']);
-
-  this.quizService.uploadFiles(formData).subscribe();
+      this.quizService.setGeneratedQuiz(result.data);
+      this.route.navigate(['/quiz-generator/review']);
+    },
+    error: (error) => {
+      console.error('Quiz generation failed', error);
+    },
+  });
 
   
 }

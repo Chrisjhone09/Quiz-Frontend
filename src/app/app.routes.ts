@@ -11,7 +11,6 @@ import { StudentList } from './features/instructor/components/student-list/stude
 import { QuizGenerator } from './features/instructor/components/quiz-generator/quiz-generator/quiz-generator';
 import { QuizSettings } from './features/instructor/components/quiz-generator/quiz-settings/quiz-settings';
 import { UploadSyllabusStep } from './features/instructor/components/quiz-generator/upload-syllabus-step/upload-syllabus-step';
-import { AiProcessingStep } from './features/instructor/components/quiz-generator/ai-processing-step/ai-processing-step';
 import { ReviewEditStep } from './features/instructor/components/quiz-generator/review-edit-step/review-edit-step';
 import { PublishQuizStep } from './features/instructor/components/quiz-generator/publish-quiz-step/publish-quiz-step';
 
@@ -35,6 +34,10 @@ export const routes: Routes = [
             ]
     },
     { path: 'student-classroom/:id', component: Classroom },
+    {
+        path: 'student-quiz/:quizId',
+        loadComponent: () => import('./features/student/pages/take-quiz/take-quiz').then(m => m.TakeQuiz)
+    },
     { path: 'instructor-dashboard', component: InstructorDashboard},
     {path: 'instructor-classroom/:id', component: Classroom, children: [
         {path:'', component: InstructorQuizList},
@@ -44,7 +47,6 @@ export const routes: Routes = [
     {path: 'quiz-generator', component: QuizGenerator, children: 
         [
             {path: '', component: UploadSyllabusStep},
-            {path: 'processing', component: AiProcessingStep},
             {path: 'review', component: ReviewEditStep},
             {path: 'publish', component: PublishQuizStep}
         ]}
