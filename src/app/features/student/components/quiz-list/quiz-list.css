@@ -4,7 +4,7 @@
 
 .section-title {
 	margin: 0 0 16px;
-	color: #020817;
+	color: #12372a;
 	font-size: 20px;
 	font-weight: 800;
 }
@@ -21,13 +21,13 @@
 	min-height: 178px;
 	padding: 22px;
 	background: #ffffff;
-	border: 1px solid #dde5ef;
+	border: 1px solid #dce9df;
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
 .disabled-card {
-	background: #f8fafc;
+	background: #ffffff;
 }
 
 .quiz-card-header,
@@ -51,13 +51,13 @@
 }
 
 .status-pill.available {
-	background: #d1fae5;
-	color: #047857;
+	background: #f4f6f4;
+	color: #146c43;
 }
 
 .status-pill.upcoming {
-	background: #dbeafe;
-	color: #1d4ed8;
+	background: #f4f6f4;
+	color: #146c43;
 }
 
 .status-pill.past-due {
@@ -66,12 +66,12 @@
 }
 
 .status-pill.completed {
-	background: #dcfce7;
+	background: #ffffff;
 	color: #166534;
 }
 
 .date-pill {
-	background: #f1f5f9;
+	background: #ffffff;
 	color: #48617f;
 	font-weight: 700;
 }
@@ -83,13 +83,13 @@
 }
 
 .score-pill {
-	background: #eff6ff;
-	color: #1d4ed8;
+	background: #ffffff;
+	color: #146c43;
 }
 
 .quiz-title {
 	margin: 0;
-	color: #071225;
+	color: #12372a;
 	font-size: 18px;
 	line-height: 1.35;
 	font-weight: 800;
@@ -97,7 +97,7 @@
 
 .quiz-meta {
 	justify-content: flex-start;
-	color: #71839d;
+	color: #6b8478;
 	font-size: 14px;
 }
 
@@ -125,7 +125,7 @@
 	width: 100%;
 	border: 0;
 	border-radius: 6px;
-	background: #2563eb;
+	background: #198754;
 	color: #ffffff;
 	font: inherit;
 	font-size: 14px;
@@ -135,11 +135,11 @@
 }
 
 .take-link:hover {
-	background: #1d4ed8;
+	background: #146c43;
 }
 
 .take-link.disabled {
-	background: #e8edf4;
+	background: #ffffff;
 	color: #b7c2d2;
 	cursor: not-allowed;
 }
@@ -151,9 +151,9 @@
 .empty {
 	padding: 18px;
 	background: #ffffff;
-	border: 1px solid #dde5ef;
+	border: 1px solid #dce9df;
 	border-radius: 8px;
-	color: #64748b;
+	color: #60796c;
 }
 
 @media (max-width: 760px) {
@@ -166,4 +166,30 @@
 		align-items: flex-start;
 		flex-direction: column;
 	}
+}
+
+/* ---- result review link ---- */
+
+.review-link {
+	display: inline-block;
+	margin-top: 10px;
+	padding: 7px 13px;
+	border-radius: 6px;
+	border: 1px solid #dce9df;
+	background: #ffffff;
+	color: #198754;
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.review-link:hover {
+	background: #f4f6f4;
+}
+
+.review-link.disabled {
+	border-color: #dce9df;
+	background: #ffffff;
+	color: #98ada1;
+	cursor: default;
 }

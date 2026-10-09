@@ -1,0 +1,284 @@
+<div class="builder-page">
+	<header class="builder-topbar">
+		<div>
+			<h1>{{ headerTitle() }}</h1>
+			<p class="subtitle">{{ headerSubtitle() }}</p>
+		</div>
+		@if (selectedClassroomId()) {
+			<a class="btn-secondary" [routerLink]="['/instructor-classroom', selectedClassroomId()]">Cancel</a>
+		} @else {
+			<a class="btn-secondary" routerLink="/instructor-dashboard">Cancel</a>
+		}
+	</header>
+
+	@if (quizLoading()) {
+		<p class="empty">Loading quiz…</p>
+	}
+	@if (errorMessage()) {
+		<p class="banner banner-error">{{ errorMessage() }}</p>
+	}
+	@if (successMessage()) {
+		<p class="banner banner-success">{{ successMessage() }}</p>
+	}
+
+	@if (entryMode() === 'ai' && phase() === 'setup') {
+		<section class="card">
+			<h2>Quiz Details</h2>
+
+			<div class="field-grid">
+				<label class="field">
+					<span>Classroom</span>
+					@if (classroomsLoading()) {
+						<span class="muted">Loading classrooms…</span>
+					} @else {
+						<select [ngModel]="selectedClassroomId()" (ngModelChange)="selectedClassroomId.set($event)" [disabled]="generating()">
+							@if (classrooms().length === 0) {
+								<option value="">No classrooms yet</option>
+							}
+							@for (classroom of classrooms(); track classroom.id) {
+								<option [value]="classroom.id">{{ classroom.classroomTitle }}</option>
+							}
+						</select>
+					}
+				</label>
+
+				<label class="field">
+					<span>Title <span class="muted">(optional — AI will suggest one)</span></span>
+					<input type="text" [ngModel]="title()" (ngModelChange)="title.set($event)" placeholder="Leave blank to let AI title it" [disabled]="generating()" />
+				</label>
+
+				<label class="field field-wide">
+					<span>Description <span class="muted">(optional)</span></span>
+					<textarea rows="2" [ngModel]="description()" (ngModelChange)="description.set($event)" placeholder="Optional" [disabled]="generating()"></textarea>
+				</label>
+
+				<app-question-type-settings class="field-wide" [allocations]="aiAllocations()"
+					(allocationsChange)="aiAllocations.set($event)" [disabled]="generating()" />
+
+				<label class="field">
+					<span>Time Limit (minutes)</span>
+					<input type="number" min="1" [ngModel]="timeLimit()" (ngModelChange)="timeLimit.set($event)" [disabled]="generating()" />
+				</label>
+
+				<label class="field">
+					<span>Passing Score (%)</span>
+					<input type="number" min="0" max="100" [ngModel]="passingScore()" (ngModelChange)="passingScore.set($event)" [disabled]="generating()" />
+				</label>
+
+				<label class="field checkbox-field">
+					<input type="checkbox" [ngModel]="notifyStudents()" (ngModelChange)="notifyStudents.set($event)" [disabled]="generating()" />
+					<span>Notify students when published</span>
+				</label>
+
+				<label class="field checkbox-field">
+					<input type="checkbox" [ngModel]="autoReleaseScore()" (ngModelChange)="autoReleaseScore.set($event)" [disabled]="generating()" />
+					<span>Auto-release scores after submission</span>
+				</label>
+
+				<label class="field field-wide">
+					<span>Source File</span>
+					<input type="file" accept=".pdf,.doc,.docx,.txt" multiple (change)="onAiFileSelected($event)" [disabled]="generating()" />
+					@if (aiFileNames().length) {
+						<span class="muted">Selected: {{ aiFileNames().join(', ') }}</span>
+					}
+					<p class="hint">Upload a syllabus, notes, or reference document — AI will draft questions from it.</p>
+				</label>
+			</div>
+
+			<div class="submit-row">
+				<button type="button" class="btn-primary" [disabled]="generating()" (click)="generateWithAi()">
+					{{ generating() ? 'Generating…' : 'Generate Quiz with AI' }}
+				</button>
+			</div>
+
+			@if (generating()) {
+				<div class="ai-loading">
+					<span class="spinner" aria-hidden="true"></span>
+					<p>AI is generating and checking your quiz. This may take a few minutes. Please don't close this page.</p>
+				</div>
+			}
+		</section>
+	} @else {
+		<section class="card">
+			<h2>Quiz Details</h2>
+
+			<div class="field-grid">
+				<label class="field">
+					<span>Classroom</span>
+					@if (isEditing()) {
+						<span class="muted">{{ selectedClassroomName() || 'This quiz\'s classroom' }} (can't be changed here)</span>
+					} @else if (classroomsLoading()) {
+						<span class="muted">Loading classrooms…</span>
+					} @else {
+						<select [ngModel]="selectedClassroomId()" (ngModelChange)="selectedClassroomId.set($event)">
+							@if (classrooms().length === 0) {
+								<option value="">No classrooms yet</option>
+							}
+							@for (classroom of classrooms(); track classroom.id) {
+								<option [value]="classroom.id">{{ classroom.classroomTitle }}</option>
+							}
+						</select>
+					}
+				</label>
+
+				<label class="field">
+					<span>Title</span>
+					<input type="text" [ngModel]="title()" (ngModelChange)="title.set($event)" placeholder="Untitled Quiz" />
+				</label>
+
+				<label class="field field-wide">
+					<span>Description</span>
+					<textarea rows="2" [ngModel]="description()" (ngModelChange)="description.set($event)" placeholder="Optional"></textarea>
+				</label>
+
+				<label class="field">
+					<span>Time Limit (minutes)</span>
+					<input type="number" min="1" [ngModel]="timeLimit()" (ngModelChange)="timeLimit.set($event)" />
+				</label>
+
+				<label class="field">
+					<span>Passing Score (%)</span>
+					<input type="number" min="0" max="100" [ngModel]="passingScore()" (ngModelChange)="passingScore.set($event)" />
+				</label>
+
+				<label class="field checkbox-field">
+					<input type="checkbox" [ngModel]="notifyStudents()" (ngModelChange)="notifyStudents.set($event)" />
+					<span>Notify students when published</span>
+				</label>
+
+				<label class="field checkbox-field">
+					<input type="checkbox" [ngModel]="autoReleaseScore()" (ngModelChange)="autoReleaseScore.set($event)" />
+					<span>Auto-release scores after submission</span>
+				</label>
+			</div>
+
+			<div class="publish-toggle">
+				<label class="field checkbox-field">
+					<input type="checkbox" [ngModel]="publishNow()" (ngModelChange)="publishNow.set($event)" />
+					<span>Publish immediately (otherwise this saves as a draft)</span>
+				</label>
+
+				@if (publishNow()) {
+					<div class="field-grid schedule-grid">
+						<label class="field">
+							<span>Opens</span>
+							<input type="date" [ngModel]="openDate()" (ngModelChange)="openDate.set($event)" />
+						</label>
+						<label class="field">
+							<span>Open time (PHT)</span>
+							<input type="time" [ngModel]="openTime()" (ngModelChange)="openTime.set($event)" />
+						</label>
+						<label class="field">
+							<span>Due</span>
+							<input type="date" [ngModel]="closeDate()" (ngModelChange)="closeDate.set($event)" />
+						</label>
+						<label class="field">
+							<span>Due time (PHT)</span>
+							<input type="time" [ngModel]="closeTime()" (ngModelChange)="closeTime.set($event)" />
+						</label>
+					</div>
+				}
+			</div>
+		</section>
+
+		<section class="card">
+			<div class="section-head">
+				<h2>Questions</h2>
+				<span class="muted">{{ questions().length }} question{{ questions().length === 1 ? '' : 's' }} · {{ totalPoints() }} points total</span>
+			</div>
+
+			@if (questions().length === 0) {
+				<p class="empty">No questions yet — add one below.</p>
+			}
+
+			@for (question of questions(); track question.key; let i = $index) {
+				<article class="question-card">
+					<div class="question-head">
+						<span class="question-number">Question {{ i + 1 }}</span>
+						<div class="question-head-controls">
+							<label class="inline-field">
+								<span>Type</span>
+								<select [ngModel]="question.questionType" (ngModelChange)="setQuestionType(question.key, $event)">
+									@for (type of questionTypes; track type.value) {
+										<option [value]="type.value">{{ type.label }}</option>
+									}
+								</select>
+							</label>
+							<label class="inline-field">
+								<span>Points</span>
+								<input type="number" min="1" class="points-input" [ngModel]="question.points" (ngModelChange)="updateQuestionPoints(question.key, $event)" />
+							</label>
+							<button type="button" class="icon-remove" (click)="removeQuestion(question.key)" title="Remove question">Remove</button>
+						</div>
+					</div>
+
+					<label class="field">
+						<span>Question text</span>
+						<textarea rows="2" [ngModel]="question.text" (ngModelChange)="updateQuestionText(question.key, $event)" placeholder="Type your question…"></textarea>
+					</label>
+
+					@if (question.questionType === 'multiple_choice') {
+						<div class="choices">
+							@for (choice of question.choices; track choice.id) {
+								<div class="choice-row">
+									<input
+										type="radio"
+										[name]="'correct-' + question.key"
+										[checked]="question.correctChoiceId === choice.id"
+										(change)="setCorrectChoice(question.key, choice.id)"
+									/>
+									<input
+										type="text"
+										class="choice-text"
+										[ngModel]="choice.text"
+										(ngModelChange)="updateChoiceText(question.key, choice.id, $event)"
+										placeholder="Answer option"
+									/>
+									<button type="button" class="icon-remove" (click)="removeChoice(question.key, choice.id)" title="Remove option">&times;</button>
+								</div>
+							}
+							<button type="button" class="link-action" (click)="addChoice(question.key)">+ Add option</button>
+							<p class="hint">Select the radio button next to the correct answer.</p>
+						</div>
+					} @else if (question.questionType === 'short_answer') {
+						<label class="field">
+							<span>Expected answer</span>
+							<input type="text" [ngModel]="question.correctAnswer" (ngModelChange)="updateCorrectAnswer(question.key, $event)" placeholder="Expected answer" />
+						</label>
+					} @else {
+						<div class="true-false-row">
+							<label class="inline-field">
+								<input
+									type="radio"
+									[name]="'tf-' + question.key"
+									value="true"
+									[checked]="question.correctAnswer === 'true'"
+									(change)="updateCorrectAnswer(question.key, 'true')"
+								/>
+								<span>True</span>
+							</label>
+							<label class="inline-field">
+								<input
+									type="radio"
+									[name]="'tf-' + question.key"
+									value="false"
+									[checked]="question.correctAnswer === 'false'"
+									(change)="updateCorrectAnswer(question.key, 'false')"
+								/>
+								<span>False</span>
+							</label>
+						</div>
+					}
+				</article>
+			}
+
+			<button type="button" class="btn-outline" (click)="addQuestion()">+ Add Question</button>
+		</section>
+
+		<div class="submit-row">
+			<button type="button" class="btn-primary" [disabled]="submitting()" (click)="submit()">
+				{{ submitting() ? 'Saving…' : (publishNow() ? (isEditing() ? 'Save & Publish' : 'Create & Publish') : 'Save as Draft') }}
+			</button>
+		</div>
+	}
+</div>

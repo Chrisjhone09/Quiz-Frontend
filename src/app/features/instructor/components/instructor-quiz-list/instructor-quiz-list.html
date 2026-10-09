@@ -18,8 +18,8 @@
 			<td data-label="Title">{{ quiz.quizTitle }}</td>
 			<td class="center" data-label="Questions">{{ quiz.numberOfQuestions }}</td>
 			<td class="center" data-label="Duration">{{ quiz.duration }} min</td>
-			<td class="center" data-label="Publish Date">{{ quiz.publishDate }}</td>
-			<td class="center" data-label="Due Date">{{ quiz.dueDate }}</td>
+			<td class="center" data-label="Publish Date">{{ quiz.publishDate | timeAgo }}</td>
+			<td class="center" data-label="Due Date">{{ quiz.closeDate ? (quiz.closeDate | philippineDate:'datetime':quiz.closeTime) : 'No due date' }}</td>
 			<td class="center" data-label="Status">{{quiz.status}}</td>
 			<td class="center" data-label="Submissions">{{ quiz.submissions }}</td>
 			<td class="center" data-label="Avg Score">{{ quiz.averageScore }}</td>

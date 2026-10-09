@@ -13,7 +13,7 @@
                 <h3>{{ activity.quizTitle }}</h3>
                 <p>{{ activity.classroomTitle }}</p>
                 <div class="quiz-meta">
-                    <span>Submitted {{ activity.dateSubmitted }}</span>
+                    <span>Submitted {{ activity.dateSubmitted | timeAgo }}</span>
                     <span>Score: {{ activity.score }}</span>
                     <span>Status: {{ activity.status }}</span>
                 </div>

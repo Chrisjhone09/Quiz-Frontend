@@ -1,0 +1,88 @@
+<section class="analytics" aria-label="Quiz analytics">
+  <div class="summary">
+    <div><span>Pass rate</span><strong>{{ passRate() == null ? 'N/A' : (passRate() | number:'1.0-1') + '%' }}</strong></div>
+    <div><span>Passed</span><strong class="correct-text">{{ passed() }}</strong></div>
+    <div><span>Failed</span><strong class="incorrect-text">{{ failed() }}</strong></div>
+    <div><span>Median score</span><strong>{{ median() == null ? 'N/A' : (median() | number:'1.0-1') + '%' }}</strong></div>
+  </div>
+
+  @if (results().submittedCount > 0) {
+    <div class="charts">
+      <section class="chart-section" aria-labelledby="item-chart-title">
+        <h3 id="item-chart-title"><mat-icon aria-hidden="true">bar_chart</mat-icon>Item performance</h3>
+        <ul class="legend" aria-label="Answer categories">
+          <li><i class="correct"></i>Correct</li><li><i class="incorrect"></i>Incorrect</li><li><i class="unanswered"></i>Unanswered</li>
+        </ul>
+        @if (items().length > 0) {
+          <div class="item-chart" tabindex="0" aria-label="Item performance chart">
+            <div class="axis"><span>0%</span><span>50%</span><span>100%</span></div>
+            @for (item of items(); track item.questionId) {
+              <div class="item-bar-row">
+                <span class="item-label" [title]="item.text">Q{{ item.itemNumber }}</span>
+                <div class="stack" role="img" [attr.aria-label]="itemLabel(item)" [title]="itemLabel(item)">
+                  <span class="correct" [style.width.%]="share(item.correctCount)"></span>
+                  <span class="incorrect" [style.width.%]="share(item.incorrectCount)"></span>
+                  <span class="unanswered" [style.width.%]="share(item.unansweredCount)"></span>
+                </div>
+                <span class="rate">{{ item.correctPercentage | number:'1.0-1' }}%</span>
+              </div>
+            }
+          </div>
+        } @else {
+          <p class="empty">No question items available.</p>
+        }
+      </section>
+
+      <section class="chart-section" aria-labelledby="score-chart-title">
+        <h3 id="score-chart-title"><mat-icon aria-hidden="true">insights</mat-icon>Score distribution</h3>
+        <p class="chart-meta">{{ results().submittedCount }} submitted students &middot; Passing score {{ results().passingScore }}%</p>
+        <div class="histogram" role="img" [attr.aria-label]="scoreChartLabel()">
+          <div class="y-axis" aria-hidden="true"><span>{{ maxBandCount() }}</span><span>Students</span><span>0</span></div>
+          <div class="columns">
+            @for (band of scoreBands(); track band.label) {
+              <div class="column" [attr.aria-label]="band.label + ': ' + band.count + ' students'" [title]="band.label + ': ' + band.count + ' students'">
+                <div class="column-track"><div class="column-bar" [style.height.%]="band.height"><span class="column-count">{{ band.count }}</span></div></div>
+                <span class="column-label">{{ band.label }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+  <section class="item-analysis" aria-labelledby="item-analysis-title">
+    <div class="analysis-heading">
+      <h3 id="item-analysis-title"><mat-icon aria-hidden="true">fact_check</mat-icon>Item analysis</h3>
+      <label>Order
+        <select [value]="sort()" (change)="sort.set($any($event.target).value)">
+          <option value="item">Question order</option>
+          <option value="lowest">Lowest correct rate</option>
+        </select>
+      </label>
+    </div>
+    <p class="chart-meta">Submitted students: {{ results().submittedCount }}</p>
+    @if (results().submittedCount === 0) {
+      <p class="empty">Item statistics will be available after the first submission.</p>
+    }
+    @if (items().length > 0) {
+      <table class="item-table">
+        <caption class="sr-only">Correct, incorrect and unanswered counts per question among submitted students</caption>
+        <thead><tr><th scope="col">Question item</th><th scope="col">Correct</th><th scope="col">Incorrect</th><th scope="col">Unanswered</th><th scope="col">Correct rate</th></tr></thead>
+        <tbody>
+          @for (item of items(); track item.questionId) {
+            <tr>
+              <th scope="row" class="question-cell"><span class="question-number">Q{{ item.itemNumber }}</span><div><span class="question-text">{{ item.text }}</span><span class="question-meta">{{ typeLabel(item.questionType) }} &middot; {{ item.points }} {{ item.points === 1 ? 'point' : 'points' }}</span></div></th>
+              <td data-label="Correct" class="correct-text">{{ item.correctCount }}</td>
+              <td data-label="Incorrect" class="incorrect-text">{{ item.incorrectCount }}</td>
+              <td data-label="Unanswered">{{ item.unansweredCount }}</td>
+              <td data-label="Correct rate">{{ item.correctPercentage == null ? 'N/A' : (item.correctPercentage | number:'1.0-1') + '%' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="empty">No question items available.</p>
+    }
+  </section>
+</section>

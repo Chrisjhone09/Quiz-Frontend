@@ -1,0 +1,19 @@
+X [ERROR] Cannot find tsconfig file "tsconfig.json"
+
+
+X [ERROR] TS500: Error: ENOENT: no such file or directory, lstat 'D:\Capstone\Quiz AI\frontend\.angular\ui-verification\tsconfig.json'
+    at Object.lstatSync (node:fs:1702:25)
+    at NodeJSFileSystem.lstat (file:///D:/Capstone/Quiz%20AI/frontend/node_modules/@angular/compiler-cli/bundles/chunk-KWAGEHJJ.js:73:15)
+    at calcProjectFileAndBasePath (file:///D:/Capstone/Quiz%20AI/frontend/node_modules/@angular/compiler-cli/bundles/chunk-Z3IXQTMY.js:448:29)
+    at readConfiguration (file:///D:/Capstone/Quiz%20AI/frontend/node_modules/@angular/compiler-cli/bundles/chunk-Z3IXQTMY.js:474:39)
+    at D:\Capstone\Quiz AI\frontend\node_modules\@angular\build\src\tools\angular\compilation\angular-compilation.js:67:69
+    at profileSync (D:\Capstone\Quiz AI\frontend\node_modules\@angular\build\src\tools\esbuild\profiling.js:68:16)
+    at AotCompilation.loadConfiguration (D:\Capstone\Quiz AI\frontend\node_modules\@angular\build\src\tools\angular\compilation\angular-compilation.js:67:44)
+    at async AotCompilation.initialize (D:\Capstone\Quiz AI\frontend\node_modules\@angular\build\src\tools\angular\compilation\aot-compilation.js:62:100)
+    at async initialize (D:\Capstone\Quiz AI\frontend\node_modules\@angular\build\src\tools\angular\compilation\parallel-worker.js:38:121)
+    at async onMessage (D:\Capstone\Quiz AI\frontend\node_modules\piscina\dist\worker.js:180:22) [plugin angular-compiler]
+
+
+X [ERROR] Could not resolve "D:\\Capstone\\Quiz AI\\frontend\\.angular\\ui-verification\\main.ts"
+
+

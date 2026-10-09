@@ -16,5 +16,6 @@ export interface QuizModel {
     averageScore? : number;
     submissions: number;
     publishDate: string;
+    createdAt?: string | null;
     takeQuiz? : () => void;
 }

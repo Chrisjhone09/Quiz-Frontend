@@ -1,1 +1,20 @@
-<p>email-verification works!</p>
+<div class="auth-form verify-card">
+	@if (status() === 'verifying') {
+		<div class="spinner" aria-hidden="true"></div>
+		<h2>Verifying your email…</h2>
+	} @else if (status() === 'success') {
+		<div class="status-icon status-icon-success" aria-hidden="true">✓</div>
+		<h2>Email verified</h2>
+	} @else {
+		<div class="status-icon status-icon-error" aria-hidden="true">!</div>
+		<h2>Verification failed</h2>
+	}
+
+	<p class="message">{{ message() }}</p>
+
+	@if (status() !== 'verifying') {
+		<div class="actions actions-center">
+			<a class="primary" routerLink="/login">Go to sign in</a>
+		</div>
+	}
+</div>

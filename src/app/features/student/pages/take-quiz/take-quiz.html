@@ -12,7 +12,28 @@
           <span>{{ submission.score }}</span>
           <small>/ {{ submission.totalPoints }} points</small>
         </div>
-        <p class="result-copy">Your score has been released. Correct answers are hidden for quiz integrity.</p>
+
+        <div class="result-figures">
+          <div class="result-figure">
+            <span class="result-figure-value">{{ submission.percentage }}%</span>
+            <span class="result-figure-label">Score</span>
+          </div>
+          <div class="result-figure">
+            <span class="result-figure-value">{{ submission.correctCount }}/{{ submission.totalQuestions }}</span>
+            <span class="result-figure-label">Correct answers</span>
+          </div>
+          <div class="result-figure">
+            <span class="result-figure-value" [class.pass]="submission.passed" [class.fail]="!submission.passed">
+              {{ submission.passed ? 'Passed' : 'Did not pass' }}
+            </span>
+            <span class="result-figure-label">{{ submission.passingScore }}% needed</span>
+          </div>
+        </div>
+
+        <p class="result-copy">Your score has been released. You can review every question and its correct answer.</p>
+        <a class="review-cta" [routerLink]="['/student-quiz-result', quiz()?.id]">
+          Review my answers
+        </a>
       } @else {
         <div class="score-display muted-score">
           <span>Submitted</span>
@@ -52,6 +73,13 @@
         <strong>{{ tabSwitchCount() }} switch detected</strong>
       }
     </div>
+
+    @if (instructorWarning()) {
+      <div class="instructor-warning">
+        <strong>Instructor warning</strong>
+        <span>{{ instructorWarning() }}</span>
+      </div>
+    }
 
     @if (submitError()) {
       <div class="error-banner">{{ submitError() }}</div>

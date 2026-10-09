@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+/* Shared visual foundation. Page layouts remain owned by their components. */
+:root {
+  --app-gutter: 20px;
+  --theme-950: #12372a;
+  --theme-800: #174a38;
+  --theme-700: #198754;
+  --theme-600: #146c43;
+  --theme-100: #f4f6f4;
+  --theme-50: #ffffff;
+  --theme-border: #dce9df;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+input, select, textarea { min-width: 0; max-width: 100%; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--theme-700); }
+img, video, canvas { max-width: 100%; }
+.department-brand-logo { flex: 0 0 auto; width: 36px; height: 36px; object-fit: contain; }
+.dash-sidebar .brand .brand-text { min-width: 0; white-space: normal; font-size: 14px; line-height: 1.4; overflow-wrap: normal; }
+button, a, input, select { touch-action: manipulation; }
+@media (max-width: 600px) {
+  :root { --app-gutter: 14px; }
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea { font-size: 16px !important; }
+  button, .nav-link, .tab { min-height: 44px; }
+}
+
+html,
+body {
+  background: var(--theme-50);
+  color: var(--theme-950);
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--theme-700);
+}

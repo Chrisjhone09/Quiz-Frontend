@@ -13,7 +13,7 @@
                 <h3>{{ quiz.quizTitle }}</h3>
                 <p>{{ quiz.classroomTitle }}</p>
                 <div class="quiz-meta">
-                    <span>Due {{ quiz.dueDate }}</span>
+                    <span>{{ quiz.closeDate ? 'Due ' + (quiz.closeDate | philippineDate:'datetime':quiz.closeTime) : 'No due date' }}</span>
                     <span>{{ quiz.status }}</span>
                 </div>
             </div>

@@ -1,0 +1,69 @@
+> Building...
+√ Building...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 900.88 kB | 
+styles.css          | styles              |   9.70 kB | 
+chunk-AIRELDGJ.js   | -                   |   6.37 kB | 
+chunk-3RHDWHLL.js   | -                   |   4.97 kB | 
+chunk-HZOPG4A4.js   | -                   |   3.83 kB | 
+chunk-WRKC7FNL.js   | -                   |   3.32 kB | 
+chunk-LOKXYNQS.js   | -                   |   1.76 kB | 
+
+                    | Initial total       | 930.82 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-I3GEHUFZ.js   | admin-dashboard     | 259.38 kB | 
+chunk-QWLWZK3N.js   | take-quiz           |  58.46 kB | 
+chunk-AGONDRMU.js   | enrollment-requests |  32.42 kB | 
+chunk-S2CJL3SG.js   | quiz-result         |  30.90 kB | 
+chunk-GWZSZ5NJ.js   | -                   |   1.93 kB | 
+
+Application bundle generation complete. [3.131 seconds] - 2026-10-09T18:18:48.507Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://127.0.0.1:4301/
+  ➜  press h + enter to show help
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 900.92 kB | 
+
+Application bundle generation complete. [1.543 seconds] - 2026-10-09T18:20:48.496Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 901.05 kB | 
+
+Application bundle generation complete. [0.528 seconds] - 2026-10-09T18:20:59.282Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 901.40 kB | 
+
+Application bundle generation complete. [0.461 seconds] - 2026-10-09T18:42:31.446Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names  | Raw size
+styles.css          | styles |  9.79 kB | 
+
+Application bundle generation complete. [0.008 seconds] - 2026-10-09T18:42:53.963Z
+
+Stylesheet update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 901.40 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-EH5FEC4O.js   | admin-dashboard | 259.35 kB | 
+
+Application bundle generation complete. [1.071 seconds] - 2026-10-09T18:45:11.291Z
+
+Component update sent to client(s).

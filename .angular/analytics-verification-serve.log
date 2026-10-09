@@ -1,0 +1,15 @@
+> Building...
+√ Building...
+Initial chunk files | Names         |  Raw size
+main.js             | main          | 280.74 kB | 
+styles.css          | styles        |  10.05 kB | 
+
+                    | Initial total | 290.79 kB
+
+Application bundle generation complete. [2.007 seconds] - 2026-10-09T21:08:27.596Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+5:08:27 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+  ➜  Local:   http://127.0.0.1:4302/
+  ➜  press h + enter to show help

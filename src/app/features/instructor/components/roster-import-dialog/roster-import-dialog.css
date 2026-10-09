@@ -1,0 +1,29 @@
+:host { display: block; background: #fff; color: #1f2937; }
+h2 { display: flex; align-items: center; gap: 10px; }
+h2 mat-icon { color: #198754; }
+.classroom-name { margin: 0 0 20px; font-size: 14px; overflow-wrap: anywhere; }
+.file-toolbar { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+.file-field { display: grid; gap: 8px; flex: 1 1 260px; min-width: 0; font-size: 13px; font-weight: 600; }
+input { width: 100%; padding: 8px 0; color: #4b5563; }
+input::file-selector-button { min-height: 40px; margin-right: 10px; padding: 8px 12px; background: #fff; border: 1px solid #d1d5db; border-radius: 6px; color: #146c43; cursor: pointer; }
+button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 8px 14px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; color: #374151; font: inherit; font-size: 14px; cursor: pointer; }
+button.primary { background: #198754; color: #fff; border-color: #198754; }
+button mat-icon { width: 18px; height: 18px; font-size: 18px; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button:focus-visible, input:focus-visible { outline: 2px solid #198754; outline-offset: 3px; }
+.import-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 24px; padding: 16px 0; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
+.import-summary div { display: grid; gap: 4px; }
+.import-summary strong { font-size: 24px; }
+.import-summary span { font-size: 12px; color: #6b7280; }
+.roster-list { margin: 12px 0 0; padding: 0; list-style: none; }
+.roster-row { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 8px 12px; padding: 14px 0; border-bottom: 1px solid #e5e7eb; font-size: 13px; }
+.row-number { color: #6b7280; }
+.student { display: grid; gap: 4px; overflow-wrap: anywhere; }
+.student span { color: #6b7280; }
+.row-status { color: #146c43; font-weight: 600; }
+.row-warning, .error { color: #b91c1c; }
+.roster-row p { grid-column: 2 / -1; margin: 0; color: #6b7280; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.busy, .success { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.success { color: #146c43; }
+mat-dialog-actions { gap: 10px; padding: 16px 24px 24px; }
+@media (max-width: 600px) { .import-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } .roster-row { grid-template-columns: 20px minmax(0, 1fr); } .row-status { grid-column: 2; } mat-dialog-actions { flex-wrap: wrap; } }

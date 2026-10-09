@@ -1,0 +1,443 @@
+X [ERROR] NG5002: Parser Error: Expected identifier for property access at the end of the expression [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Unexpected token |, expected identifier or keyword at column 8 in [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Expected identifier for property access at the end of the expression [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Unexpected token |, expected identifier or keyword at column 8 in [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Expected identifier for property access at the end of the expression [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Unexpected token |, expected identifier or keyword at column 8 in [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2339: Property 'Cr' does not exist on type 'QuizActivityRow'. [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...            <td class="muted nowrap">{{ quiz.Cr | timeAgo }}</td>
+          ╵                                                 ~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2339: Property 'Crea' does not exist on type 'QuizActivityRow'. [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...          <td class="muted nowrap">{{ quiz.Crea | timeAgo }}</td>
+          ╵                                               ~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2339: Property 'Cr' does not exist on type 'QuizActivityRow'. [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...            <td class="muted nowrap">{{ quiz.Cr | timeAgo }}</td>
+          ╵                                                 ~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2339: Property 'C' does not exist on type 'QuizActivityRow'. [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...             <td class="muted nowrap">{{ quiz.C | timeAgo }}</td>
+          ╵                                                  ^
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Expected identifier for property access at the end of the expression [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Unexpected token |, expected identifier or keyword at column 8 in [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2551: Property 'createDate' does not exist on type 'QuizActivityRow'. Did you mean 'createdAt'? [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...    <td class="muted nowrap">{{ quiz.createDate | timeAgo }}</td>
+          ╵                                         ~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Expected identifier for property access at the end of the expression [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Parser Error: Unexpected token |, expected identifier or keyword at column 8 in [ quiz. | timeAgo ] in D:\Capstone\Quiz AI\frontend\src\app\features\instructor\pages\instructor-dashboard\instructor-dashboard.html@170:34 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:34:
+      171 │ ...              <td class="muted nowrap">{{ quiz. | timeAgo }}</td>
+          ╵                                           ~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.html:153:39:
+      153 │ ...d nowrap">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+          ╵                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorClassroomDetail.
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:15:
+      34 │   templateUrl: './instructor-classroom-detail.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.html:21:52:
+      21 │ ...lish Date">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+         ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorQuizList.
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.ts:11:15:
+      11 │   templateUrl: './instructor-quiz-list.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.html:153:39:
+      153 │ ...d nowrap">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+          ╵                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorClassroomDetail.
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:15:
+      34 │   templateUrl: './instructor-classroom-detail.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.html:21:52:
+      21 │ ...lish Date">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+         ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorQuizList.
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.ts:11:15:
+      11 │   templateUrl: './instructor-quiz-list.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.html:153:39:
+      153 │ ...d nowrap">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+          ╵                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorClassroomDetail.
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:15:
+      34 │   templateUrl: './instructor-classroom-detail.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2551: Property 'publishedAt' does not exist on type 'QuizActivityRow'. Did you mean 'publishDate'? [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...   <td class="muted nowrap">{{ quiz.publishedAt | timeAgo }}</td>
+          ╵                                        ~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.html:21:52:
+      21 │ ...lish Date">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+         ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorQuizList.
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.ts:11:15:
+      11 │   templateUrl: './instructor-quiz-list.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.html:153:39:
+      153 │ ...d nowrap">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+          ╵                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorClassroomDetail.
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:15:
+      34 │   templateUrl: './instructor-classroom-detail.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2551: Property 'publishedAt' does not exist on type 'QuizActivityRow'. Did you mean 'publishDate'? [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.html:171:42:
+      171 │ ...   <td class="muted nowrap">{{ quiz.publishedAt | timeAgo }}</td>
+          ╵                                        ~~~~~~~~~~~
+
+  Error occurs in the template of component InstructorDashboard.
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:24:15:
+      24 │   templateUrl: './instructor-dashboard.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.html:21:52:
+      21 │ ...lish Date">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+         ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorQuizList.
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.ts:11:15:
+      11 │   templateUrl: './instructor-quiz-list.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.html:153:39:
+      153 │ ...d nowrap">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+          ╵                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorClassroomDetail.
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:15:
+      34 │   templateUrl: './instructor-classroom-detail.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8102: NG8102: The left side of this nullish coalescing operation does not include 'null' or 'undefined' in its type, therefore the '??' operator can be safely removed. Find more at https://v21.angular.dev/extended-diagnostics/NG8102 [plugin angular-compiler]
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.html:21:52:
+      21 │ ...lish Date">{{ (quiz.publishDate ?? quiz.createdAt) | timeAgo }}...
+         ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Warning occurs in the template of component InstructorQuizList.
+
+    src/app/features/instructor/components/instructor-quiz-list/instructor-quiz-list.ts:11:15:
+      11 │   templateUrl: './instructor-quiz-list.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../auth-pages.css" [plugin angular-compiler]
+
+    src/app/features/auth/pages/login/login.css:1:8:
+      1 │ @import '../auth-pages.css';
+        ╵         ~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../auth-pages.css" [plugin angular-compiler]
+
+    src/app/features/auth/pages/register/register.css:1:8:
+      1 │ @import '../auth-pages.css';
+        ╵         ~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../auth-pages.css" [plugin angular-compiler]
+
+    src/app/features/auth/pages/register/register.css:1:8:
+      1 │ @import '../auth-pages.css';
+        ╵         ~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../auth-pages.css" [plugin angular-compiler]
+
+    src/app/features/auth/pages/register/register.css:1:8:
+      1 │ @import '../auth-pages.css';
+        ╵         ~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../components/quiz-results-analytics/quiz-results-analytics' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:20:37:
+      20 │ ...cs } from '../../components/quiz-results-analytics/quiz-results...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG1010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value could not be determined statically. [plugin angular-compiler]
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:113:
+      34 │ ...AgoPipe, PhilippineDatePipe, MatIconModule, QuizResultsAnalytics],
+         ╵                                                ~~~~~~~~~~~~~~~~~~~~
+
+  Unknown reference.
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:34:113:
+      34 │ ...AgoPipe, PhilippineDatePipe, MatIconModule, QuizResultsAnalytics],
+         ╵                                                ~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] Could not resolve "../../components/quiz-results-analytics/quiz-results-analytics"
+
+    src/app/features/instructor/pages/instructor-classroom-detail/instructor-classroom-detail.ts:15:37:
+      15 │ ...cs } from '../../components/quiz-results-analytics/quiz-results...
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2345: Argument of type 'OperatorFunction<HttpEvent<unknown>, HttpEvent<unknown>>' is not assignable to parameter of type 'OperatorFunction<HttpEvent<unknown>, HttpResponse<unknown>>'.
+  Type 'HttpEvent<unknown>' is not assignable to type 'HttpResponse<unknown>'.
+    Type 'HttpSentEvent' is missing the following properties from type 'HttpResponse<unknown>': body, clone, headers, status, and 3 more. [plugin angular-compiler]
+
+    src/app/shared/interceptors/cache-loading.interceptor.ts:22:6:
+      22 │       catchError((error) => {
+         ╵       ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2345: Argument of type 'OperatorFunction<HttpEvent<unknown>, HttpEvent<unknown>>' is not assignable to parameter of type 'OperatorFunction<HttpEvent<unknown>, HttpResponse<unknown>>'.
+  Type 'HttpEvent<unknown>' is not assignable to type 'HttpResponse<unknown>'.
+    Type 'HttpSentEvent' is missing the following properties from type 'HttpResponse<unknown>': body, clone, headers, status, and 3 more. [plugin angular-compiler]
+
+    src/app/shared/interceptors/cache-loading.interceptor.ts:22:6:
+      22 │       catchError((error) => {
+         ╵       ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2345: Argument of type 'OperatorFunction<HttpEvent<unknown>, HttpEvent<unknown>>' is not assignable to parameter of type 'OperatorFunction<HttpEvent<unknown>, HttpResponse<unknown>>'.
+  Type 'HttpEvent<unknown>' is not assignable to type 'HttpResponse<unknown>'.
+    Type 'HttpSentEvent' is missing the following properties from type 'HttpResponse<unknown>': body, clone, headers, status, and 3 more. [plugin angular-compiler]
+
+    src/app/shared/interceptors/cache-loading.interceptor.ts:22:6:
+      22 │       catchError((error) => {
+         ╵       ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2345: Argument of type 'OperatorFunction<HttpEvent<unknown>, HttpEvent<unknown>>' is not assignable to parameter of type 'OperatorFunction<HttpEvent<unknown>, HttpResponse<unknown>>'.
+  Type 'HttpEvent<unknown>' is not assignable to type 'HttpResponse<unknown>'.
+    Type 'HttpSentEvent' is missing the following properties from type 'HttpResponse<unknown>': body, clone, headers, status, and 3 more. [plugin angular-compiler]
+
+    src/app/shared/interceptors/cache-loading.interceptor.ts:22:6:
+      22 │       catchError((error) => {
+         ╵       ~~~~~~~~~~~~~~~~~~~~~~~
+
+

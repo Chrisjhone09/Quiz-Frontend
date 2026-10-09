@@ -2,7 +2,7 @@
 	max-width: 980px;
 	margin: 0 auto;
 	padding: 8px 28px 48px;
-	color: #061226;
+	color: #12372a;
 }
 
 .breadcrumbs {
@@ -10,22 +10,22 @@
 	align-items: center;
 	gap: 8px;
 	margin-bottom: 16px;
-	color: #496286;
+	color: #476d5d;
 	font-size: 14px;
 }
 
 .breadcrumbs a {
-	color: #496286;
+	color: #476d5d;
 	text-decoration: none;
 }
 
 .breadcrumbs strong {
-	color: #071225;
+	color: #12372a;
 }
 
 .classroom-card {
 	background: #ffffff;
-	border: 1px solid #dde5ef;
+	border: 1px solid #dce9df;
 	border-radius: 10px;
 	padding: 30px;
 	box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
@@ -38,23 +38,29 @@
 
 .classroom-title {
 	margin: 0;
-	color: #020817;
+	color: #12372a;
 	font-size: 30px;
 	line-height: 1.2;
 	font-weight: 900;
 }
+
+.classroom-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.classroom-title-row h2 { min-width: 0; overflow-wrap: anywhere; }
+.classroom-options { display: inline-grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; padding: 0; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; color: #475569; cursor: pointer; }
+.classroom-options:hover { border-color: #198754; color: #198754; }
+.classroom-options:focus-visible { outline: 3px solid #198754; outline-offset: 2px; }
 
 .classroom-meta {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 8px;
-	color: #526b8c;
+	color: #4e7361;
 	font-size: 15px;
 }
 
 .dot {
-	color: #9aa8ba;
+	color: #95ad9f;
 }
 
 .class-code {
@@ -66,9 +72,9 @@
 	align-items: center;
 	min-height: 24px;
 	padding: 0 12px;
-	background: #f1f5f9;
+	background: #ffffff;
 	border-radius: 6px;
-	color: #334155;
+	color: #345b4a;
 	font-size: 12px;
 }
 
@@ -89,7 +95,7 @@
 	display: flex;
 	gap: 18px;
 	margin-top: 22px;
-	border-bottom: 1px solid #dde5ef;
+	border-bottom: 1px solid #dce9df;
 }
 
 .tab,
@@ -98,29 +104,169 @@
 	align-items: center;
 	min-height: 42px;
 	padding: 0 8px;
-	color: #415978;
+	color: #3e6655;
 	font-size: 14px;
 	font-weight: 700;
 	text-decoration: none;
 }
 
 .tab.active {
-	color: #2563eb;
-	border-bottom: 2px solid #2563eb;
+	color: #198754;
+	border-bottom: 2px solid #198754;
 }
 
 .quizzes-section {
 	padding-bottom: 24px;
 }
 
+/* ---- announcements & classmates ---- */
+
+.announcements-section,
+.classmates-section {
+	padding-bottom: 24px;
+}
+
+.empty {
+	margin: 24px 0;
+	color: #60796c;
+	font-size: 14px;
+}
+
+.muted {
+	color: #657c70;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.announcement-list,
+.classmate-list {
+	list-style: none;
+	margin: 18px 0 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.announcement-card {
+	background: #fff;
+	border: 1px solid #dce9df;
+	border-radius: 10px;
+	padding: 16px 20px;
+}
+
+.announcement-card-top {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.announcement-avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	background: #ffffff;
+	color: #1f6b45;
+	font-size: 13px;
+	font-weight: 700;
+	flex: 0 0 auto;
+}
+
+.announcement-header-text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.announcement-author {
+	font-size: 14px;
+	font-weight: 700;
+	color: #12372a;
+}
+
+.announcement-time {
+	font-size: 12.5px;
+	color: #657c70;
+}
+
+.announcement-content {
+	margin: 8px 0 0;
+	color: #284263;
+	font-size: 14px;
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+.announcement-card-bottom {
+	margin-top: 14px;
+}
+
+.btn-ack {
+	padding: 7px 16px;
+	border-radius: 6px;
+	border: 1px solid #198754;
+	background: #198754;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.btn-ack:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+.ack-done {
+	color: #198754;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.classmate-card {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	background: #fff;
+	border: 1px solid #dce9df;
+	border-radius: 10px;
+	padding: 14px 20px;
+}
+
+.classmate-card .avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #ffffff;
+	color: #1f6b45;
+	font-size: 13px;
+	font-weight: 700;
+	flex: 0 0 auto;
+}
+
+.classmate-name {
+	font-weight: 600;
+	color: #12372a;
+	font-size: 14px;
+}
+
 .empty-card {
 	max-width: 900px;
 	margin: 24px auto;
-	color: #64748b;
+	color: #60796c;
 	background: #ffffff;
 	padding: 18px;
 	border-radius: 8px;
-	border: 1px solid #dde5ef;
+	border: 1px solid #dce9df;
 }
 
 @media (max-width: 760px) {
@@ -140,4 +286,39 @@
 	.instructor-tabs {
 		overflow-x: auto;
 	}
+}
+
+/* ---- enrolment approval ---- */
+
+.approval-pill {
+	display: inline-block;
+	margin-left: 8px;
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: #fef3c7;
+	border: 1px solid #fde68a;
+	color: #92400e;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.instructor-tabs a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.tab-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 999px;
+	background: #dc2626;
+	color: #fff;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1;
 }

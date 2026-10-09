@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Auth } from '../../../auth/services/auth';
 import { StudentQuizService } from '../../services/student-quiz-service';
+import { QuizMonitoringRealtimeService } from '../../../../shared/services/quiz-monitoring-realtime.service';
 import {
   QuizSubmissionResult,
   StudentQuiz,
@@ -26,7 +28,10 @@ export class TakeQuiz implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly quizService = inject(StudentQuizService);
   private readonly auth = inject(Auth);
+  private readonly realtime = inject(QuizMonitoringRealtimeService);
   private timerId: number | null = null;
+  private warningSubscription?: Subscription;
+  private forceSubmitSubscription?: Subscription;
 
   readonly quiz = signal<StudentQuiz | null>(null);
   readonly currentIndex = signal(0);
@@ -38,6 +43,7 @@ export class TakeQuiz implements OnInit, OnDestroy {
   readonly submitError = signal('');
   readonly result = signal<QuizSubmissionResult | null>(null);
   readonly tabSwitchCount = signal(0);
+  readonly instructorWarning = signal('');
 
   readonly currentQuestion = computed<StudentQuizQuestion | null>(() => {
     const quiz = this.quiz();
@@ -71,6 +77,7 @@ export class TakeQuiz implements OnInit, OnDestroy {
         this.remainingSeconds.set(Math.max(response.data.timeLimit, 1) * 60);
         this.loading.set(false);
         this.startTimer();
+        this.startMonitoringSession(response.data.id);
       },
       error: () => {
         this.loading.set(false);
@@ -84,6 +91,8 @@ export class TakeQuiz implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stopTimer();
     document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+    this.warningSubscription?.unsubscribe();
+    this.forceSubmitSubscription?.unsubscribe();
   }
 
   selectQuestion(index: number): void {
@@ -148,7 +157,7 @@ export class TakeQuiz implements OnInit, OnDestroy {
       .replace(/\b\w/g, (letter) => letter.toUpperCase());
   }
 
-  submitQuiz(): void {
+  submitQuiz(forced = false): void {
     const quiz = this.quiz();
     const studentId = this.auth.getUserId();
 
@@ -157,7 +166,7 @@ export class TakeQuiz implements OnInit, OnDestroy {
     }
 
     this.submitting.set(true);
-    this.submitError.set('');
+    this.submitError.set(forced ? 'Your instructor forced this quiz to submit.' : '');
 
     this.quizService
       .submitQuiz({
@@ -213,6 +222,33 @@ export class TakeQuiz implements OnInit, OnDestroy {
   private readonly handleVisibilityChange = (): void => {
     if (document.hidden && !this.result()) {
       this.tabSwitchCount.update((count) => count + 1);
+      const quiz = this.quiz();
+      const studentId = this.auth.getUserId();
+
+      if (quiz && studentId) {
+        this.quizService.recordTabSwitch(studentId, quiz.id).subscribe();
+      }
     }
   };
+
+  private startMonitoringSession(quizId: number): void {
+    const studentId = this.auth.getUserId();
+    if (!studentId) {
+      return;
+    }
+
+    this.realtime.joinStudentQuiz(quizId, studentId);
+
+    this.warningSubscription = this.realtime.warning$.subscribe((event) => {
+      if (event.quizId === quizId && event.studentId === studentId) {
+        this.instructorWarning.set(event.message);
+      }
+    });
+
+    this.forceSubmitSubscription = this.realtime.forceSubmit$.subscribe((event) => {
+      if (event.quizId === quizId && event.studentId === studentId && !this.result()) {
+        this.submitQuiz(true);
+      }
+    });
+  }
 }

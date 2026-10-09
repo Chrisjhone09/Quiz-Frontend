@@ -1,0 +1,28 @@
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: SideNav is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.ts:10:34:
+[37m      10 │   imports: [RouterOutlet, Header, [32mSideNav[37m],
+         ╵                                   [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: All imports are unused[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/auth/pages/forgot-password/forgot-password.ts:8:2:
+[37m      8 │   [32mimports[37m: [FormField, FormRoot],
+        ╵   [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: RouterOutlet is not used within the template of InstructorDashboard[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/instructor/pages/instructor-dashboard/instructor-dashboard.ts:13:38:
+[37m      13 │   imports: [StatsCard, ClassroomList, [32mRouterOutlet[37m],
+         ╵                                       [32m~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: RouterOutlet is not used within the template of StudentDashboard[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/student/pages/student-dashboard/student-dashboard.ts:17:82:
+[37m      17 │ ...omList, FormsModule, UpcomingQuizzes, QuizActivity, [32mRouterOutlet[37m],
+         ╵                                                        [32m~~~~~~~~~~~~[0m
+
+[39m[22m

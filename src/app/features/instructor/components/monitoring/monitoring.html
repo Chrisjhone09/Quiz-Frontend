@@ -1,0 +1,164 @@
+<section class="monitoring-page">
+  <header class="monitoring-header">
+    <div>
+      <p class="eyebrow"><mat-icon aria-hidden="true">shield</mat-icon> Exam monitoring</p>
+      <h2>Quiz activity</h2>
+    </div>
+
+    @if (dashboard()?.quizzes?.length) {
+      <div class="header-controls">
+      <label class="quiz-picker">
+        <span>Quiz <span class="timezone-label">Philippine time (PHT)</span></span>
+        <select [ngModel]="selectedQuizId()" (ngModelChange)="onQuizChange($event)">
+          @for (quiz of dashboard()?.quizzes; track quiz.id) {
+            <option [value]="quiz.id">{{ quiz.title }}</option>
+          }
+        </select>
+      </label>
+      <button type="button" class="icon-button refresh-button" (click)="refresh()" [disabled]="loading()" matTooltip="Refresh monitoring" aria-label="Refresh monitoring">
+        <mat-icon aria-hidden="true">refresh</mat-icon>
+      </button>
+      </div>
+    }
+  </header>
+
+  @if (actionMessage()) {
+    <div class="action-banner" [class.action-error]="actionError()" role="status"><mat-icon aria-hidden="true">{{ actionError() ? 'error_outline' : 'check_circle' }}</mat-icon>{{ actionMessage() }}</div>
+  }
+
+  @if (loading()) {
+    <div class="empty-state"><mat-icon aria-hidden="true">hourglass_empty</mat-icon>Loading monitoring data...</div>
+  } @else if (!dashboard()?.quizzes?.length) {
+    <div class="empty-state"><mat-icon aria-hidden="true">assignment</mat-icon>No quizzes are available for monitoring yet.</div>
+  } @else {
+    <div class="stats-grid">
+      <article class="stat-card">
+        <span class="stat-icon"><mat-icon aria-hidden="true">edit_note</mat-icon></span>
+        <div>
+          <p>Taking Exam</p>
+          <strong>{{ takingCount() }}</strong>
+        </div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon"><mat-icon aria-hidden="true">task_alt</mat-icon></span>
+        <div>
+          <p>Submitted</p>
+          <strong>{{ submittedCount() }}</strong>
+        </div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon alert-icon"><mat-icon aria-hidden="true">tab_unselected</mat-icon></span>
+        <div>
+          <p>Tab Switches</p>
+          <strong>{{ alertCount() }}</strong>
+        </div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon"><mat-icon aria-hidden="true">donut_large</mat-icon></span>
+        <div>
+          <p>Completion</p>
+          <strong>{{ completionPercentage() }}%</strong>
+        </div>
+      </article>
+    </div>
+
+    <div class="monitoring-layout">
+      <section class="student-panel">
+        <div class="panel-header">
+          <h3><mat-icon aria-hidden="true">groups</mat-icon> Students</h3>
+          <span>{{ students().length }} enrolled</span>
+        </div>
+
+        <div class="student-filters">
+          <label class="search-field"><mat-icon aria-hidden="true">search</mat-icon><input type="search" [ngModel]="search()" (ngModelChange)="search.set($event)" placeholder="Search students" aria-label="Search by name, student number, or section" /></label>
+          <select [ngModel]="statusFilter()" (ngModelChange)="statusFilter.set($event)" aria-label="Filter by attempt status">
+            <option value="all">All statuses</option><option value="Taking">Taking</option><option value="Submitted">Submitted</option><option value="Not started">Not started</option>
+          </select>
+          <label class="alerts-filter"><input type="checkbox" [ngModel]="alertsOnly()" (ngModelChange)="alertsOnly.set($event)" />With tab switches</label>
+        </div>
+
+        <div class="student-list">
+          @for (student of filteredStudents(); track student.studentId) {
+            <article class="student-card" [class.alert-card]="student.tabSwitchCount > 0">
+              <div class="student-main">
+                <span class="avatar">{{ initials(student) }}</span>
+                <div class="student-identity">
+                  <h4>{{ student.fullName }}</h4>
+                  <p>{{ student.studentNumber }} · {{ student.section }}</p>
+                </div>
+                <span class="status-pill" [class.submitted]="student.status === 'Submitted'" [class.taking]="student.status === 'Taking'">
+                  <mat-icon aria-hidden="true">{{ student.status === 'Submitted' ? 'check_circle' : student.status === 'Taking' ? 'edit' : 'schedule' }}</mat-icon>
+                  {{ student.status }}
+                </span>
+              </div>
+
+              <div class="student-metrics">
+                <div>
+                  <span><mat-icon aria-hidden="true">tab_unselected</mat-icon>Tab switches</span>
+                  <strong>{{ student.tabSwitchCount }}</strong>
+                </div>
+                <div>
+                  <span><mat-icon aria-hidden="true">schedule</mat-icon>Last event</span>
+                  <strong [title]="student.lastEventAt | philippineDate:'datetime'">{{ student.lastEventAt ? (student.lastEventAt | timeAgo) : 'None' }}</strong>
+                </div>
+              </div>
+
+              @if (student.logs.length) {
+                <ul class="mini-log">
+                  @for (log of student.logs.slice(0, 2); track log.id) {
+                    <li [class.warn-log]="!isTabSwitch(log)"><mat-icon aria-hidden="true">{{ isTabSwitch(log) ? 'tab_unselected' : 'notifications_active' }}</mat-icon><span>{{ log.action }}</span></li>
+                  }
+                </ul>
+              }
+
+              @if (expandedScoreStudentId() === student.studentId) {
+                <div class="score-row">
+                  @if (student.status === 'Submitted') {
+                    <strong>{{ student.score ?? 0 }} / {{ student.totalPoints }}</strong>
+                    <span [title]="student.submittedAt | philippineDate:'datetime'">Submitted {{ student.submittedAt | timeAgo }}</span>
+                  } @else {
+                    <span>No submitted score yet.</span>
+                  }
+                </div>
+              }
+
+              <footer class="student-actions">
+                <button type="button" class="ghost-button" (click)="warn(student)" [disabled]="student.status !== 'Taking' || isPending(student)" matTooltip="Send a reminder to stay on the quiz tab"><mat-icon aria-hidden="true">notifications_active</mat-icon>Warn</button>
+                <button type="button" class="danger-button" (click)="forceSubmit(student)" [disabled]="student.status !== 'Taking' || isPending(student)" matTooltip="End this attempt and submit the entered answers">
+                  <mat-icon aria-hidden="true">stop_circle</mat-icon>Force submit
+                </button>
+                <button type="button" class="ghost-button score-button" (click)="toggleScore(student)" [attr.aria-expanded]="expandedScoreStudentId() === student.studentId"><mat-icon aria-hidden="true">{{ expandedScoreStudentId() === student.studentId ? 'visibility_off' : 'visibility' }}</mat-icon>{{ expandedScoreStudentId() === student.studentId ? 'Hide score' : 'View score' }}</button>
+              </footer>
+            </article>
+          } @empty {
+            <div class="empty-state students-empty"><mat-icon aria-hidden="true">person_search</mat-icon>{{ students().length ? 'No students match these filters.' : 'No students are enrolled in this classroom yet.' }}</div>
+          }
+        </div>
+      </section>
+
+      <aside class="event-panel">
+        <div class="panel-header">
+          <h3><mat-icon aria-hidden="true">history</mat-icon> Security events</h3>
+          <span class="live-pill" [class.connected]="connectionAvailable() && realtime.connected()"><mat-icon aria-hidden="true">{{ connectionAvailable() && realtime.connected() ? 'sensors' : 'cloud_off' }}</mat-icon>{{ connectionAvailable() && realtime.connected() ? 'Live' : 'Stored' }}</span>
+        </div>
+
+        @if (eventFeed().length) {
+          <ol class="event-list">
+            @for (event of eventFeed(); track event.id) {
+              <li [class.tab-event]="isTabSwitch(event)">
+                <mat-icon class="event-icon" aria-hidden="true">{{ isTabSwitch(event) ? 'tab_unselected' : 'notifications_active' }}</mat-icon>
+                <div class="event-content">
+                <strong>{{ event.studentName }}</strong>
+                <span>{{ event.action }}</span>
+                <small [title]="event.timeStamp | philippineDate:'datetime'">{{ event.timeStamp | timeAgo }}</small>
+                </div>
+              </li>
+            }
+          </ol>
+        } @else {
+          <p class="muted-copy feed-empty"><mat-icon aria-hidden="true">verified_user</mat-icon>No monitoring events have been recorded for this quiz.</p>
+        }
+      </aside>
+    </div>
+  }
+</section>

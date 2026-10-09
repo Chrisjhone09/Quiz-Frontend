@@ -1,0 +1,12 @@
+<h2 mat-dialog-title><mat-icon aria-hidden="true">logout</mat-icon> Leave classroom?</h2>
+<mat-dialog-content>
+  <p>You are about to leave <strong>{{ data.title }}</strong>.</p>
+  <p>You will lose access to its quizzes and announcements. To return, you will need to join again and may need your instructor's approval.</p>
+  @if (error()) { <p class="leave-error" role="alert">{{ error() }}</p> }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button id="cancel-leave" type="button" class="cancel-button" (click)="cancel()" [disabled]="leaving()">Stay in classroom</button>
+  <button type="button" class="leave-button" (click)="confirm()" [disabled]="leaving()">
+    <mat-icon aria-hidden="true">logout</mat-icon>{{ leaving() ? 'Leaving...' : 'Leave classroom' }}
+  </button>
+</mat-dialog-actions>

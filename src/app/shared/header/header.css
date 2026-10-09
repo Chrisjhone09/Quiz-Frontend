@@ -1,27 +1,104 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #dce9df;
+  box-sizing: border-box;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 220px;
+}
+.header-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+.app-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #153d2d;
+  line-height: 1.35;
+  max-width: 340px;
+}
+.header-right {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+.header-right .user-info {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+.user-name {
+  font-weight: 700;
+  color: #153d2d;
+}
+.user-role {
+  font-size: 0.85rem;
+  color: #657c70;
+  margin-top: 4px;
+}
+.logout-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #dce9df;
+  background: #fff;
+  color: #476b5c;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+.logout-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-.app-header{
-	display:flex;
-	align-items:center;
-	justify-content:space-between;
-	padding:12px 20px;
-	background:#ffffff;
-	border-bottom:1px solid #e5e7eb;
-	box-sizing:border-box;
-}
-.app-title{
-	font-size:1.1rem;
-	font-weight:700;
-	color:#111827;
-}
-.header-right .user-info{
-	text-align:right;
-}
-.user-name{
-	font-weight:700;
-	color:#111827;
-}
-.user-role{
-	font-size:.85rem;
-	color:#6b7280;
-	margin-top:4px;
+@media (max-width: 480px) {
+  .app-header {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .app-title {
+    white-space: normal;
+    font-size: 0.9rem;
+  }
+  .header-right {
+    gap: 8px;
+  }
+  .user-name,
+  .user-role {
+    font-size: 0.78rem;
+  }
+  .logout-btn span {
+    display: none;
+  }
+  .logout-btn {
+    padding: 8px;
+  }
 }

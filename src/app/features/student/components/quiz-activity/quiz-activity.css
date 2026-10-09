@@ -1,5 +1,5 @@
 .quiz-activity h2 {
-	color: #020817;
+	color: #12372a;
 	font-size: 20px;
 	line-height: 1.25;
 	margin: 0 0 14px;
@@ -10,7 +10,7 @@
 }
 .quiz-card {
 	background: #ffffff;
-	border: 1px solid #e6ebf2;
+	border: 1px solid #dce9df;
 	border-bottom-width: 0;
 	box-shadow: 0 2px 7px rgba(15, 23, 42, 0.08);
 	display: grid;
@@ -35,7 +35,7 @@
 }
 
 .quiz-icon {
-	color: #00bd8a;
+	color: #198754;
 	display: grid;
 	place-items: center;
 	padding-top: 2px;
@@ -62,7 +62,7 @@
 }
 
 .quiz-details h3 {
-	color: #020817;
+	color: #12372a;
 	font-size: 14px;
 	line-height: 1.25;
 	font-weight: 700;
@@ -70,7 +70,7 @@
 }
 
 .quiz-details p {
-	color: #4e6281;
+	color: #4b705f;
 	font-size: 12px;
 	line-height: 1.25;
 	margin: 0 0 7px;
@@ -90,26 +90,26 @@
 }
 
 .quiz-meta span:first-child {
-	border: 1px solid #dfe7f1;
-	color: #020817;
+	border: 1px solid #dce9df;
+	color: #12372a;
 	background: #ffffff;
 }
 
 .quiz-meta span:last-child {
-	background: #c9f7df;
-	color: #047857;
+	background: #f4f6f4;
+	color: #146c43;
 }
 
 .quiz-arrow {
-	color: #bfd0e4;
+	color: #b2cec0;
 	margin-top: 18px;
 }
 
 .no-quizzes {
 	background: #ffffff;
-	border: 1px solid #e6ebf2;
+	border: 1px solid #dce9df;
 	border-radius: 8px;
-	color: #4e6281;
+	color: #4b705f;
 	padding: 18px;
 }
 

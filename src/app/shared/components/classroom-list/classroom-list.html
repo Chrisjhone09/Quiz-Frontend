@@ -2,8 +2,19 @@
     @if (classrooms().length > 0) {
         @for (classroom of classrooms(); track classroom.id) {
             <article class="classroom-card classroom-card--{{ $index }}">
-                <div class="class-subjectcode">{{ classroom.classCode }}</div>
+                <div class="class-card-top">
+                    <div class="class-subjectcode">{{ classroom.classCode }}</div>
+                    @if (activeCount(classroom) > 0) {
+                        <span class="active-badge">{{ activeCount(classroom) }} Active</span>
+                    }
+                </div>
                 <h3 class="class-title">{{ classroom.classroomTitle }}</h3>
+                @if (auth.getUserRole() === "Instructor" && (classroom.pendingRequestCount ?? 0) > 0) {
+                    <a class="pending-badge"
+                       [routerLink]="['/instructor-classroom', classroom.id, 'requests']">
+                        {{ classroom.pendingRequestCount }} join request{{ classroom.pendingRequestCount === 1 ? '' : 's' }} waiting
+                    </a>
+                }
                 @if(auth.getUserRole() !== "Instructor"){
                     <div class="instructor">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -39,7 +50,6 @@
                     </svg>
                 </a>
 
-                <button (click)="leaveClassroom.emit(classroom.id)">Leave</button>
                 @if(auth.getUserRole() === "Instructor" ){
                     <button (click)="updateClassroom.emit(classroom.id)">Update</button>
                 }

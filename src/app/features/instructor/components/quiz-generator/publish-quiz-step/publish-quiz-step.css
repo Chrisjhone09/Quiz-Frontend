@@ -2,13 +2,13 @@
   display: grid;
   grid-template-columns: 360px minmax(0, 1fr);
   min-height: calc(100vh - 72px);
-  background: #f3f6fb;
+  background: #ffffff;
 }
 
 .summary-panel {
   padding: 24px 28px;
   background: #ffffff;
-  border-right: 1px solid #e4e9f2;
+  border-right: 1px solid #ffffff;
 }
 
 h2,
@@ -18,13 +18,13 @@ p {
 }
 
 h2 {
-  color: #0f172a;
+  color: #153d2d;
   font-size: 20px;
   font-weight: 850;
 }
 
 h3 {
-  color: #0f172a;
+  color: #153d2d;
   font-size: 18px;
   font-weight: 850;
 }
@@ -35,14 +35,14 @@ h3 {
   margin-top: 18px;
   padding: 16px;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
 
 .summary-card span,
 .summary-grid span {
-  color: #64748b;
+  color: #60796c;
   font-size: 12px;
   font-weight: 800;
 }
@@ -51,7 +51,7 @@ h3 {
 .summary-grid strong {
   display: block;
   margin-top: 3px;
-  color: #0f172a;
+  color: #153d2d;
   font-size: 15px;
   font-weight: 850;
 }
@@ -72,8 +72,8 @@ h3 {
 
 .badge-list span {
   padding: 5px 8px;
-  color: #2563eb;
-  background: #eff6ff;
+  color: #198754;
+  background: #ffffff;
   border-radius: 999px;
 }
 
@@ -92,8 +92,8 @@ h3 {
   align-items: center;
   gap: 10px;
   padding: 11px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border: 1px solid #dce9df;
   border-radius: 7px;
 }
 
@@ -102,15 +102,15 @@ h3 {
   width: 28px;
   height: 28px;
   place-items: center;
-  color: #2563eb;
+  color: #198754;
   font-size: 9px;
   font-weight: 900;
-  background: #eaf1ff;
+  background: #ffffff;
   border-radius: 6px;
 }
 
 .source-card p {
-  color: #334155;
+  color: #345b4a;
   font-size: 13px;
   font-weight: 800;
 }
@@ -145,21 +145,21 @@ button {
 }
 
 .outline-button {
-  color: #334155;
+  color: #345b4a;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
 }
 
 .primary-button {
   color: #ffffff;
-  background: #2563eb;
+  background: #198754;
   border: 0;
   box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
 }
 
 .content-header p {
   margin-top: 7px;
-  color: #64748b;
+  color: #60796c;
   font-size: 13px;
 }
 
@@ -167,7 +167,7 @@ button {
   margin-top: 22px;
   padding: 20px;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
@@ -184,17 +184,17 @@ button {
   width: 24px;
   height: 24px;
   place-items: center;
-  color: #2563eb;
+  color: #198754;
   font-size: 11px;
   font-weight: 900;
-  background: #eff6ff;
+  background: #ffffff;
   border-radius: 999px;
 }
 
 label {
   display: grid;
   gap: 7px;
-  color: #334155;
+  color: #345b4a;
   font-size: 13px;
   font-weight: 800;
 }
@@ -204,12 +204,12 @@ select {
   width: 100%;
   height: 42px;
   padding: 0 12px;
-  color: #334155;
+  color: #345b4a;
   font: inherit;
   font-size: 13px;
   font-weight: 600;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
   border-radius: 7px;
 }
 
@@ -232,15 +232,15 @@ select {
 
 .schedule-readout div {
   padding: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border: 1px solid #dce9df;
   border-radius: 7px;
 }
 
 .schedule-readout span,
 .expires-field span {
   display: block;
-  color: #64748b;
+  color: #60796c;
   font-size: 12px;
   font-weight: 800;
 }
@@ -248,7 +248,7 @@ select {
 .schedule-readout strong {
   display: block;
   margin-top: 5px;
-  color: #0f172a;
+  color: #153d2d;
   font-size: 14px;
   font-weight: 850;
 }
@@ -259,7 +259,7 @@ select {
 
 .duration-note {
   margin-top: 14px;
-  color: #64748b;
+  color: #60796c;
   font-size: 12px;
 }
 
@@ -269,7 +269,7 @@ select {
   justify-content: space-between;
   gap: 18px;
   padding: 14px 0;
-  border-bottom: 1px solid #edf2f7;
+  border-bottom: 1px solid #edf5ef;
 }
 
 .toggle-row:last-child {
@@ -280,7 +280,7 @@ select {
 .toggle-row small {
   display: block;
   margin-top: 4px;
-  color: #94a3b8;
+  color: #8da89b;
   font-size: 11px;
   font-weight: 600;
 }
@@ -288,7 +288,7 @@ select {
 .toggle-row input {
   width: 38px;
   height: 22px;
-  accent-color: #2563eb;
+  accent-color: #198754;
 }
 
 @media (max-width: 900px) {
@@ -298,7 +298,7 @@ select {
 
   .summary-panel {
     border-right: 0;
-    border-bottom: 1px solid #e4e9f2;
+    border-bottom: 1px solid #ffffff;
   }
 
   .publish-panel {

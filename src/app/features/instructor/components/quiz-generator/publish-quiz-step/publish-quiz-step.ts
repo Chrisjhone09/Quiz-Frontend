@@ -4,6 +4,7 @@ import { SourceMaterial } from '../quiz-generator.models';
 import { QuizCreationModel, QuizResponseModel } from '../../../interfaces/quizCreation.model';
 import { QuizSettingsService } from '../../../services/quiz-settings-service';
 import { Router } from '@angular/router';
+import { formatPhilippineDateTime, philippineInputValues, scheduleTimestamp } from '../../../../../shared/utils/philippine-time';
 
 @Component({
   selector: 'app-publish-quiz-step',
@@ -63,14 +64,14 @@ export class PublishQuizStep {
         return 'Schedule is incomplete';
       }
 
-      return `${this.formatDateLabel(settings.openDate)} ${settings.openTime} to ${this.formatDateLabel(settings.closeDate)} ${settings.closeTime}`;
+      return `${this.scheduleLabel(settings.openDate, settings.openTime)} to ${this.scheduleLabel(settings.closeDate, settings.closeTime)}`;
     }
 
     if (!settings.expiresAt) {
       return 'Schedule is incomplete';
     }
 
-    return `Available now until ${this.formatDateLabel(settings.closeDate)} ${settings.expiresAt}`;
+    return `Available now until ${this.scheduleLabel(settings.closeDate, settings.expiresAt)}`;
   });
 
   saveDraft(): void {
@@ -161,7 +162,7 @@ export class PublishQuizStep {
       return '';
     }
 
-    return `${date}T${time || '00:00'}`;
+    return `${date}T${time || '00:00'}+08:00`;
   }
 
   private createInitialSchedule(): Pick<
@@ -183,32 +184,14 @@ export class PublishQuizStep {
   }
 
   private toDateInputValue(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
+    return philippineInputValues(date).date;
   }
 
   private toTimeInputValue(date: Date): string {
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-
-    return `${hours}:${minutes}`;
+    return philippineInputValues(date).time;
   }
 
-  private formatDateLabel(dateValue: string): string {
-    if (!dateValue) {
-      return '';
-    }
-
-    const [year, month, day] = dateValue.split('-').map(Number);
-    const date = new Date(year, month - 1, day);
-
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'long',
-      day: '2-digit',
-      year: 'numeric',
-    }).format(date);
+  private scheduleLabel(date: string, time: string): string {
+    return formatPhilippineDateTime(scheduleTimestamp(date, time));
   }
 }

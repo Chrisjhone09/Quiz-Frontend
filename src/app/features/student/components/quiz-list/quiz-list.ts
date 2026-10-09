@@ -2,6 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { QuizModel } from '../../interfaces/quiz.model';
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { formatPhilippineDate, formatPhilippineDateTime, scheduleTimestamp } from '../../../../shared/utils/philippine-time';
 
 @Component({
   selector: 'app-quiz-list',
@@ -35,7 +36,7 @@ export class QuizList {
   }
 
   isPastDue(quiz: QuizModel): boolean {
-    const closeAt = this.buildDate(quiz.closeDate, quiz.closeTime);
+    const closeAt = this.buildDate(quiz.closeDate, quiz.closeTime || '23:59:59');
     return !!closeAt && new Date() > closeAt && !this.isCompleted(quiz);
   }
 
@@ -56,6 +57,7 @@ export class QuizList {
   }
 
   dueLabel(quiz: QuizModel): string {
+    if (quiz.closeDate && !quiz.closeTime) return `Due: ${formatPhilippineDate(quiz.closeDate)}`;
     const closeAt = this.buildDate(quiz.closeDate, quiz.closeTime);
     return closeAt ? `Due: ${this.formatDateTime(closeAt)}` : quiz.dueDate ?? 'No due date';
   }
@@ -74,23 +76,11 @@ export class QuizList {
   }
 
   private buildDate(date?: string | null, time?: string | null): Date | null {
-    if (!date) {
-      return null;
-    }
-
-    const normalizedTime = time?.split('.')[0] || '00:00:00';
-    const value = new Date(`${date}T${normalizedTime}`);
-    return Number.isNaN(value.getTime()) ? null : value;
+    return scheduleTimestamp(date, time);
   }
 
   private formatDateTime(value: Date): string {
-    return value.toLocaleString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-    });
+    return formatPhilippineDateTime(value);
   }
 
 

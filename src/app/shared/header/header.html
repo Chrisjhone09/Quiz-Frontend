@@ -1,11 +1,18 @@
 <header class="app-header">
 	<div class="header-left">
-		<div class="app-title">Quiz AI</div>
+    <img class="header-logo" src="itLogo.png" width="40" height="40" alt="Information Technology Education department logo" />
+		<div class="app-title">Information Technology Education</div>
 	</div>
 	<div class="header-right">
-		<div class="user-info">
-			<div class="user-name">{{ authService.getUserName() }}</div>
-			<div class="user-role">{{authService.getUserRole()}}</div>
-		</div>
+		@if (isLoggedIn()) {
+			<div class="user-info">
+				<div class="user-name">{{ authService.getUserName() }}</div>
+				<div class="user-role">{{authService.getUserRole()}}</div>
+			</div>
+			<button type="button" class="logout-btn" (click)="logout()" aria-label="Log out" title="Log out">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg>
+				<span>Logout</span>
+			</button>
+		}
 	</div>
 </header>

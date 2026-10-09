@@ -11,7 +11,7 @@
 	text-align: left;
 	padding: 12px 16px;
 	background: #f4f6fb;
-	color: #1f2937;
+	color: #174a38;
 	font-weight: 600;
 	border-bottom: 1px solid #e6edf3;
 }
@@ -39,9 +39,9 @@
 }
 
 .status[data-status="Active"] { background: #10b981; }
-.status[data-status="Draft"] { background: #6b7280; }
+.status[data-status="Draft"] { background: #657c70; }
 .status[data-status="Closed"] { background: #ef4444; }
-.status[data-status="Scheduled"] { background: #2563eb; }
+.status[data-status="Scheduled"] { background: #198754; }
 
 @media (max-width: 720px) {
 	.instructor-quiz-table thead { display: none; }

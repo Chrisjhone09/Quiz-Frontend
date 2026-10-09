@@ -1,0 +1,12 @@
+:host { display: block; background: #fff; color: #1f2937; }
+h2 { display: flex; align-items: center; gap: 10px; }
+h2 mat-icon { color: #b91c1c; flex-shrink: 0; }
+p { line-height: 1.55; overflow-wrap: anywhere; }
+.leave-error { color: #b91c1c; }
+button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px 14px; border: 1px solid #d1d5db; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.cancel-button { background: #fff; color: #374151; }
+.leave-button { background: #b91c1c; color: #fff; border-color: #b91c1c; }
+.leave-button mat-icon { width: 18px; height: 18px; font-size: 18px; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+button:focus-visible { outline: 3px solid #198754; outline-offset: 3px; }
+mat-dialog-actions { gap: 10px; padding: 16px 24px 24px; flex-wrap: wrap; }

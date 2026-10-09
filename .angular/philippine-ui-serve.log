@@ -1,0 +1,796 @@
+> Building...
+√ Building...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 851.41 kB | 
+styles.css          | styles              |   9.24 kB | 
+chunk-S5WFK5QF.js   | -                   |   5.69 kB | 
+chunk-XXL3TUW7.js   | -                   |   4.57 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-HJVCIO6F.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 878.15 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-SALX4O7G.js   | admin-dashboard     | 259.88 kB | 
+chunk-DGRX5G57.js   | take-quiz           |  58.62 kB | 
+chunk-Z5GVO44R.js   | enrollment-requests |  32.63 kB | 
+chunk-54O3CTAK.js   | quiz-result         |  31.07 kB | 
+chunk-BE3FRTRB.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [3.765 seconds] - 2026-10-09T16:06:09.110Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://127.0.0.1:4300/
+  ➜  press h + enter to show help
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 851.42 kB | 
+
+Application bundle generation complete. [1.972 seconds] - 2026-10-09T16:08:24.217Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 851.58 kB | 
+
+Application bundle generation complete. [0.666 seconds] - 2026-10-09T16:13:54.312Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 851.70 kB | 
+
+Application bundle generation complete. [0.363 seconds] - 2026-10-09T16:13:54.683Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 851.72 kB | 
+
+Application bundle generation complete. [0.793 seconds] - 2026-10-09T16:13:55.481Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.369 seconds] - 2026-10-09T17:33:29.043Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.336 seconds] - 2026-10-09T17:33:29.835Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.244 seconds] - 2026-10-09T17:33:30.083Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.405 seconds] - 2026-10-09T17:33:31.638Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.313 seconds] - 2026-10-09T17:33:32.085Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.349 seconds] - 2026-10-09T17:33:38.130Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.317 seconds] - 2026-10-09T17:33:39.120Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.216 seconds] - 2026-10-09T17:33:39.408Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.304 seconds] - 2026-10-09T17:34:34.232Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.296 seconds] - 2026-10-09T17:34:39.793Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 851.72 kB | 
+styles.css          | styles              |   9.24 kB | 
+chunk-S5WFK5QF.js   | -                   |   5.69 kB | 
+chunk-XXL3TUW7.js   | -                   |   4.57 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-HJVCIO6F.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 878.46 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-SALX4O7G.js   | admin-dashboard     | 259.88 kB | 
+chunk-DGRX5G57.js   | take-quiz           |  58.62 kB | 
+chunk-Z5GVO44R.js   | enrollment-requests |  32.63 kB | 
+chunk-54O3CTAK.js   | quiz-result         |  31.07 kB | 
+chunk-BE3FRTRB.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.293 seconds] - 2026-10-09T17:34:43.228Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 851.72 kB | 
+chunk-WXR5PJRX.js   | -                   |   6.43 kB | 
+
+Lazy chunk files    | Names               |  Raw size
+chunk-RTZU44SF.js   | enrollment-requests |  32.63 kB | 
+
+Application bundle generation complete. [0.658 seconds] - 2026-10-09T18:06:05.388Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 896.57 kB | 
+styles.css          | styles          |   9.72 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-GO2QI5QD.js   | admin-dashboard | 261.18 kB | 
+
+Application bundle generation complete. [1.266 seconds] - 2026-10-09T18:08:40.331Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 896.79 kB | 
+
+Application bundle generation complete. [0.601 seconds] - 2026-10-09T18:14:32.668Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 896.83 kB | 
+
+Application bundle generation complete. [0.188 seconds] - 2026-10-09T18:20:47.139Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 896.96 kB | 
+
+Application bundle generation complete. [0.606 seconds] - 2026-10-09T18:20:59.361Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 897.31 kB | 
+
+Application bundle generation complete. [0.517 seconds] - 2026-10-09T18:42:31.503Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names  | Raw size
+styles.css          | styles |  9.81 kB | 
+
+Application bundle generation complete. [0.007 seconds] - 2026-10-09T18:42:53.962Z
+
+Stylesheet update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 897.31 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-SSM42YHP.js   | admin-dashboard | 261.15 kB | 
+
+Application bundle generation complete. [1.156 seconds] - 2026-10-09T18:45:11.376Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 897.31 kB | 
+
+Application bundle generation complete. [0.373 seconds] - 2026-10-09T18:59:21.831Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 897.37 kB | 
+
+Application bundle generation complete. [0.333 seconds] - 2026-10-09T18:59:23.898Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 897.38 kB | 
+
+Application bundle generation complete. [0.396 seconds] - 2026-10-09T18:59:26.023Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 897.42 kB | 
+
+Application bundle generation complete. [0.686 seconds] - 2026-10-09T18:59:28.258Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 897.42 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-WXR5PJRX.js   | -                   |   6.43 kB | 
+chunk-XXL3TUW7.js   | -                   |   4.57 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-HJVCIO6F.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 925.47 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-SSM42YHP.js   | admin-dashboard     | 261.15 kB | 
+chunk-DGRX5G57.js   | take-quiz           |  58.62 kB | 
+chunk-RTZU44SF.js   | enrollment-requests |  32.63 kB | 
+chunk-54O3CTAK.js   | quiz-result         |  31.07 kB | 
+chunk-BE3FRTRB.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.479 seconds] - 2026-10-09T18:59:29.707Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.400 seconds] - 2026-10-09T19:29:57.932Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.321 seconds] - 2026-10-09T19:30:00.919Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 897.36 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-WXR5PJRX.js   | -                   |   6.43 kB | 
+chunk-XXL3TUW7.js   | -                   |   4.57 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-HJVCIO6F.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 925.41 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-SSM42YHP.js   | admin-dashboard     | 261.15 kB | 
+chunk-DGRX5G57.js   | take-quiz           |  58.62 kB | 
+chunk-RTZU44SF.js   | enrollment-requests |  32.63 kB | 
+chunk-54O3CTAK.js   | quiz-result         |  31.07 kB | 
+chunk-BE3FRTRB.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.330 seconds] - 2026-10-09T19:30:03.384Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 897.32 kB | 
+
+Application bundle generation complete. [0.755 seconds] - 2026-10-09T19:30:06.535Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 897.32 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-WXR5PJRX.js   | -                   |   6.43 kB | 
+chunk-XXL3TUW7.js   | -                   |   4.57 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-HJVCIO6F.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 925.37 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-SSM42YHP.js   | admin-dashboard     | 261.15 kB | 
+chunk-DGRX5G57.js   | take-quiz           |  58.62 kB | 
+chunk-RTZU44SF.js   | enrollment-requests |  32.63 kB | 
+chunk-54O3CTAK.js   | quiz-result         |  31.07 kB | 
+chunk-BE3FRTRB.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.447 seconds] - 2026-10-09T19:30:08.559Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 897.32 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-WXR5PJRX.js   | -                   |   6.43 kB | 
+chunk-XXL3TUW7.js   | -                   |   4.57 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-HJVCIO6F.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 925.37 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-SSM42YHP.js   | admin-dashboard     | 261.15 kB | 
+chunk-DGRX5G57.js   | take-quiz           |  58.62 kB | 
+chunk-RTZU44SF.js   | enrollment-requests |  32.63 kB | 
+chunk-54O3CTAK.js   | quiz-result         |  31.07 kB | 
+chunk-BE3FRTRB.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.247 seconds] - 2026-10-09T19:39:10.582Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 897.32 kB | 
+chunk-JHEWJ6IZ.js   | -                   |   6.43 kB | 
+chunk-M3AZMAIK.js   | -                   |   4.55 kB | 
+chunk-TEHYLRV3.js   | -                   |   3.35 kB | 
+
+Lazy chunk files    | Names               |  Raw size
+chunk-XTBMWKMV.js   | admin-dashboard     | 261.15 kB | 
+chunk-T5ZHMCOR.js   | take-quiz           |  58.62 kB | 
+chunk-HLKH6F22.js   | enrollment-requests |  32.63 kB | 
+chunk-67XJAMSV.js   | quiz-result         |  31.07 kB | 
+chunk-L2MU6URJ.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.189 seconds] - 2026-10-09T19:41:41.064Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 898.32 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+Lazy chunk files    | Names               |  Raw size
+chunk-STBVPDTP.js   | admin-dashboard     | 261.15 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.544 seconds] - 2026-10-09T20:02:16.901Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 898.32 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 926.41 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-STBVPDTP.js   | admin-dashboard     | 261.15 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.475 seconds] - 2026-10-09T20:11:46.639Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 907.51 kB | 
+
+Application bundle generation complete. [0.610 seconds] - 2026-10-09T20:11:48.636Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 906.53 kB | 
+
+Application bundle generation complete. [0.679 seconds] - 2026-10-09T20:13:04.159Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 906.74 kB | 
+
+Application bundle generation complete. [0.548 seconds] - 2026-10-09T20:15:01.099Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 906.86 kB | 
+
+Application bundle generation complete. [0.653 seconds] - 2026-10-09T20:19:04.674Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 906.82 kB | 
+
+Application bundle generation complete. [0.489 seconds] - 2026-10-09T20:33:17.451Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 906.84 kB | 
+
+Application bundle generation complete. [0.637 seconds] - 2026-10-09T20:48:25.355Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.371 seconds] - 2026-10-09T20:48:27.079Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.314 seconds] - 2026-10-09T20:48:29.919Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.344 seconds] - 2026-10-09T20:48:31.245Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.449 seconds] - 2026-10-09T20:48:31.698Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 897.60 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 925.68 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-STBVPDTP.js   | admin-dashboard     | 261.15 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.440 seconds] - 2026-10-09T20:48:32.144Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 898.25 kB | 
+
+Application bundle generation complete. [0.504 seconds] - 2026-10-09T20:48:32.657Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 898.25 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 926.33 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-STBVPDTP.js   | admin-dashboard     | 261.15 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.004 seconds] - 2026-10-09T20:48:32.665Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 898.42 kB | 
+
+Application bundle generation complete. [0.390 seconds] - 2026-10-09T20:49:00.852Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 898.60 kB | 
+
+Application bundle generation complete. [0.511 seconds] - 2026-10-09T20:49:01.422Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 898.77 kB | 
+
+Application bundle generation complete. [0.500 seconds] - 2026-10-09T20:49:01.928Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 898.95 kB | 
+
+Application bundle generation complete. [0.794 seconds] - 2026-10-09T20:49:02.727Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 898.95 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-O7DN65OZ.js   | admin-dashboard | 261.25 kB | 
+
+Application bundle generation complete. [1.468 seconds] - 2026-10-09T20:49:05.331Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 898.95 kB | 
+styles.css          | styles              |   9.81 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 927.03 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-O7DN65OZ.js   | admin-dashboard     | 261.25 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.782 seconds] - 2026-10-09T20:49:06.746Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names  | Raw size
+styles.css          | styles | 10.05 kB | 
+
+Application bundle generation complete. [0.011 seconds] - 2026-10-09T20:49:09.959Z
+
+Stylesheet update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 918.16 kB | 
+
+Application bundle generation complete. [0.465 seconds] - 2026-10-09T20:49:12.028Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 918.16 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-5DTJIH2R.js   | admin-dashboard | 260.89 kB | 
+
+Application bundle generation complete. [1.176 seconds] - 2026-10-09T20:50:04.450Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 919.13 kB | 
+
+Application bundle generation complete. [0.809 seconds] - 2026-10-09T20:52:21.472Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 919.13 kB | 
+
+Application bundle generation complete. [0.357 seconds] - 2026-10-09T20:52:22.836Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.474 seconds] - 2026-10-09T21:03:08.206Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 961.75 kB | 
+styles.css          | styles              |  10.05 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 990.08 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-5DTJIH2R.js   | admin-dashboard     | 260.89 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.943 seconds] - 2026-10-09T21:04:47.395Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 961.73 kB | 
+
+Application bundle generation complete. [0.714 seconds] - 2026-10-09T21:11:15.604Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 955.91 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-JUQLUPIE.js   | admin-dashboard | 262.31 kB | 
+
+Application bundle generation complete. [1.251 seconds] - 2026-10-09T21:19:41.829Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 955.93 kB | 
+
+Application bundle generation complete. [1.107 seconds] - 2026-10-09T21:25:41.347Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 955.78 kB | 
+
+Application bundle generation complete. [0.322 seconds] - 2026-10-09T21:25:41.674Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 955.79 kB | 
+
+Application bundle generation complete. [0.491 seconds] - 2026-10-09T21:25:42.168Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 955.79 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-PJ5XI3V2.js   | admin-dashboard | 262.22 kB | 
+
+Application bundle generation complete. [0.896 seconds] - 2026-10-09T21:25:43.150Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 955.47 kB | 
+
+Application bundle generation complete. [0.701 seconds] - 2026-10-09T21:25:55.523Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 955.47 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-FM7ZLZXS.js   | admin-dashboard | 262.21 kB | 
+
+Application bundle generation complete. [0.813 seconds] - 2026-10-09T21:25:56.339Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names           |  Raw size
+main.js             | main            | 955.47 kB | 
+
+Lazy chunk files    | Names           |  Raw size
+chunk-O4ESKUWW.js   | admin-dashboard | 262.21 kB | 
+
+Application bundle generation complete. [0.494 seconds] - 2026-10-09T21:26:46.580Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 956.42 kB | 
+
+Application bundle generation complete. [0.481 seconds] - 2026-10-09T21:39:44.901Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 956.66 kB | 
+
+Application bundle generation complete. [0.461 seconds] - 2026-10-09T21:39:48.940Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.382 seconds] - 2026-10-09T21:43:45.638Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.199 seconds] - 2026-10-09T21:43:45.845Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.149 seconds] - 2026-10-09T21:43:46.117Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.133 seconds] - 2026-10-09T21:44:01.897Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                | 964.64 kB | 
+styles.css          | styles              |  10.05 kB | 
+chunk-QXGFWNT6.js   | -                   |   6.43 kB | 
+chunk-CO7BS5FS.js   | -                   |   4.61 kB | 
+chunk-LTZSW4UF.js   | -                   |   3.88 kB | 
+chunk-2MSUP67P.js   | -                   |   3.35 kB | 
+
+                    | Initial total       | 992.96 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-O4ESKUWW.js   | admin-dashboard     | 262.21 kB | 
+chunk-6F4VGF7B.js   | take-quiz           |  58.62 kB | 
+chunk-4N3SJDHZ.js   | enrollment-requests |  32.63 kB | 
+chunk-AKLFXIHP.js   | quiz-result         |  31.07 kB | 
+chunk-RQ4NMOMF.js   | -                   |   1.99 kB | 
+
+Application bundle generation complete. [0.165 seconds] - 2026-10-09T21:44:02.505Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 964.81 kB | 
+
+Application bundle generation complete. [0.157 seconds] - 2026-10-09T21:44:47.357Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names |  Raw size
+main.js             | main  | 964.94 kB | 
+
+Application bundle generation complete. [0.156 seconds] - 2026-10-09T21:44:53.027Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+
+No output file changes.
+
+Application bundle generation complete. [0.178 seconds] - 2026-10-09T21:45:39.972Z
+

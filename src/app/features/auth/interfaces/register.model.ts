@@ -1,4 +1,7 @@
-interface RegisterModel {
+export type RegisterRole = 'Student' | 'Instructor';
+
+export interface RegisterModel {
+    role: RegisterRole;
     fname: string;
     lname: string;
     email: string;

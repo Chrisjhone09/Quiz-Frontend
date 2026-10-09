@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 340px minmax(420px, 1fr) 300px;
   min-height: calc(100vh - 72px);
-  background: #f3f6fb;
+  background: #ffffff;
 }
 
 .source-panel {
@@ -11,7 +11,7 @@
 }
 
 .source-panel {
-  border-left: 1px solid #e4e9f2;
+  border-left: 1px solid #ffffff;
 }
 
 h2,
@@ -21,7 +21,7 @@ p {
 }
 
 h2 {
-  color: #0f172a;
+  color: #153d2d;
   font-size: 18px;
   font-weight: 850;
 }
@@ -53,14 +53,14 @@ button {
 }
 
 .outline-button {
-  color: #334155;
+  color: #345b4a;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
 }
 
 .primary-button {
   color: #ffffff;
-  background: #2563eb;
+  background: #198754;
   border: 0;
 }
 
@@ -68,7 +68,7 @@ button {
   margin-bottom: 18px;
   padding: 20px;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
@@ -77,15 +77,15 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #64748b;
+  color: #60796c;
   font-size: 12px;
   font-weight: 800;
 }
 
 .type-badge {
   padding: 4px 9px;
-  color: #2563eb;
-  background: #eff6ff;
+  color: #198754;
+  background: #ffffff;
   border-radius: 999px;
 }
 
@@ -98,11 +98,11 @@ button {
 .question-actions button {
   height: 28px;
   padding: 0 8px;
-  color: #64748b;
+  color: #60796c;
   font-size: 11px;
   font-weight: 800;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border: 1px solid #dce9df;
   border-radius: 6px;
 }
 
@@ -111,20 +111,20 @@ button {
   min-height: 76px;
   margin-top: 12px;
   padding: 10px 12px;
-  color: #0f172a;
+  color: #153d2d;
   font: inherit;
   font-size: 16px;
   font-weight: 800;
   line-height: 1.45;
   resize: vertical;
   background: #ffffff;
-  border: 1px solid #dbe3ef;
+  border: 1px solid #dce9df;
   border-radius: 7px;
 }
 
 .question-card h3 {
   margin-top: 12px;
-  color: #0f172a;
+  color: #153d2d;
   font-size: 16px;
   font-weight: 850;
   line-height: 1.45;
@@ -143,8 +143,8 @@ button {
   min-height: 42px;
   gap: 10px;
   padding: 9px 12px;
-  background: #f8fafc;
-  border: 1px solid #edf2f7;
+  background: #ffffff;
+  border: 1px solid #edf5ef;
   border-radius: 7px;
 }
 
@@ -153,7 +153,7 @@ button {
   width: 22px;
   height: 22px;
   place-items: center;
-  color: #64748b;
+  color: #60796c;
   font-size: 11px;
   font-weight: 850;
   background: #ffffff;
@@ -161,7 +161,7 @@ button {
 }
 
 .answer-option p {
-  color: #334155;
+  color: #345b4a;
   font-size: 14px;
   font-weight: 700;
 }
@@ -169,7 +169,7 @@ button {
 .answer-option input[type="text"] {
   width: 100%;
   min-width: 0;
-  color: #334155;
+  color: #345b4a;
   font: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -183,29 +183,29 @@ button {
 }
 
 .answer-correct {
-  background: #ecfdf5;
+  background: #ffffff;
   border-color: #86efac;
 }
 
 .answer-correct span,
 .answer-correct strong {
-  color: #059669;
+  color: #198754;
 }
 
 .add-question {
   width: 100%;
   height: 46px;
-  color: #0f172a;
+  color: #153d2d;
   font-size: 13px;
   font-weight: 850;
   background: #ffffff;
-  border: 1px dashed #cbd5e1;
+  border: 1px dashed #c7ddd0;
   border-radius: 8px;
 }
 
 .source-panel > p {
   margin-top: 6px;
-  color: #64748b;
+  color: #60796c;
   font-size: 13px;
 }
 
@@ -220,8 +220,8 @@ button {
   align-items: center;
   gap: 10px;
   padding: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border: 1px solid #dce9df;
   border-radius: 8px;
 }
 
@@ -230,10 +230,10 @@ button {
   width: 30px;
   height: 30px;
   place-items: center;
-  color: #2563eb;
+  color: #198754;
   font-size: 9px;
   font-weight: 900;
-  background: #eaf1ff;
+  background: #ffffff;
   border-radius: 6px;
 }
 
@@ -243,13 +243,13 @@ button {
 }
 
 .source-card strong {
-  color: #0f172a;
+  color: #153d2d;
   font-size: 13px;
 }
 
 .source-card small {
   margin-top: 3px;
-  color: #059669;
+  color: #198754;
   font-size: 11px;
   font-weight: 800;
 }
@@ -259,17 +259,17 @@ button {
   place-items: center;
   margin-top: 22px;
   padding: 16px;
-  background: #eff6ff;
+  background: #ffffff;
   border-radius: 8px;
 }
 
 .question-count strong {
-  color: #2563eb;
+  color: #198754;
   font-size: 24px;
 }
 
 .question-count span {
-  color: #64748b;
+  color: #60796c;
   font-size: 12px;
   font-weight: 800;
 }
@@ -281,7 +281,7 @@ button {
 
   .source-panel {
     grid-column: 1 / -1;
-    border-top: 1px solid #e4e9f2;
+    border-top: 1px solid #ffffff;
     border-left: 0;
   }
 }

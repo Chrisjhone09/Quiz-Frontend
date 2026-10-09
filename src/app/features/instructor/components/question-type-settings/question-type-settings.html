@@ -1,0 +1,34 @@
+<fieldset [disabled]="disabled()">
+  <legend>Question Types</legend>
+  <div class="type-list">
+    @for (option of options; track option.value) {
+      <div class="type-row">
+        <label class="type-label">
+          <input
+            type="checkbox"
+            [checked]="selected(option.value)"
+            (change)="toggle(option.value, $any($event.target).checked)"
+          />
+          <span>{{ option.label }}</span>
+        </label>
+        <label class="count-label">
+          <span>Items</span>
+          <input
+            type="number"
+            min="1"
+            max="50"
+            step="1"
+            [attr.aria-label]="option.label + ' items'"
+            [disabled]="disabled() || !selected(option.value)"
+            [ngModel]="count(option.value)"
+            (ngModelChange)="setCount(option.value, $event)"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </label>
+      </div>
+    }
+  </div>
+  <div class="total-row">
+    <span>Total questions</span><output aria-live="polite">{{ total() }}</output>
+  </div>
+</fieldset>

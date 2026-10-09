@@ -2,10 +2,13 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InstructorClassroomService } from '../../services/instructor-classroom-service';
 import { QuizModel } from '../../../student/interfaces/quiz.model';
+import { TimeAgoPipe } from '../../../../shared/pipes/time-ago.pipe';
+import { PhilippineDatePipe } from '../../../../shared/pipes/philippine-date.pipe';
 
 @Component({
   selector: 'app-instructor-quiz-list',
-  imports: [],
+  standalone: true,
+  imports: [TimeAgoPipe, PhilippineDatePipe],
   templateUrl: './instructor-quiz-list.html',
   styleUrl: './instructor-quiz-list.css',
 })

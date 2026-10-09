@@ -1,0 +1,127 @@
+<section class="requests-panel">
+	<header class="panel-head">
+		<div>
+			<h3>Enrolment requests</h3>
+			@if (!loading() && !requiresApproval()) {
+				<p class="subtitle">
+					This classroom does not require approval — students join immediately with the
+					class code. Anything listed here was requested while approval was switched on.
+				</p>
+			} @else {
+				<p class="subtitle">Students who entered the class code and are waiting to be admitted.</p>
+			}
+		</div>
+		<button type="button" class="ghost" (click)="refresh()" [disabled]="loading()">
+			{{ loading() ? 'Loading…' : 'Refresh' }}
+		</button>
+	</header>
+
+	@if (errorMessage()) {
+		<p class="banner banner-error">{{ errorMessage() }}</p>
+	}
+	@if (actionMessage()) {
+		<p class="banner banner-info">{{ actionMessage() }}</p>
+	}
+
+	<div class="tabs">
+		<button type="button" [class.active]="activeTab() === 'pending'" (click)="setTab('pending')">
+			Pending ({{ pending().length }})
+		</button>
+		<button type="button" [class.active]="activeTab() === 'decided'" (click)="setTab('decided')">
+			History ({{ decided().length }})
+		</button>
+	</div>
+
+	@if (loading()) {
+		<p class="empty">Loading requests…</p>
+	} @else if (activeTab() === 'pending') {
+
+		@if (pending().length === 0) {
+			<p class="empty">No requests waiting. Students who enter the class code will appear here.</p>
+		} @else {
+			<ul class="request-list">
+				@for (request of pending(); track request.studentId) {
+					<li class="request-card">
+						<div class="request-main">
+							<div class="avatar">{{ initials(request) }}</div>
+							<div class="request-details">
+								<div class="request-name">{{ request.fullName }}</div>
+								<div class="request-meta">
+									<span>ID {{ request.studentNumber }}</span>
+									<span>· Section {{ request.section }}</span>
+									@if (request.requestedAt) {
+										<span>· Requested {{ request.requestedAt | timeAgo }}</span>
+									}
+								</div>
+							</div>
+						</div>
+						<div class="request-actions">
+							<button
+								type="button"
+								class="danger-ghost"
+								[disabled]="isBusy(request)"
+								(click)="reject(request)">
+								Reject
+							</button>
+							<button
+								type="button"
+								class="primary"
+								[disabled]="isBusy(request)"
+								(click)="approve(request)">
+								{{ isBusy(request) ? 'Working…' : 'Approve' }}
+							</button>
+						</div>
+					</li>
+				}
+			</ul>
+		}
+
+	} @else {
+
+		@if (decided().length === 0) {
+			<p class="empty">No decisions yet.</p>
+		} @else {
+			<ul class="request-list">
+				@for (request of decided(); track request.studentId) {
+					<li class="request-card">
+						<div class="request-main">
+							<div class="avatar">{{ initials(request) }}</div>
+							<div class="request-details">
+								<div class="request-name">
+									{{ request.fullName }}
+									<span [class]="statusClass(request.status)">{{ request.status }}</span>
+								</div>
+								<div class="request-meta">
+									<span>ID {{ request.studentNumber }}</span>
+									<span>· Section {{ request.section }}</span>
+									@if (request.decisionAt) {
+										<span>· {{ request.decisionAt | timeAgo }}</span>
+									}
+								</div>
+							</div>
+						</div>
+						<div class="request-actions">
+							@if (request.status === 'Rejected') {
+								<button
+									type="button"
+									class="primary"
+									[disabled]="isBusy(request)"
+									(click)="approve(request)">
+									{{ isBusy(request) ? 'Working…' : 'Approve' }}
+								</button>
+							} @else {
+								<button
+									type="button"
+									class="danger-ghost"
+									[disabled]="isBusy(request)"
+									(click)="reject(request)">
+									Remove
+								</button>
+							}
+						</div>
+					</li>
+				}
+			</ul>
+		}
+	}
+</section>

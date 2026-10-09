@@ -1,10 +1,20 @@
+export type QuestionType = 'multiple_choice' | 'short_answer' | 'true_false';
+export interface QuestionTypeAllocation {
+    type: QuestionType;
+    count: number | null;
+}
+
 export interface QuizCreationModel {
     title: string;
     description: string;
     classroomTitle: string;
+    /** The id of the classroom the quiz is created in — this is what the backend actually
+     * needs; classroomTitle above is display text only. */
+    classroomId: string;
     difficulty: string;
     questionType: string;
     types: string[];
+    questionTypeCounts?: Partial<Record<QuestionType, number>>;
     validUntil: string;
     openAt: string;
     openDate: string;
@@ -41,14 +51,20 @@ export interface QuizResponseModel {
     id: number;
     title: string;
     description?: string | null;
-    openDate: string;
-    closeDate: string;
-    openTime: string;
-    closeTime: string;
+    openDate?: string | null;
+    closeDate?: string | null;
+    openTime?: string | null;
+    closeTime?: string | null;
     createdAt: string;
     autoReleaseResults: boolean;
     isLocked: boolean;
     isPublished: boolean;
+    difficulty?: string;
+    questionType?: string;
+    numberOfQuestions?: number;
+    timeLimit?: number;
+    passingScore?: number;
+    notifyStudents?: boolean;
     classroomId?: string | null;
     questions: QuizQuestionModel[];
 }

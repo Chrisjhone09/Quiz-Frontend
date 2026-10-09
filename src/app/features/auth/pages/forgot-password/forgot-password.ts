@@ -2,18 +2,21 @@ import { Component, signal } from '@angular/core';
 import { email, form, required, FormField, FormRoot } from '@angular/forms/signals';
 import { ForgotPasswordModel } from '../../interfaces/forgotPassword.model';
 import { Auth } from '../../services/auth';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [FormField, FormRoot],
+  imports: [FormField, FormRoot, RouterLink],
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.css',
 })
 export class ForgotPassword {
 
 
-  constructor(private authService: Auth){}
+  constructor(private authService: Auth, private router: Router){}
 
+  readonly submitting = signal(false);
+  readonly errorMessage = signal('');
 
   forgotPasswordModel = signal<ForgotPasswordModel>({
     email: ''
@@ -26,12 +29,21 @@ export class ForgotPassword {
   {
     submission: {
       action: async (model) => {
-          this.authService.forgotPassword(model).subscribe({
+          this.submitting.set(true);
+          this.errorMessage.set('');
+          const emailAddress = model().value().email;
+
+          this.authService.forgotPassword(emailAddress).subscribe({
           next: (response) => {
-            console.log('Forgot password response:', response);
+            this.submitting.set(false);
+            this.router.navigate(['/reset-password'], {
+              queryParams: { email: emailAddress },
+              state: { message: response.message }
+            });
           },
           error: (error) => {
-            console.error('Forgot password error:', error);
+            this.submitting.set(false);
+            this.errorMessage.set(error?.error?.message ?? 'We could not send a reset code. Please try again.');
           }
         });
       }

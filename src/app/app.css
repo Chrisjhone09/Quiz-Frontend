@@ -1,37 +1,57 @@
 
+/*
+ * There used to be a third "sidebar" grid area here reserving a 220px column,
+ * but no element was ever placed in it (app.html never renders <app-side-nav>
+ * with class="sidebar") — every page in the app was rendering with an
+ * unexplained blank 220px gutter between the header and its content. Removed;
+ * pages that want their own sidebar (e.g. the instructor dashboard) build it
+ * themselves inside <main>.
+ */
 .layout{
 	display:grid;
 	grid-template-areas:
-		"header header"
-		"sidebar main";
-	grid-template-columns: 220px 1fr;
+		"header"
+		"main";
 	grid-template-rows: auto 1fr;
-	height:100vh;
+	min-height:100vh;
 }
 
 .header{
 	grid-area: header;
 }
 
-.sidebar{
-	grid-area: sidebar;
-	border-right:1px solid #e5e7eb;
-	overflow:auto;
-}
-
 .main{
 	grid-area: main;
-	padding:20px;
-	overflow:auto;
+	min-width: 0;
+	padding:var(--app-gutter);
+	/*
+	 * Deliberately NOT `overflow:auto`. Setting that here makes .main a scroll
+	 * container in its own right, but since nothing constrains .main's height
+	 * to the viewport, it never actually grows a scrollbar of its own — the
+	 * page just keeps growing and the document/window scrolls instead. The
+	 * catch: any `position:sticky` descendant (e.g. the dashboard sidebars)
+	 * sticks relative to the NEAREST scroll container, so once .main counts
+	 * as one, sticky elements pin themselves to .main's (never-moving) box
+	 * instead of the window that's actually scrolling — and just scroll away
+	 * as if they were static. Leaving this as the default (visible) lets
+	 * sticky descendants correctly track the window's scroll instead.
+	 */
 }
 
-@media (max-width:700px){
-	.layout{
-		grid-template-areas:
-			"header"
-			"main";
-		grid-template-columns: 1fr;
-		grid-auto-rows: auto;
+.layout { grid-template-columns: minmax(0, 1fr); }
+.main > router-outlet + * { min-width: 0; max-width: 100%; }
+
+/* Keep the app usable down to small phone widths without touching the grid
+   shape above — pages nested inside .main handle their own column/sidebar
+   collapses at this same breakpoint (see each page's own CSS).
+   NOTE: deliberately not adding `overflow-x:hidden` on html/body here — it
+   was tried and verified (Playwright) to reproduce the exact sticky-sidebar
+   bug fixed earlier: it makes body a scroll container that never actually
+   grows a scrollbar, so `position:sticky` descendants anchor to body's
+   inert box instead of the window and appear to scroll away. Horizontal
+   overflow is prevented per-component instead (table wrappers, flex-wrap). */
+@media (max-width: 600px){
+	.main{
+		padding:14px;
 	}
-	.sidebar{display:none}
 }

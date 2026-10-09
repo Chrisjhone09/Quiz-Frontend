@@ -1,0 +1,41 @@
+<h2 mat-dialog-title><mat-icon aria-hidden="true">group_add</mat-icon>Import students</h2>
+<mat-dialog-content>
+  <p class="classroom-name">{{ data.classroomTitle }}</p>
+  @if (!result()?.imported) {
+    <div class="file-toolbar">
+      <label class="file-field">Student roster (.csv)<input id="roster-file" type="file" accept=".csv,text/csv" (change)="selectFile($event)" [disabled]="busy()" /></label>
+      <button type="button" class="template-button" (click)="downloadTemplate()"><mat-icon aria-hidden="true">download</mat-icon>Template</button>
+    </div>
+  }
+  @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+  @if (busy()) { <p class="busy" role="status"><mat-icon aria-hidden="true">hourglass_empty</mat-icon>Processing roster...</p> }
+  @if (result(); as report) {
+    <div class="import-summary" aria-live="polite">
+      <div><strong>{{ report.imported ? report.enrolledCount : report.readyCount }}</strong><span>{{ report.imported ? 'Enrolled' : 'Ready to enroll' }}</span></div>
+      <div><strong>{{ report.waitingCount }}</strong><span>Awaiting registration</span></div>
+      <div><strong>{{ report.alreadyEnrolledCount }}</strong><span>Already enrolled</span></div>
+      <div><strong>{{ report.skippedCount }}</strong><span>Skipped rows</span></div>
+    </div>
+    @if (report.imported) { <p class="success" role="status"><mat-icon aria-hidden="true">check_circle</mat-icon>Roster import complete.</p> }
+    <ol class="roster-list" aria-label="Student roster preview">
+      @for (row of report.rows; track row.rowNumber) {
+        <li class="roster-row">
+          <span class="row-number">{{ row.rowNumber }}</span>
+          <div class="student"><strong>{{ row.studentNumber || 'Missing ID' }}</strong>@if (row.fullName) { <span>{{ row.fullName }}</span> }</div>
+          <span class="row-status" [class.row-warning]="row.status === 'Invalid' || row.status === 'Duplicate' || row.status === 'Ambiguous'">{{ row.status }}</span>
+          <p>{{ row.message }}</p>
+        </li>
+      }
+    </ol>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button id="cancel-roster-import" type="button" (click)="close()" [disabled]="busy()">{{ result()?.imported ? 'Done' : 'Cancel' }}</button>
+  @if (!result()?.imported) {
+    @if (!result()) {
+      <button type="button" class="primary" (click)="preview()" [disabled]="!file() || busy()"><mat-icon aria-hidden="true">preview</mat-icon>Preview roster</button>
+    } @else {
+      <button type="button" class="primary" (click)="import()" [disabled]="!result()?.canImport || busy()"><mat-icon aria-hidden="true">group_add</mat-icon>Import students</button>
+    }
+  }
+</mat-dialog-actions>

@@ -1,0 +1,1005 @@
+<div class="dash">
+	<aside class="dash-sidebar">
+		<div class="brand">
+            <img class="department-brand-logo" src="itLogo.png" width="36" height="36" alt="Department logo" />
+			<div>
+				<div class="brand-text">Information Technology Education</div>
+				<div class="brand-sub">Administration</div>
+			</div>
+		</div>
+
+		<nav class="nav-list">
+			<div class="nav-group-label">System</div>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'overview'" (click)="setSection('overview')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z"></path></svg>
+				<span>Overview</span>
+			</button>
+
+			<div class="nav-group-label">Accounts</div>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'approvals'" (click)="setSection('approvals')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
+				<span>Approvals</span>
+				@if (stats(); as s) {
+					@if (s.pendingCount > 0) {
+						<span class="nav-badge">{{ s.pendingCount }}</span>
+					}
+				}
+			</button>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'instructors'" (click)="setSection('instructors')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M2 20a6 6 0 0 1 12 0"></path><path d="M14 14a5.5 5.5 0 0 1 8 5"></path></svg>
+				<span>Instructors</span>
+			</button>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'students'" (click)="setSection('students')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path></svg>
+				<span>Students</span>
+			</button>
+
+			<div class="nav-group-label">Classrooms</div>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'classrooms'" (click)="setSection('classrooms')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7.5A3.5 3.5 0 0 0 4 21.5v-16Z"></path><path d="M7.5 18H20"></path></svg>
+				<span>Classrooms</span>
+			</button>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'deletedClassrooms'" (click)="setSection('deletedClassrooms')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6M14 11v6"></path></svg>
+				<span>Deleted Classrooms</span>
+			</button>
+
+			<div class="nav-group-label">Insights</div>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'reports'" (click)="setSection('reports')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M10 19V9M16 19v-6M4 19h16"></path></svg>
+				<span>Reports</span>
+			</button>
+			<button type="button" class="nav-link" [class.active]="activeSection() === 'activity'" (click)="setSection('activity')">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+				<span>Activity Log</span>
+			</button>
+		</nav>
+		<button type="button" class="nav-link sign-out-link" (click)="signOut()" aria-label="Sign out">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg>
+			<span>Sign Out</span>
+		</button>
+
+		<div class="sidebar-footer">
+			<div class="footer-avatar">{{ adminInitials() }}</div>
+			<div class="footer-text">
+				<div class="footer-name">{{ adminDisplayName() }}</div>
+				<div class="footer-role">System Admin</div>
+			</div>
+		</div>
+	</aside>
+
+	<div class="dash-content">
+		<header class="dash-topbar">
+			<div>
+				@if (activeSection() === 'overview') {
+					<h1>System Overview</h1>
+					<p class="subtitle">A snapshot of accounts, classrooms and recent activity across Information Technology Education.</p>
+				} @else if (activeSection() === 'approvals') {
+					<h1>Approvals</h1>
+					<p class="subtitle">Student registrations need your approval before they can sign in.</p>
+				} @else if (activeSection() === 'instructors') {
+					<h1>Instructors</h1>
+					<p class="subtitle">Create instructor accounts, edit details, or delete accounts.</p>
+				} @else if (activeSection() === 'students') {
+					<h1>Students</h1>
+					<p class="subtitle">Edit student account details or delete accounts.</p>
+				} @else if (activeSection() === 'classrooms') {
+					<h1>Classrooms</h1>
+					<p class="subtitle">Every classroom system-wide.</p>
+				} @else if (activeSection() === 'deletedClassrooms') {
+					<h1>Deleted Classrooms</h1>
+					<p class="subtitle">Classrooms an instructor deleted. Nothing is actually removed — restore any of these to bring it back for the instructor and its students.</p>
+				} @else if (activeSection() === 'reports') {
+					<h1>Reports</h1>
+					<p class="subtitle">System-wide totals and per-quiz performance.</p>
+				} @else {
+					<h1>Activity Log</h1>
+					<p class="subtitle">Audit trail of logins, approvals, classroom changes and quiz events.</p>
+				}
+			</div>
+
+			<div class="topbar-right">
+				@if (activeSection() === 'overview') {
+					<span class="status-pill">
+						<span class="status-dot"></span>
+						All systems operational
+					</span>
+					<button type="button" class="btn-secondary" (click)="refreshOverview()" [disabled]="reportLoading() || activityLoading()">
+						{{ (reportLoading() || activityLoading()) ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else if (activeSection() === 'approvals') {
+					<button type="button" class="btn-secondary" (click)="refresh()" [disabled]="loading()">
+						{{ loading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else if (activeSection() === 'instructors') {
+					<button type="button" class="btn-secondary" (click)="loadInstructors()" [disabled]="instructorsLoading()">
+						{{ instructorsLoading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else if (activeSection() === 'students') {
+					<button type="button" class="btn-secondary" (click)="loadStudents()" [disabled]="studentsLoading()">
+						{{ studentsLoading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else if (activeSection() === 'classrooms') {
+					<button type="button" class="btn-secondary" (click)="loadClassroomsAdmin()" [disabled]="classroomsLoading()">
+						{{ classroomsLoading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else if (activeSection() === 'deletedClassrooms') {
+					<button type="button" class="btn-secondary" (click)="loadDeletedClassroomsAdmin()" [disabled]="deletedClassroomsLoading()">
+						{{ deletedClassroomsLoading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else if (activeSection() === 'reports') {
+					<button type="button" class="btn-secondary" (click)="loadReports()" [disabled]="reportLoading()">
+						{{ reportLoading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				} @else {
+					<button type="button" class="btn-secondary" (click)="loadActivity()" [disabled]="activityLoading()">
+						{{ activityLoading() ? 'Loading…' : 'Refresh' }}
+					</button>
+				}
+			</div>
+		</header>
+
+		@if (errorMessage()) {
+			<p class="banner banner-error">{{ errorMessage() }}</p>
+		}
+		@if (actionMessage()) {
+			<p class="banner banner-info">{{ actionMessage() }}</p>
+		}
+
+		@if (activeSection() === 'overview') {
+			<div class="action-row">
+				<button type="button" class="btn-primary" (click)="quickAddInstructor()">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+					Add Instructor
+				</button>
+				<button type="button" class="btn-secondary" (click)="setSection('approvals')">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
+					Review Approvals
+					@if (stats(); as s) {
+						@if (s.pendingCount > 0) {
+							<span class="btn-badge">{{ s.pendingCount }}</span>
+						}
+					}
+				</button>
+				<button type="button" class="btn-secondary" (click)="setSection('activity')">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+					View Activity Log
+				</button>
+			</div>
+
+			<div class="stat-grid">
+				<div class="stat-card">
+					<div class="stat-icon stat-icon-blue">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M2 20a6 6 0 0 1 12 0"></path><path d="M14 14a5.5 5.5 0 0 1 8 5"></path></svg>
+					</div>
+					<div class="stat-value">{{ reportLoading() && !report() ? '—' : (report()?.users?.total ?? 0) }}</div>
+					<div class="stat-label">Total Users</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon stat-icon-purple">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7.5A3.5 3.5 0 0 0 4 21.5v-16Z"></path><path d="M7.5 18H20"></path></svg>
+					</div>
+					<div class="stat-value">{{ reportLoading() && !report() ? '—' : (report()?.users?.instructors ?? 0) }}</div>
+					<div class="stat-label">Active Instructors</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon stat-icon-green">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"></path><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path></svg>
+					</div>
+					<div class="stat-value">{{ reportLoading() && !report() ? '—' : (report()?.users?.students ?? 0) }}</div>
+					<div class="stat-label">Active Students</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon stat-icon-amber">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M10 19V9M16 19v-6M4 19h16"></path></svg>
+					</div>
+					<div class="stat-value">{{ reportLoading() && !report() ? '—' : (report()?.quizzes?.total ?? 0) }}</div>
+					<div class="stat-label">Total Quizzes</div>
+				</div>
+				<div class="stat-card stat-card-accent">
+					<div class="stat-icon stat-icon-red">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+					</div>
+					<div class="stat-value">{{ reportLoading() && !report() ? '—' : (report()?.users?.pendingApproval ?? 0) }}</div>
+					<div class="stat-label">Pending Approvals</div>
+				</div>
+			</div>
+
+			<div class="overview-grid">
+				<section class="panel">
+					<div class="panel-head">
+						<h2>Pending Approvals</h2>
+						<button type="button" class="link-action" (click)="setSection('approvals')">View all →</button>
+					</div>
+
+					@if (loading()) {
+						<p class="empty">Loading…</p>
+					} @else if (recentPending().length === 0) {
+						<p class="empty">Nothing waiting for review.</p>
+					} @else {
+						<ul class="mini-list">
+							@for (account of recentPending(); track account.userId) {
+								<li class="mini-item">
+									<div class="mini-avatar">{{ initials(account) }}</div>
+									<div class="mini-body">
+										<div class="mini-title">
+											{{ account.fullName }}
+											<span class="role-chip">{{ account.role }}</span>
+										</div>
+										<div class="mini-meta">{{ account.email }}</div>
+									</div>
+								</li>
+							}
+						</ul>
+					}
+				</section>
+
+				<section class="panel">
+					<div class="panel-head">
+						<h2>
+							System Activity
+							<span class="live-pill"><span class="live-dot"></span>Live</span>
+						</h2>
+						<button type="button" class="link-action" (click)="setSection('activity')">View all logs →</button>
+					</div>
+
+					@if (activityLoading() && liveActivity().length === 0) {
+						<p class="empty">Loading…</p>
+					} @else if (liveActivity().length === 0) {
+						<p class="empty">Nothing logged yet.</p>
+					} @else {
+						<ul class="activity-feed">
+							@for (entry of liveActivity(); track entry.id) {
+								<li class="activity-item">
+									<span class="activity-dot" [class.activity-dot-fail]="!entry.success"></span>
+									<div class="activity-body">
+										<div class="activity-text">
+											<strong>{{ entry.userEmail || 'System' }}</strong>
+											@if (entry.role) {
+												<span class="activity-role">{{ entry.role }}</span>
+											}
+											— {{ entry.action }}
+										</div>
+										<div class="activity-time">{{ entry.timeStamp | timeAgo }}</div>
+									</div>
+								</li>
+							}
+						</ul>
+					}
+				</section>
+			</div>
+		}
+
+		@if (activeSection() === 'approvals' && stats(); as s) {
+			<div class="stat-row">
+				<div class="stat stat-accent">
+					<span class="stat-value">{{ s.pendingCount }}</span>
+					<span class="stat-label">Awaiting your review</span>
+				</div>
+				<div class="stat">
+					<span class="stat-value">{{ s.awaitingEmailVerificationCount }}</span>
+					<span class="stat-label">Awaiting approval</span>
+				</div>
+				<div class="stat">
+					<span class="stat-value">{{ s.approvedCount }}</span>
+					<span class="stat-label">Approved</span>
+				</div>
+				<div class="stat">
+					<span class="stat-value">{{ s.rejectedCount }}</span>
+					<span class="stat-label">Rejected</span>
+				</div>
+			</div>
+		}
+
+		@if (activeSection() === 'approvals') {
+		<div class="tabs">
+			<button type="button" [class.active]="activeTab() === 'pending'" (click)="setTab('pending')">
+				Pending ({{ pending().length }})
+			</button>
+			<button type="button" [class.active]="activeTab() === 'decided'" (click)="setTab('decided')">
+				History ({{ decided().length }})
+			</button>
+		</div>
+
+		@if (loading()) {
+			<p class="empty">Loading accounts…</p>
+		} @else if (activeTab() === 'pending') {
+
+			@if (pending().length === 0) {
+				<p class="empty">Nothing waiting for review. New registrations appear here immediately.</p>
+			} @else {
+				<ul class="account-list">
+					@for (account of pending(); track account.userId) {
+						<li class="account-card">
+							<div class="account-main">
+								<div class="avatar">{{ initials(account) }}</div>
+								<div class="account-details">
+									<div class="account-name">
+										{{ account.fullName }}
+										<span class="role-chip">{{ account.role }}</span>
+										@if (!account.emailConfirmed) {
+												<span class="chip-warning" title="This account is awaiting administrator approval.">Awaiting approval</span>
+										}
+									</div>
+									<div class="account-meta">{{ account.email }}</div>
+									<div class="account-meta">
+										@if (account.studentNumber) {
+											<span>ID {{ account.studentNumber }}</span>
+										}
+										@if (account.section) {
+											<span>· Section {{ account.section }}</span>
+										}
+										@if (account.registeredAt) {
+											<span>· Registered {{ account.registeredAt | timeAgo }}</span>
+										}
+									</div>
+								</div>
+							</div>
+
+							@if (isRejecting(account)) {
+								<div class="reject-box">
+									<label class="reject-label" [attr.for]="'reason-' + account.userId">
+										Reason (optional — included in the email to the applicant)
+									</label>
+									<input
+										[id]="'reason-' + account.userId"
+										type="text"
+										class="reject-input"
+										placeholder="e.g. Student ID does not match our records"
+										[ngModel]="rejectReason()"
+										(ngModelChange)="rejectReason.set($event)" />
+									<div class="reject-actions">
+										<button type="button" class="ghost" (click)="cancelReject()">Cancel</button>
+										<button
+											type="button"
+											class="danger"
+											[disabled]="isBusy(account)"
+											(click)="confirmReject(account)">
+											{{ isBusy(account) ? 'Rejecting…' : 'Confirm reject' }}
+										</button>
+									</div>
+								</div>
+							} @else {
+								<div class="account-actions">
+									<button
+										type="button"
+										class="danger-ghost"
+										[disabled]="isBusy(account)"
+										(click)="startReject(account)">
+										Reject
+									</button>
+									<button
+										type="button"
+										class="primary"
+										[disabled]="isBusy(account)"
+										(click)="approve(account)">
+										{{ isBusy(account) ? 'Approving…' : 'Approve' }}
+									</button>
+								</div>
+							}
+						</li>
+					}
+				</ul>
+			}
+
+		} @else {
+
+			@if (decided().length === 0) {
+				<p class="empty">No decisions yet.</p>
+			} @else {
+				<ul class="account-list">
+					@for (account of decided(); track account.userId) {
+						<li class="account-card">
+							<div class="account-main">
+								<div class="avatar">{{ initials(account) }}</div>
+								<div class="account-details">
+									<div class="account-name">
+										{{ account.fullName }}
+										<span [class]="statusClass(account.status)">{{ account.status }}</span>
+									</div>
+									<div class="account-meta">{{ account.email }}</div>
+									<div class="account-meta">
+										@if (account.decisionAt) {
+											<span>{{ account.decisionAt | timeAgo }}</span>
+										}
+										@if (account.decidedByEmail) {
+											<span>· by {{ account.decidedByEmail }}</span>
+										}
+									</div>
+									@if (account.rejectionReason) {
+										<div class="reason">“{{ account.rejectionReason }}”</div>
+									}
+								</div>
+							</div>
+
+							@if (isRejecting(account)) {
+								<div class="reject-box">
+									<label class="reject-label" [attr.for]="'revoke-reason-' + account.userId">
+										Reason (optional — included in the email to the account holder)
+									</label>
+									<input
+										[id]="'revoke-reason-' + account.userId"
+										type="text"
+										class="reject-input"
+										placeholder="e.g. Enrolment withdrawn"
+										[ngModel]="rejectReason()"
+										(ngModelChange)="rejectReason.set($event)" />
+									<div class="reject-actions">
+										<button type="button" class="ghost" (click)="cancelReject()">Cancel</button>
+										<button
+											type="button"
+											class="danger"
+											[disabled]="isBusy(account)"
+											(click)="confirmReject(account)">
+											{{ isBusy(account) ? 'Revoking…' : 'Confirm revoke' }}
+										</button>
+									</div>
+								</div>
+							} @else {
+								<div class="account-actions">
+									@if (account.status === 'Rejected') {
+										<button
+											type="button"
+											class="primary"
+											[disabled]="isBusy(account)"
+											(click)="approve(account)">
+											{{ isBusy(account) ? 'Approving…' : 'Approve' }}
+										</button>
+									} @else {
+										<button
+											type="button"
+											class="danger-ghost"
+											[disabled]="isBusy(account)"
+											(click)="startReject(account)">
+											Revoke
+										</button>
+									}
+								</div>
+							}
+						</li>
+					}
+				</ul>
+			}
+		}
+		}
+
+		@if (activeSection() === 'instructors') {
+			<div class="section-toolbar">
+				<button type="button" class="primary" (click)="toggleCreateInstructorForm()">
+					{{ showCreateInstructorForm() ? 'Cancel' : '+ Create instructor' }}
+				</button>
+			</div>
+
+			@if (showCreateInstructorForm()) {
+				<div class="edit-box">
+					<div class="edit-grid">
+						<label>First name
+							<input type="text" [ngModel]="newInstructorFirstName()" (ngModelChange)="newInstructorFirstName.set($event)" />
+						</label>
+						<label>Middle name (optional)
+							<input type="text" [ngModel]="newInstructorMiddleName()" (ngModelChange)="newInstructorMiddleName.set($event)" />
+						</label>
+						<label>Last name
+							<input type="text" [ngModel]="newInstructorLastName()" (ngModelChange)="newInstructorLastName.set($event)" />
+						</label>
+						<label>Email
+							<input type="email" [ngModel]="newInstructorEmail()" (ngModelChange)="newInstructorEmail.set($event)" />
+						</label>
+						<label>Password
+							<input type="text" [ngModel]="newInstructorPassword()" (ngModelChange)="newInstructorPassword.set($event)" />
+						</label>
+					</div>
+					@if (createInstructorError()) {
+						<p class="banner banner-error">{{ createInstructorError() }}</p>
+					}
+					<div class="edit-actions">
+						<button type="button" class="ghost" (click)="toggleCreateInstructorForm()">Cancel</button>
+						<button type="button" class="primary" [disabled]="creatingInstructor()" (click)="submitCreateInstructor()">
+							{{ creatingInstructor() ? 'Creating…' : 'Create instructor' }}
+						</button>
+					</div>
+				</div>
+			}
+
+			@if (instructorsLoading()) {
+				<p class="empty">Loading instructors…</p>
+			} @else if (!instructors() || instructors()!.length === 0) {
+				<p class="empty">No instructor accounts yet.</p>
+			} @else {
+				<ul class="account-list">
+					@for (instructor of instructors()!; track instructor.id) {
+						<li class="account-card">
+							@if (editingInstructorId() === instructor.id) {
+								<div class="edit-box edit-box-inline">
+									<div class="edit-grid">
+										<label>First name
+											<input type="text" [ngModel]="editInstructorFirstName()" (ngModelChange)="editInstructorFirstName.set($event)" />
+										</label>
+										<label>Middle name
+											<input type="text" [ngModel]="editInstructorMiddleName()" (ngModelChange)="editInstructorMiddleName.set($event)" />
+										</label>
+										<label>Last name
+											<input type="text" [ngModel]="editInstructorLastName()" (ngModelChange)="editInstructorLastName.set($event)" />
+										</label>
+										<label>Email
+											<input type="email" [ngModel]="editInstructorEmail()" (ngModelChange)="editInstructorEmail.set($event)" />
+										</label>
+									</div>
+									@if (editInstructorError()) {
+										<p class="banner banner-error">{{ editInstructorError() }}</p>
+									}
+									<div class="edit-actions">
+										<button type="button" class="ghost" (click)="cancelEditInstructor()">Cancel</button>
+										<button
+											type="button"
+											class="primary"
+											[disabled]="savingInstructor()"
+											(click)="saveEditInstructor(instructor)">
+											{{ savingInstructor() ? 'Saving…' : 'Save' }}
+										</button>
+									</div>
+								</div>
+							} @else if (confirmingDeleteUserId() === instructor.userId) {
+								<div class="reject-box edit-box-inline">
+									<p class="reject-label">
+										Delete {{ instructor.firstName }} {{ instructor.lastName }}'s account?
+										@if (instructor.classroomCount > 0) {
+											They own {{ instructor.classroomCount }} classroom(s), so the account will be
+											deactivated instead of removed — their classrooms and quizzes stay intact.
+										} @else {
+											This can't be undone from here.
+										}
+									</p>
+									<div class="reject-actions">
+										<button type="button" class="ghost" (click)="cancelDeleteUser()">Cancel</button>
+										<button
+											type="button"
+											class="danger"
+											[disabled]="deletingUserId() === instructor.userId"
+											(click)="confirmDeleteUser(instructor.userId, 'Instructor')">
+											{{ deletingUserId() === instructor.userId ? 'Deleting…' : 'Confirm delete' }}
+										</button>
+									</div>
+								</div>
+							} @else if (isEditingRoles(instructor.userId)) {
+								<div class="edit-box edit-box-inline">
+									<p class="edit-box-title">Roles for {{ instructor.firstName }} {{ instructor.lastName }}</p>
+									<div class="role-checkboxes">
+										@for (role of managedRoles; track role) {
+											<label class="role-checkbox">
+												<input type="checkbox" [checked]="isRoleSelected(role)" (change)="toggleEditRole(role)" />
+												{{ role }}
+											</label>
+										}
+									</div>
+									@if (needsStudentDetails()) {
+										<div class="edit-grid">
+											<label>Student ID
+												<input type="text" [ngModel]="editRolesStudentIdInput()" (ngModelChange)="editRolesStudentIdInput.set($event)" />
+											</label>
+											<label>Section
+												<input type="text" [ngModel]="editRolesSectionInput()" (ngModelChange)="editRolesSectionInput.set($event)" />
+											</label>
+										</div>
+									}
+									@if (editRolesError()) {
+										<p class="banner banner-error">{{ editRolesError() }}</p>
+									}
+									<div class="edit-actions">
+										<button type="button" class="ghost" (click)="cancelEditRoles()">Cancel</button>
+										<button
+											type="button"
+											class="primary"
+											[disabled]="savingRoles()"
+											(click)="saveEditRoles(instructor.userId)">
+											{{ savingRoles() ? 'Saving…' : 'Save roles' }}
+										</button>
+									</div>
+								</div>
+							} @else {
+								<div class="account-main">
+									<div class="avatar">{{ instructor.firstName.charAt(0) }}{{ instructor.lastName.charAt(0) }}</div>
+									<div class="account-details">
+										<div class="account-name">
+											{{ instructor.firstName }} {{ instructor.lastName }}
+											<span [class]="statusClass(instructor.status)">{{ instructor.status }}</span>
+										</div>
+										<div class="account-meta">{{ instructor.email }}</div>
+										<div class="account-meta">
+											<span>{{ instructor.classroomCount }} classroom(s)</span>
+											@if (instructor.registeredAt) {
+												<span>· Registered {{ instructor.registeredAt | timeAgo }}</span>
+											}
+										</div>
+										<div class="role-chips">
+											@for (r of instructor.roles; track r) {
+												<span class="role-chip">{{ r }}</span>
+											}
+										</div>
+									</div>
+								</div>
+								<div class="account-actions">
+									<button type="button" class="ghost" (click)="startEditInstructor(instructor)">Edit</button>
+									<button type="button" class="ghost" (click)="startEditRoles(instructor.userId, instructor.roles)">Manage roles</button>
+									<button type="button" class="danger-ghost" (click)="startDeleteUser(instructor.userId)">Delete</button>
+								</div>
+							}
+						</li>
+					}
+				</ul>
+			}
+		}
+
+		@if (activeSection() === 'students') {
+			@if (studentsLoading()) {
+				<p class="empty">Loading students…</p>
+			} @else if (!students() || students()!.length === 0) {
+				<p class="empty">No student accounts yet.</p>
+			} @else {
+				<ul class="account-list">
+					@for (student of students()!; track student.id) {
+						<li class="account-card">
+							@if (editingStudentId() === student.id) {
+								<div class="edit-box edit-box-inline">
+									<div class="edit-grid">
+										<label>First name
+											<input type="text" [ngModel]="editStudentFirstName()" (ngModelChange)="editStudentFirstName.set($event)" />
+										</label>
+										<label>Middle name
+											<input type="text" [ngModel]="editStudentMiddleName()" (ngModelChange)="editStudentMiddleName.set($event)" />
+										</label>
+										<label>Last name
+											<input type="text" [ngModel]="editStudentLastName()" (ngModelChange)="editStudentLastName.set($event)" />
+										</label>
+										<label>Email
+											<input type="email" [ngModel]="editStudentEmail()" (ngModelChange)="editStudentEmail.set($event)" />
+										</label>
+										<label>Student ID
+											<input type="text" [ngModel]="editStudentNumber()" (ngModelChange)="editStudentNumber.set($event)" />
+										</label>
+										<label>Section
+											<input type="text" [ngModel]="editStudentSection()" (ngModelChange)="editStudentSection.set($event)" />
+										</label>
+									</div>
+									@if (editStudentError()) {
+										<p class="banner banner-error">{{ editStudentError() }}</p>
+									}
+									<div class="edit-actions">
+										<button type="button" class="ghost" (click)="cancelEditStudent()">Cancel</button>
+										<button
+											type="button"
+											class="primary"
+											[disabled]="savingStudent()"
+											(click)="saveEditStudent(student)">
+											{{ savingStudent() ? 'Saving…' : 'Save' }}
+										</button>
+									</div>
+								</div>
+							} @else if (confirmingDeleteUserId() === student.userId) {
+								<div class="reject-box edit-box-inline">
+									<p class="reject-label">
+										Delete {{ student.firstName }} {{ student.lastName }}'s account?
+										@if (student.classroomCount > 0) {
+											They have classroom enrolments or quiz attempts on record, so the account will
+											be deactivated instead of removed — that history stays intact.
+										} @else {
+											This can't be undone from here.
+										}
+									</p>
+									<div class="reject-actions">
+										<button type="button" class="ghost" (click)="cancelDeleteUser()">Cancel</button>
+										<button
+											type="button"
+											class="danger"
+											[disabled]="deletingUserId() === student.userId"
+											(click)="confirmDeleteUser(student.userId, 'Student')">
+											{{ deletingUserId() === student.userId ? 'Deleting…' : 'Confirm delete' }}
+										</button>
+									</div>
+								</div>
+							} @else if (isEditingRoles(student.userId)) {
+								<div class="edit-box edit-box-inline">
+									<p class="edit-box-title">Roles for {{ student.firstName }} {{ student.lastName }}</p>
+									<div class="role-checkboxes">
+										@for (role of managedRoles; track role) {
+											<label class="role-checkbox">
+												<input type="checkbox" [checked]="isRoleSelected(role)" (change)="toggleEditRole(role)" />
+												{{ role }}
+											</label>
+										}
+									</div>
+									@if (needsStudentDetails()) {
+										<div class="edit-grid">
+											<label>Student ID
+												<input type="text" [ngModel]="editRolesStudentIdInput()" (ngModelChange)="editRolesStudentIdInput.set($event)" />
+											</label>
+											<label>Section
+												<input type="text" [ngModel]="editRolesSectionInput()" (ngModelChange)="editRolesSectionInput.set($event)" />
+											</label>
+										</div>
+									}
+									@if (editRolesError()) {
+										<p class="banner banner-error">{{ editRolesError() }}</p>
+									}
+									<div class="edit-actions">
+										<button type="button" class="ghost" (click)="cancelEditRoles()">Cancel</button>
+										<button
+											type="button"
+											class="primary"
+											[disabled]="savingRoles()"
+											(click)="saveEditRoles(student.userId)">
+											{{ savingRoles() ? 'Saving…' : 'Save roles' }}
+										</button>
+									</div>
+								</div>
+							} @else {
+								<div class="account-main">
+									<div class="avatar">{{ student.firstName.charAt(0) }}{{ student.lastName.charAt(0) }}</div>
+									<div class="account-details">
+										<div class="account-name">
+											{{ student.firstName }} {{ student.lastName }}
+											<span [class]="statusClass(student.status)">{{ student.status }}</span>
+										</div>
+										<div class="account-meta">{{ student.email }}</div>
+										<div class="account-meta">
+											<span>ID {{ student.studentId }}</span>
+											<span>· Section {{ student.section }}</span>
+											<span>· {{ student.classroomCount }} classroom(s)</span>
+										</div>
+										<div class="role-chips">
+											@for (r of student.roles; track r) {
+												<span class="role-chip">{{ r }}</span>
+											}
+										</div>
+									</div>
+								</div>
+								<div class="account-actions">
+									<button type="button" class="ghost" (click)="startEditStudent(student)">Edit</button>
+									<button type="button" class="ghost" (click)="startEditRoles(student.userId, student.roles)">Manage roles</button>
+									<button type="button" class="danger-ghost" (click)="startDeleteUser(student.userId)">Delete</button>
+								</div>
+							}
+						</li>
+					}
+				</ul>
+			}
+		}
+
+		@if (activeSection() === 'classrooms') {
+			@if (classroomsLoading()) {
+				<p class="empty">Loading classrooms…</p>
+			} @else if (!classroomsAdmin() || classroomsAdmin()!.length === 0) {
+				<p class="empty">No classrooms yet.</p>
+			} @else {
+				<div class="table-wrap">
+					<table class="report-table">
+						<thead>
+							<tr>
+								<th>Classroom</th>
+								<th>Instructor</th>
+								<th class="num">Students</th>
+								<th class="num">Pending</th>
+								<th class="num">Quizzes</th>
+								<th>Code</th>
+								<th>Approval</th>
+								<th>Created</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (classroom of classroomsAdmin()!; track classroom.id) {
+								<tr>
+									<td>
+										{{ classroom.title }}
+										@if (classroom.description) {
+											<div class="muted">{{ classroom.description }}</div>
+										}
+									</td>
+									<td class="muted">
+										{{ classroom.instructorName }}
+										@if (classroom.instructorEmail) {
+											<div class="muted">{{ classroom.instructorEmail }}</div>
+										}
+									</td>
+									<td class="num">{{ classroom.studentCount }}</td>
+									<td class="num">
+										@if (classroom.pendingRequestCount > 0) {
+											<span class="rate-low">{{ classroom.pendingRequestCount }}</span>
+										} @else {
+											0
+										}
+									</td>
+									<td class="num">{{ classroom.publishedQuizCount }} / {{ classroom.quizCount }}</td>
+									<td class="nowrap muted">{{ classroom.uniqueCode }}</td>
+									<td>{{ classroom.requiresApproval ? 'Required' : 'Open' }}</td>
+									<td class="nowrap muted">{{ classroom.createdAt | timeAgo }}</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+		}
+
+		@if (activeSection() === 'deletedClassrooms') {
+			@if (deletedClassroomsLoading()) {
+				<p class="empty">Loading deleted classrooms…</p>
+			} @else if (!deletedClassroomsAdmin() || deletedClassroomsAdmin()!.length === 0) {
+				<p class="empty">No deleted classrooms. Anything an instructor deletes will show up here for recovery.</p>
+			} @else {
+				<div class="table-wrap">
+					<table class="report-table">
+						<thead>
+							<tr>
+								<th>Classroom</th>
+								<th>Instructor</th>
+								<th class="num">Students</th>
+								<th class="num">Quizzes</th>
+								<th>Code</th>
+								<th>Deleted</th>
+								<th>Deleted by</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (classroom of deletedClassroomsAdmin()!; track classroom.id) {
+								<tr>
+									<td>
+										{{ classroom.title }}
+										@if (classroom.description) {
+											<div class="muted">{{ classroom.description }}</div>
+										}
+									</td>
+									<td class="muted">
+										{{ classroom.instructorName }}
+										@if (classroom.instructorEmail) {
+											<div class="muted">{{ classroom.instructorEmail }}</div>
+										}
+									</td>
+									<td class="num">{{ classroom.studentCount }}</td>
+									<td class="num">{{ classroom.quizCount }}</td>
+									<td class="nowrap muted">{{ classroom.uniqueCode }}</td>
+									<td class="nowrap muted">{{ classroom.deletedAt ? (classroom.deletedAt | timeAgo) : '—' }}</td>
+									<td class="muted">{{ classroom.deletedByName || '—' }}</td>
+									<td class="nowrap">
+										<button
+											type="button"
+											class="primary"
+											[disabled]="restoringClassroomId() === classroom.id"
+											(click)="restoreClassroom(classroom.id)">
+											{{ restoringClassroomId() === classroom.id ? 'Restoring…' : 'Restore' }}
+										</button>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+		}
+
+		@if (activeSection() === 'reports') {
+			@if (reportLoading()) {
+				<p class="empty">Loading reports…</p>
+			} @else if (report(); as r) {
+				<h3 class="group-title">Users</h3>
+				<div class="stat-row">
+					<div class="stat"><span class="stat-value">{{ r.users.total }}</span><span class="stat-label">Total accounts</span></div>
+					<div class="stat"><span class="stat-value">{{ r.users.students }}</span><span class="stat-label">Students</span></div>
+					<div class="stat"><span class="stat-value">{{ r.users.instructors }}</span><span class="stat-label">Instructors</span></div>
+					<div class="stat"><span class="stat-value">{{ r.users.admins }}</span><span class="stat-label">Admins</span></div>
+					<div class="stat stat-accent"><span class="stat-value">{{ r.users.pendingApproval }}</span><span class="stat-label">Pending approval</span></div>
+					<div class="stat"><span class="stat-value">{{ r.users.rejected }}</span><span class="stat-label">Rejected</span></div>
+					<div class="stat"><span class="stat-value">{{ r.users.unverified }}</span><span class="stat-label">Email unverified</span></div>
+				</div>
+
+				<h3 class="group-title">Classrooms</h3>
+				<div class="stat-row">
+					<div class="stat"><span class="stat-value">{{ r.classrooms.total }}</span><span class="stat-label">Classrooms</span></div>
+					<div class="stat"><span class="stat-value">{{ r.classrooms.totalEnrollments }}</span><span class="stat-label">Enrolments</span></div>
+					<div class="stat"><span class="stat-value">{{ r.classrooms.requiringApproval }}</span><span class="stat-label">Require approval</span></div>
+					<div class="stat stat-accent"><span class="stat-value">{{ r.classrooms.pendingEnrollmentRequests }}</span><span class="stat-label">Join requests waiting</span></div>
+				</div>
+
+				<h3 class="group-title">Quizzes and attempts</h3>
+				<div class="stat-row">
+					<div class="stat"><span class="stat-value">{{ r.quizzes.published }}</span><span class="stat-label">Published quizzes</span></div>
+					<div class="stat"><span class="stat-value">{{ r.quizzes.drafts }}</span><span class="stat-label">Drafts</span></div>
+					<div class="stat"><span class="stat-value">{{ r.quizzes.totalQuestions }}</span><span class="stat-label">Questions</span></div>
+					<div class="stat"><span class="stat-value">{{ r.attempts.submitted }}</span><span class="stat-label">Submitted attempts</span></div>
+					<div class="stat"><span class="stat-value">{{ r.attempts.averageScorePercent }}%</span><span class="stat-label">Average score</span></div>
+					<div class="stat"><span class="stat-value">{{ r.attempts.passRatePercent }}%</span><span class="stat-label">Pass rate</span></div>
+					<div class="stat"><span class="stat-value">{{ r.attempts.tabSwitchEvents }}</span><span class="stat-label">Tab-switch events</span></div>
+				</div>
+
+				<h3 class="group-title">Per-quiz performance</h3>
+				@if (r.quizPerformance.length === 0) {
+					<p class="empty">No submitted attempts yet.</p>
+				} @else {
+					<div class="table-wrap">
+						<table class="report-table">
+							<thead>
+								<tr>
+									<th>Quiz</th>
+									<th>Classroom</th>
+									<th class="num">Submissions</th>
+									<th class="num">Average</th>
+									<th class="num">Pass rate</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for (quiz of r.quizPerformance; track quiz.quizId) {
+									<tr>
+										<td>{{ quiz.title }}</td>
+										<td class="muted">{{ quiz.classroomTitle || '—' }}</td>
+										<td class="num">{{ quiz.submissions }}</td>
+										<td class="num">{{ quiz.averageScorePercent }}%</td>
+										<td class="num">
+											<span [class.rate-low]="quiz.passRatePercent < 50">{{ quiz.passRatePercent }}%</span>
+											<small class="muted"> (need {{ quiz.passingScore }}%)</small>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				}
+			} @else {
+				<p class="empty">No report data.</p>
+			}
+		}
+
+		@if (activeSection() === 'activity') {
+			<div class="filter-row">
+				<button type="button" class="chip" [class.active]="activityCategory() === null" (click)="filterActivity(null)">
+					All
+				</button>
+				@for (category of activityCategories(); track category) {
+					<button type="button" class="chip" [class.active]="activityCategory() === category" (click)="filterActivity(category)">
+						{{ category }}
+					</button>
+				}
+			</div>
+
+			@if (activityLoading()) {
+				<p class="empty">Loading activity…</p>
+			} @else if (activityEntries().length === 0) {
+				<p class="empty">Nothing logged yet. Logins, approvals, classroom changes and quiz events appear here.</p>
+			} @else {
+				<div class="table-wrap">
+					<table class="report-table">
+						<thead>
+							<tr>
+								<th>When</th>
+								<th>Category</th>
+								<th>Action</th>
+								<th>User</th>
+								<th>Detail</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (entry of activityEntries(); track entry.id) {
+								<tr [class.row-failed]="!entry.success">
+									<td class="nowrap muted">{{ entry.timeStamp | timeAgo }}</td>
+									<td><span class="cat-chip">{{ entry.category }}</span></td>
+									<td>{{ entry.action }}</td>
+									<td class="muted">{{ entry.userEmail || '—' }}</td>
+									<td class="muted detail-cell">{{ entry.detail || '—' }}</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="pager">
+					<button type="button" class="ghost" [disabled]="activityPage() <= 1" (click)="changeActivityPage(-1)">
+						Previous
+					</button>
+					<span class="pager-label">Page {{ activityPage() }} of {{ activityTotalPages() }}</span>
+					<button type="button" class="ghost" [disabled]="activityPage() >= activityTotalPages()" (click)="changeActivityPage(1)">
+						Next
+					</button>
+				</div>
+			}
+		}
+	</div>
+</div>

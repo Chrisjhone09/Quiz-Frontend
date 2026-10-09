@@ -14,7 +14,6 @@ import { StudentClassroomService } from '../../../features/student/services/stud
 export class ClassroomList {
 
  classrooms = input<ClassroomModel[]>([]);
-  leaveClassroom = output<string>();
 
   updateClassroom=output<string>();
 
@@ -23,5 +22,10 @@ export class ClassroomList {
 
 constructor(private classroomService : StudentClassroomService, public auth: Auth){}
 
+  /** Quizzes in this classroom the student still has something to do for —
+   * mirrors the dashboard's "Pending Quizzes" stat, just scoped to one classroom. */
+  activeCount(classroom: ClassroomModel): number {
+    return (classroom.quizzes ?? []).filter((q) => q.status !== 'Completed').length;
+  }
 
 }

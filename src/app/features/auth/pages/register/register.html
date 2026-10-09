@@ -1,56 +1,127 @@
-<form [formRoot]="registerForm" class="register-form">
-	<h2>Create an account</h2>
-	<div class="row">
-		<label class="field">
-			First name
-			<input placeholder="First name" [formField]="registerForm.fname" />
-		</label>
-		<label class="field">
-			Last name
-			<input placeholder="Last name" [formField]="registerForm.lname" />
-		</label>
-	</div>
+<section class="auth-shell">
+  <div class="auth-brand">
+    <img
+      src="itLogo.png"
+      width="76"
+      height="76"
+      alt="Information Technology Education department logo"
+    />
+    <p>Information Technology Education</p>
+  </div>
+  <form [formRoot]="registerForm" class="auth-form register-form">
+    <h1>Create an account</h1>
+    <p class="form-subtitle">Join your department learning portal.</p>
 
-	<label class="field full">
-		Email
-		<input type="email" placeholder="you@school.edu" [formField]="registerForm.email" />
-	</label>
-    @if(registerForm.email().invalid()) {
-      <div class="error">
-        
-          <p style="color: red;">hoy mali</p>
-        
+    <div class="role-picker">
+      <span class="role-label">I am registering as</span>
+      <div class="role-options">
+        <button
+          type="button"
+          class="role-option"
+          [class.selected]="isStudent()"
+          [attr.aria-pressed]="isStudent()"
+          (click)="selectRole('Student')"
+        >
+          Student
+        </button>
+        <button
+          type="button"
+          class="role-option"
+          [class.selected]="!isStudent()"
+          [attr.aria-pressed]="!isStudent()"
+          (click)="selectRole('Instructor')"
+        >
+          Instructor
+        </button>
+      </div>
+      <p class="role-note">
+        Your account must be approved by an administrator before you can sign in.
+      </p>
+    </div>
+
+    <div class="row">
+      <label class="field">
+        First name
+        <input
+          autocomplete="given-name"
+          placeholder="First name"
+          [formField]="registerForm.fname"
+        />
+      </label>
+      <label class="field">
+        Last name
+        <input
+          autocomplete="family-name"
+          placeholder="Last name"
+          [formField]="registerForm.lname"
+        />
+      </label>
+    </div>
+
+    <label class="field full">
+      Email
+      <input
+        type="email"
+        autocomplete="email"
+        placeholder="you@school.edu"
+        [formField]="registerForm.email"
+      />
+    </label>
+    @if (registerForm.email().invalid() && registerForm.email().touched()) {
+      <p class="error">Please enter a valid email address.</p>
+    }
+
+    <div class="row">
+      <label class="field">
+        Password
+        <input
+          type="password"
+          autocomplete="new-password"
+          placeholder="Password"
+          [formField]="registerForm.password"
+        />
+      </label>
+      <label class="field">
+        Confirm password
+        <input
+          type="password"
+          autocomplete="new-password"
+          placeholder="Confirm password"
+          [formField]="registerForm.confirmPassword"
+        />
+      </label>
+    </div>
+    @if (registerForm.confirmPassword().invalid() && registerForm.confirmPassword().touched()) {
+      <p class="error">Passwords do not match.</p>
+    }
+
+    @if (isStudent()) {
+      <div class="row">
+        <label class="field">
+          Student ID
+          <input placeholder="Student ID" [formField]="registerForm.studentId" />
+        </label>
+        <label class="field">
+          Section
+          <input placeholder="Section" [formField]="registerForm.section" />
+        </label>
       </div>
     }
 
-	<div class="row">
-		<label class="field">
-			Password
-			<input type="password" placeholder="Password" [formField]="registerForm.password" />
-		</label>
-		<label class="field">
-			Confirm
-			<input type="password" placeholder="Confirm password" [formField]="registerForm.confirmPassword" />
-		</label>
+    @if (successMessage()) {
+      <p class="banner banner-success" role="status">{{ successMessage() }}</p>
+    }
+    @if (errorMessage()) {
+      <p class="banner banner-error" role="alert">{{ errorMessage() }}</p>
+    }
 
-        @if(registerForm.confirmPassword().invalid()) {
-            <p>djajja</p>
-        }
-          
-	</div>
-
-	<div class="row">
-		<label class="field">
-			Student ID
-			<input placeholder="Student ID" [formField]="registerForm.studentId" />
-		</label>
-		<label class="field">
-			Section
-			<input placeholder="Section" [formField]="registerForm.section" />
-		</label>
-	</div>
-
-	<div class="actions">
-		<button type="submit" class="primary">Register</button>
-	</div>
-</form>
+    <div class="actions">
+      <button type="submit" class="primary" [disabled]="submitting()">
+        {{ submitting() ? 'Creating account...' : 'Sign up' }}
+      </button>
+    </div>
+    <div class="auth-footer">
+      <span>Already have an account?</span><a routerLink="/login">Sign in</a>
+    </div>
+  </form>
+</section>

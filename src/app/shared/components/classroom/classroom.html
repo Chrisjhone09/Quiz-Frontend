@@ -10,7 +10,19 @@
 
 	<article class="classroom-card">
 		<header class="classroom-header">
-			<h2 class="classroom-title">{{ classroom()?.classroomTitle }}</h2>
+			<div class="classroom-title-row">
+				<h2 class="classroom-title">{{ classroom()?.classroomTitle }}</h2>
+				@if (auth.getUserRole() === 'Student') {
+					<button type="button" class="classroom-options" [matMenuTriggerFor]="classroomMenu" aria-label="Classroom options" title="Classroom options">
+						<mat-icon aria-hidden="true">more_horiz</mat-icon>
+					</button>
+					<mat-menu #classroomMenu="matMenu">
+						<button mat-menu-item type="button" (click)="requestLeave()">
+							<mat-icon aria-hidden="true">logout</mat-icon><span>Leave classroom</span>
+						</button>
+					</mat-menu>
+				}
+			</div>
 			<div class="classroom-meta">
 				<span>Instructor: {{ classroom()?.instructor }}</span>
 				<span class="dot">&bull;</span>
@@ -18,6 +30,9 @@
 			</div>
 			<div class="class-code">
 				<span class="code-pill">Class Code: {{ classroom()?.classCode }}</span>
+				@if (classroom()?.requiresApproval) {
+					<span class="approval-pill">Approval required to join</span>
+				}
 			</div>
 		</header>
 
@@ -28,23 +43,84 @@
 
 	@if(auth.getUserRole() === "Student"){
 		<nav class="classroom-tabs" aria-label="Classroom sections">
-			<a class="tab active">Quizzes</a>
-			<a class="tab">Announcements</a>
-			<a class="tab">Classmates</a>
+			<a class="tab" [class.active]="activeTab() === 'quizzes'" (click)="selectTab('quizzes')">Quizzes</a>
+			<a class="tab" [class.active]="activeTab() === 'announcements'" (click)="selectTab('announcements')">Announcements</a>
+			<a class="tab" [class.active]="activeTab() === 'classmates'" (click)="selectTab('classmates')">Classmates</a>
 		</nav>
 
-		<section class="quizzes-section">
-			<app-quiz-list [quizzes]="quizzes()"></app-quiz-list>
-		</section>
+		@if (activeTab() === 'quizzes') {
+			<section class="quizzes-section">
+				<app-quiz-list [quizzes]="quizzes()"></app-quiz-list>
+			</section>
+		} @else if (activeTab() === 'announcements') {
+			<section class="announcements-section">
+				@if (announcementsLoading()) {
+					<p class="empty">Loading announcements…</p>
+				} @else if (announcements().length === 0) {
+					<p class="empty">No announcements yet.</p>
+				} @else {
+					<ul class="announcement-list">
+						@for (announcement of announcements(); track announcement.id) {
+							<li class="announcement-card">
+								<div class="announcement-card-top">
+									<div class="avatar announcement-avatar">{{ initialsForName(announcement.postedByName) }}</div>
+									<div class="announcement-header-text">
+										<span class="announcement-author">{{ announcement.postedByName }}</span>
+										<span class="announcement-time">{{ announcement.createdAt | timeAgo }}</span>
+									</div>
+								</div>
+								<p class="announcement-content">{{ announcement.content }}</p>
+								<div class="announcement-card-bottom">
+									@if (announcement.acknowledgedByMe) {
+										<span class="ack-done">&check; Acknowledged</span>
+									} @else {
+										<button type="button" class="btn-ack" [disabled]="acknowledgingId() === announcement.id" (click)="acknowledge(announcement)">
+											{{ acknowledgingId() === announcement.id ? 'Acknowledging…' : 'Acknowledge' }}
+										</button>
+									}
+								</div>
+							</li>
+						}
+					</ul>
+				}
+			</section>
+		} @else if (activeTab() === 'classmates') {
+			<section class="classmates-section">
+				@if (classmatesLoading()) {
+					<p class="empty">Loading classmates…</p>
+				} @else if (classmates().length === 0) {
+					<p class="empty">No other students in this classroom yet.</p>
+				} @else {
+					<ul class="classmate-list">
+						@for (classmate of classmates(); track classmate.id) {
+							<li class="classmate-card">
+								<div class="avatar">{{ classmate.firstName.charAt(0) }}{{ classmate.lastName.charAt(0) }}</div>
+								<div class="classmate-details">
+									<div class="classmate-name">{{ classmate.lastName.toUpperCase() }}, {{ classmate.firstName }}</div>
+									<div class="muted">Section {{ classmate.section }}</div>
+								</div>
+							</li>
+						}
+					</ul>
+				}
+			</section>
+		}
 	} @else {
 		<nav class="instructor-tabs" aria-label="Instructor classroom sections">
-			<a [routerLink]="['/instructor-classroom', classroom()?.id, 'quizzes']">Quizzes</a>
-			<a [routerLink]="['/instructor-classroom', classroom()?.id, 'students']">Students</a>
+			<a [routerLink]="['/instructor-classroom', classroom()?.id]" [queryParams]="{ tab: 'quizzes' }">Quizzes</a>
+			<a [routerLink]="['/instructor-classroom', classroom()?.id]" [queryParams]="{ tab: 'students' }">Students</a>
+			<a [routerLink]="['/instructor-classroom', classroom()?.id, 'requests']">
+				Requests
+				@if (pendingRequestCount() > 0) {
+					<span class="tab-badge">{{ pendingRequestCount() }}</span>
+				}
+			</a>
+			<a [routerLink]="['/instructor-classroom', classroom()?.id, 'monitoring']">Monitoring</a>
 		</nav>
 		<router-outlet></router-outlet>
 	}
 </main>
 }
 @else {
-<div class="empty-card">Classroom not found.</div>
+<div class="empty-card">{{ accessMessage() || 'Classroom not found.' }}</div>
 }

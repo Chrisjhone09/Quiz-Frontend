@@ -1,3 +1,187 @@
-<app-stats-card [statsCards]="statsCard()"></app-stats-card>
-<button (click)="openDialog()">Create new classroom</button>
-<app-classroom-list [classrooms]="classrooms()" (leaveClassroom)="leaveClassroom($event)" (updateClassroom)="updateClassroom($event)"></app-classroom-list>
+<div class="dash">
+	<aside class="dash-sidebar">
+		<div class="brand">
+            <img class="department-brand-logo" src="itLogo.png" width="36" height="36" alt="Department logo" />
+            <span class="brand-text">Information Technology Education</span>
+		</div>
+
+		<nav class="nav-list">
+			<a class="nav-link active" routerLink="/instructor-dashboard">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z"></path></svg>
+				<span>Dashboard</span>
+			</a>
+			<a class="nav-link" routerLink="/instructor-dashboard" fragment="my-classrooms">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7.5A3.5 3.5 0 0 0 4 21.5v-16Z"></path><path d="M7.5 18H20"></path></svg>
+				<span>My Classrooms</span>
+			</a>
+			<a class="nav-link" routerLink="/quiz-builder">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+				<span>Create Quiz</span>
+			</a>
+			<a class="nav-link" routerLink="/quiz-builder/generate">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2Z"></path></svg>
+				<span>AI Generator</span>
+			</a>
+			<a class="nav-link" [class.disabled]="classrooms().length === 0" (click)="goToMonitoring()">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8M12 16v4"></path></svg>
+				<span>Monitoring</span>
+			</a>
+			<a class="nav-link" routerLink="/instructor-dashboard" fragment="recent-activity">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M10 19V9M16 19v-6M4 19h16"></path></svg>
+				<span>Reports</span>
+			</a>
+			<a class="nav-link" routerLink="/instructor-settings">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1Z"></path></svg>
+				<span>Settings</span>
+			</a>
+		</nav>
+		<button type="button" class="nav-link sign-out-link" (click)="signOut()" aria-label="Sign out">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg>
+			<span>Sign Out</span>
+		</button>
+	</aside>
+
+	<div class="dash-content">
+		<header class="dash-topbar">
+			<h1>Dashboard</h1>
+			<div class="topbar-right">
+				<button type="button" class="icon-btn" aria-label="Notifications" title="No notifications">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+				</button>
+				<div class="user-chip">
+					<div class="avatar">{{ initials() }}</div>
+					<div class="user-text">
+						<div class="user-name">{{ userName() }}</div>
+						<div class="user-role">{{ userRole() }}</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		@if (classroomsError()) {
+			<p class="banner banner-error">{{ classroomsError() }}</p>
+		}
+
+		<div class="action-row">
+			<a class="btn-primary" routerLink="/quiz-builder/generate">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2Z"></path></svg>
+				Generate AI Quiz
+			</a>
+			<button type="button" class="btn-secondary" [disabled]="classrooms().length === 0" (click)="goToMonitoring()">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8M12 16v4"></path></svg>
+				View All Monitoring
+			</button>
+			<button type="button" class="btn-secondary" [disabled]="recentQuizActivity().length === 0" (click)="downloadReportsCsv()">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"></path></svg>
+				Download Reports
+			</button>
+		</div>
+
+		<div class="stat-grid">
+			<div class="stat-card">
+				<div class="stat-icon stat-icon-blue">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7.5A3.5 3.5 0 0 0 4 21.5v-16Z"></path></svg>
+				</div>
+				<div class="stat-value">{{ classroomsLoading() ? '—' : activeClassroomCount() }}</div>
+				<div class="stat-label">Active Classrooms</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-icon stat-icon-purple">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M2 20a6 6 0 0 1 12 0"></path><path d="M14 14a5.5 5.5 0 0 1 8 5"></path></svg>
+				</div>
+				<div class="stat-value">{{ classroomsLoading() ? '—' : totalStudents() }}</div>
+				<div class="stat-label">Total Students</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-icon stat-icon-green">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M10 19V9M16 19v-6M4 19h16"></path></svg>
+				</div>
+				<div class="stat-value">{{ quizActivityLoading() ? '—' : quizzesPublishedCount() }}</div>
+				<div class="stat-label">Quizzes Published</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-icon stat-icon-amber">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+				</div>
+				<div class="stat-value">{{ classroomsLoading() ? '—' : pendingReviewCount() }}</div>
+				<div class="stat-label">Pending Review</div>
+			</div>
+		</div>
+
+		<section id="my-classrooms" class="section">
+			<div class="section-head">
+				<h2>My Classrooms</h2>
+				<button type="button" class="btn-outline" (click)="openCreateDialog()">+ Create New Classroom</button>
+			</div>
+
+			@if (classroomsLoading()) {
+				<p class="empty">Loading classrooms…</p>
+			} @else if (classrooms().length === 0) {
+				<p class="empty">You don't have any classrooms yet. Create one to get started.</p>
+			} @else {
+				<div class="classroom-grid">
+					@for (classroom of classrooms(); track classroom.id; let i = $index) {
+						<article class="classroom-card" [class]="cardAccent(i)">
+							<h3 class="classroom-title">
+								<a [routerLink]="['/instructor-classroom', classroom.id]">{{ classroom.classroomTitle }}</a>
+							</h3>
+							<div class="classroom-code">Class code: <span>{{ classroom.classCode }}</span></div>
+							<div class="classroom-students">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M2 20a6 6 0 0 1 12 0"></path><path d="M14 14a5.5 5.5 0 0 1 8 5"></path></svg>
+								{{ classroom.numberOfStudents }} student{{ classroom.numberOfStudents === 1 ? '' : 's' }} enrolled
+							</div>
+							@if ((classroom.pendingRequestCount ?? 0) > 0) {
+								<a class="pending-pill" [routerLink]="['/instructor-classroom', classroom.id, 'requests']">
+									{{ classroom.pendingRequestCount }} request{{ classroom.pendingRequestCount === 1 ? '' : 's' }} waiting
+								</a>
+							}
+							<div class="classroom-actions">
+								<a class="link-action" [routerLink]="['/instructor-classroom', classroom.id]">View Classroom</a>
+								<a class="link-action" [routerLink]="['/instructor-classroom', classroom.id]" [queryParams]="{ tab: 'students' }">View Students</a>
+								<button type="button" class="link-action" (click)="openEditDialog(classroom)">Edit</button>
+								<a class="btn-mini" routerLink="/quiz-builder" [queryParams]="{ classroomId: classroom.id }">Add Quiz</a>
+							</div>
+						</article>
+					}
+				</div>
+			}
+		</section>
+
+		<section id="recent-activity" class="section">
+			<h2>Recent Quiz Activity</h2>
+
+			@if (quizActivityLoading()) {
+				<p class="empty">Loading quiz activity…</p>
+			} @else if (recentQuizActivity().length === 0) {
+				<p class="empty">No quizzes published yet.</p>
+			} @else {
+				<div class="table-wrap">
+					<table class="activity-table">
+						<thead>
+							<tr>
+								<th>Quiz Name</th>
+								<th>Classroom</th>
+								<th>Published Date</th>
+								<th class="num">Submissions</th>
+								<th class="num">Average Score</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (quiz of recentQuizActivity(); track quiz.id) {
+								<tr>
+									<td>{{ quiz.quizTitle }}</td>
+									<td class="muted">{{ quiz.classroomTitle }}</td>
+									<td class="muted nowrap">{{ quiz.publishDate | timeAgo }}</td>
+									<td class="num">{{ quiz.submissions }}/{{ studentsIn(quiz.classroomId) }}</td>
+									<td class="num">{{ quiz.averageScore != null ? (quiz.averageScore | number: '1.0-0') + '%' : '—' }}</td>
+									<td><span [class]="quizStatusClass(quiz)">{{ quizStatusLabel(quiz) }}</span></td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+		</section>
+	</div>
+</div>

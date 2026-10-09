@@ -12,47 +12,22 @@
 
     <label>
       <span>Classroom</span>
-      <select [formField]="quizSettingsForm.classroomTitle">
+      <select [formField]="quizSettingsForm.classroomId">
         @for (classroom of classrooms(); track classroom.id) {
           <option [value]="classroom.id">{{ classroom.classroomTitle }}</option>
         }
 
         @if (!classrooms().length) {
-          <option value="CS101 Data Structures">CS101 Data Structures</option>
+          <option value="">No classrooms yet</option>
         }
       </select>
     </label>
 
     @if (mode() === 'upload') {
-      <label>
-        <span>Number of Questions</span>
-        <input type="number" [formField]="quizSettingsForm.numberOfQuestions" />
-      </label>
-
-      <label>
-        <span>Difficulty</span>
-        <select [formField]="quizSettingsForm.difficulty">
-          <option value="Mixed">Mixed</option>
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-      </label>
-
-      <div class="checkbox-group">
-        <span>Question Types</span>
-
-        @for (type of questionTypeOptions; track type) {
-          <label class="checkbox-row">
-            <input
-              type="checkbox"
-              [checked]="isQuestionTypeSelected(type)"
-              (change)="updateQuestionTypes(type, $event)"
-            />
-            <span>{{ type }}</span>
-          </label>
-        }
-      </div>
+      <app-question-type-settings [allocations]="allocations()" (allocationsChange)="allocations.set($event)" />
+      @if (allocationError()) {
+        <p role="alert" class="allocation-error">{{ allocationError() }}</p>
+      }
 
       <label>
         <span>Description</span>

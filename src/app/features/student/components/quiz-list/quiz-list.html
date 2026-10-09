@@ -70,6 +70,14 @@
 								<span class="meta-item">{{ quiz.numberOfQuestions }} Questions</span>
 								<span class="meta-item">{{ quiz.duration }} min</span>
 							</div>
+
+							@if (quiz.autoReleaseResults) {
+								<a class="review-link" [routerLink]="['/student-quiz-result', quiz.id]">
+									Review answers
+								</a>
+							} @else {
+								<span class="review-link disabled">Results not released</span>
+							}
 						</article>
 					}
 				</div>

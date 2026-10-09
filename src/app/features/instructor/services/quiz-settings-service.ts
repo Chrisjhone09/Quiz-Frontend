@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { ApiResult, QuizCreationModel, QuizResponseModel } from '../interfaces/quizCreation.model';
+import { ApiResult, QuizCreationModel, QuizQuestionModel, QuizResponseModel } from '../interfaces/quizCreation.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/enviroment.developement';
 
@@ -21,6 +21,16 @@ export class QuizSettingsService {
     return this.http.post<ApiResult<QuizResponseModel>>(environment.apiUrl+"/api/classroom/generate-quiz", formData)
   }
 
+  /** Manual quiz creation — instructor-authored questions, no file upload or AI generation.
+   * Saved as a draft unless publish is true, in which case the backend also applies a
+   * schedule (falling back to "open now, due in a week" if quizSettings didn't set one). */
+  createManualQuiz(quizSettings: QuizCreationModel, questions: QuizQuestionModel[], publish: boolean) {
+    return this.http.post<ApiResult<QuizResponseModel>>(
+      environment.apiUrl + "/api/classroom/create-manual-quiz?publish=" + publish,
+      { quizSettings, questions }
+    );
+  }
+
   saveDraft(quizId: number, quiz: QuizResponseModel, quizSettings: QuizCreationModel) {
     return this.http.put<ApiResult<QuizResponseModel>>(
       environment.apiUrl + "/api/classroom/save-draft/" + quizId,
@@ -32,6 +42,30 @@ export class QuizSettingsService {
     return this.http.put<ApiResult<QuizResponseModel>>(
       environment.apiUrl + "/api/classroom/publish-quiz/" + quizId,
       { quizSettings, questions: quiz.questions }
+    );
+  }
+
+  /** Fetches an existing quiz — AI-generated or manually created — for editing. */
+  getQuiz(quizId: number) {
+    return this.http.get<ApiResult<QuizResponseModel>>(
+      environment.apiUrl + "/api/classroom/get-quiz/" + quizId
+    );
+  }
+
+  /** Same request shape as createManualQuiz, but against an existing quiz id — used by the
+   * standalone quiz editor to save changes without publishing (works for AI-generated quizzes
+   * too, since save-draft/publish-quiz just replace the question set either way). */
+  saveDraftQuestions(quizId: number, quizSettings: QuizCreationModel, questions: QuizQuestionModel[]) {
+    return this.http.put<ApiResult<QuizResponseModel>>(
+      environment.apiUrl + "/api/classroom/save-draft/" + quizId,
+      { quizSettings, questions }
+    );
+  }
+
+  publishQuizQuestions(quizId: number, quizSettings: QuizCreationModel, questions: QuizQuestionModel[]) {
+    return this.http.put<ApiResult<QuizResponseModel>>(
+      environment.apiUrl + "/api/classroom/publish-quiz/" + quizId,
+      { quizSettings, questions }
     );
   }
 
@@ -57,10 +91,11 @@ export class QuizSettingsService {
 
   createDefaultSettings(): QuizCreationModel {
     return {
-      title: '',
+      title: 'Untitled Quiz',
       description: '',
       classroomTitle: '',
-      difficulty: 'Mixed',
+      classroomId: '',
+      difficulty: 'Hard',
       questionType: 'Mixed',
       types: ['Mixed'],
       validUntil: '',

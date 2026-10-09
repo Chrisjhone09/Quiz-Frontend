@@ -1,0 +1,554 @@
+<div class="dash">
+	<aside class="dash-sidebar">
+		<div class="brand">
+            <img class="department-brand-logo" src="itLogo.png" width="36" height="36" alt="Department logo" />
+            <span class="brand-text">Information Technology Education</span>
+		</div>
+
+		<nav class="nav-list">
+			<a class="nav-link" routerLink="/instructor-dashboard">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z"></path></svg>
+				<span>Dashboard</span>
+			</a>
+			<a class="nav-link active" routerLink="/instructor-dashboard" fragment="my-classrooms">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H7.5A3.5 3.5 0 0 0 4 21.5v-16Z"></path><path d="M7.5 18H20"></path></svg>
+				<span>My Classrooms</span>
+			</a>
+			<a class="nav-link" routerLink="/quiz-builder">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+				<span>Create Quiz</span>
+			</a>
+			<a class="nav-link" routerLink="/quiz-builder/generate">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2Z"></path></svg>
+				<span>AI Generator</span>
+			</a>
+			<a class="nav-link" (click)="goToMonitoring()">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8M12 16v4"></path></svg>
+				<span>Monitoring</span>
+			</a>
+			<a class="nav-link" routerLink="/instructor-dashboard" fragment="recent-activity">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M10 19V9M16 19v-6M4 19h16"></path></svg>
+				<span>Reports</span>
+			</a>
+			<a class="nav-link" routerLink="/instructor-settings">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1Z"></path></svg>
+				<span>Settings</span>
+			</a>
+		</nav>
+		<button type="button" class="nav-link sign-out-link" (click)="signOut()" aria-label="Sign out">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1 2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg>
+			<span>Sign Out</span>
+		</button>
+	</aside>
+
+	<div class="dash-content">
+		<header class="dash-topbar">
+			<nav class="breadcrumbs" aria-label="Breadcrumb">
+				<a routerLink="/instructor-dashboard">My Classrooms</a>
+				<span>&rsaquo;</span>
+				<strong>{{ classroom()?.classroomTitle || '…' }}</strong>
+			</nav>
+			<div class="topbar-right">
+				<button type="button" class="icon-btn" aria-label="Notifications" title="No notifications">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+				</button>
+				<div class="user-chip">
+					<div class="avatar">{{ initials() }}</div>
+					<div class="user-text">
+						<div class="user-name">{{ userName() }}</div>
+						<div class="user-role">{{ userRole() }}</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		@if (classroomLoading()) {
+			<p class="empty">Loading classroom…</p>
+		} @else if (classroomError() || !classroom()) {
+			<div class="empty-card">{{ classroomError() || 'Classroom not found.' }}</div>
+		} @else if (hasChildRoute()) {
+			<router-outlet></router-outlet>
+		} @else {
+			<article class="classroom-card">
+				<div class="classroom-card-top">
+					<div class="classroom-card-info">
+						<h1 class="classroom-title">{{ classroom()?.classroomTitle }}</h1>
+						<div class="classroom-meta">
+							<span>{{ classroom()?.numberOfStudents }} student{{ classroom()?.numberOfStudents === 1 ? '' : 's' }} enrolled</span>
+							<span class="dot">&bull;</span>
+							<span class="code-pill">Class Code: {{ classroom()?.classCode }}</span>
+							@if (classroom()?.requiresApproval) {
+								<span class="approval-pill">Approval required to join</span>
+							}
+							@if ((classroom()?.pendingRequestCount ?? 0) > 0) {
+								<a class="pending-pill" [routerLink]="['/instructor-classroom', classroomId, 'requests']">
+									{{ classroom()?.pendingRequestCount }} request{{ classroom()?.pendingRequestCount === 1 ? '' : 's' }} waiting
+								</a>
+							}
+						</div>
+						@if (classroom()?.description) {
+							<p class="classroom-description">{{ classroom()?.description }}</p>
+						}
+					</div>
+					<div class="classroom-card-actions">
+						<button type="button" class="btn-secondary" (click)="openEditDialog()">Edit Classroom</button>
+						<a class="btn-outline" routerLink="/quiz-builder" [queryParams]="{ classroomId: classroomId }">+ Add Quiz</a>
+						<a class="btn-primary" routerLink="/quiz-builder/generate" [queryParams]="{ classroomId: classroomId }">Generate AI Quiz</a>
+					</div>
+				</div>
+			</article>
+
+			<nav class="detail-tabs" aria-label="Classroom sections">
+				<button type="button" [class.active]="activeTab() === 'quizzes'" (click)="selectTab('quizzes')">Quizzes</button>
+				<button type="button" [class.active]="activeTab() === 'students'" (click)="selectTab('students')">Students</button>
+				<button type="button" [class.active]="activeTab() === 'announcements'" (click)="selectTab('announcements')">Announcements</button>
+				<button type="button" [class.active]="activeTab() === 'performance'" (click)="selectTab('performance')">Performance</button>
+				<button type="button" [class.active]="activeTab() === 'results'" (click)="selectTab('results')">Results</button>
+				<button type="button" [class.active]="activeTab() === 'settings'" (click)="selectTab('settings')">Settings</button>
+			</nav>
+
+			@if (activeTab() === 'quizzes') {
+				<div class="stat-grid">
+					<div class="stat-card">
+						<div class="stat-value">{{ quizzesLoading() ? '—' : totalQuizzes() }}</div>
+						<div class="stat-label">Total Quizzes</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-value">{{ quizzesLoading() ? '—' : publishedCount() }}</div>
+						<div class="stat-label">Published</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-value">{{ quizzesLoading() ? '—' : (avgClassScore() + '%') }}</div>
+						<div class="stat-label">Avg Class Score</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-value">{{ quizzesLoading() ? '—' : (completionRate() + '%') }}</div>
+						<div class="stat-label">Completion Rate</div>
+					</div>
+				</div>
+
+				<section class="section">
+					<h2>Published Quizzes</h2>
+					@if (quizzesLoading()) {
+						<p class="empty">Loading quizzes…</p>
+					} @else if (publishedQuizzes().length === 0) {
+						<p class="empty">No quizzes published yet.</p>
+					} @else {
+						<div class="table-wrap">
+							<table class="activity-table">
+								<thead>
+									<tr>
+										<th>Title</th>
+										<th class="num">Questions</th>
+										<th class="num">Time Limit</th>
+										<th>Published Date</th>
+										<th class="num">Submissions</th>
+										<th class="num">Avg Score</th>
+										<th>Status</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@for (quiz of publishedQuizzes(); track quiz.id) {
+										<tr>
+											<td>{{ quiz.quizTitle }}</td>
+											<td class="num">{{ quiz.numberOfQuestions }}</td>
+											<td class="num">{{ quiz.duration }} min</td>
+										<td class="muted nowrap">{{ quiz.publishDate | timeAgo }}</td>
+											<td class="num">{{ quiz.submissions }}/{{ classroom()?.numberOfStudents }}</td>
+											<td class="num">{{ quiz.averageScore != null ? (quiz.averageScore | number: '1.0-0') + '%' : '—' }}</td>
+											<td><span [class]="quizStatusClass(quiz)">{{ quizStatusLabel(quiz) }}</span></td>
+											<td class="row-actions">
+												<button type="button" class="link-action" (click)="viewResults(quiz.id)">Results</button>
+												<button type="button" class="link-action" (click)="goToMonitoring(quiz.id)">Monitor</button>
+												<a class="link-action" [routerLink]="['/quiz-builder', quiz.id]">Edit</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+				</section>
+
+				<section class="section">
+					<h2>Upcoming / Draft Quizzes</h2>
+					@if (quizzesLoading()) {
+						<p class="empty">Loading quizzes…</p>
+					} @else if (draftQuizzes().length === 0) {
+						<p class="empty">No draft quizzes.</p>
+					} @else {
+						<div class="table-wrap">
+							<table class="activity-table">
+								<thead>
+									<tr>
+										<th>Title</th>
+										<th class="num">Questions</th>
+										<th class="num">Time Limit</th>
+										<th>Due Date</th>
+										<th>Status</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@for (quiz of draftQuizzes(); track quiz.id) {
+										<tr>
+											<td>{{ quiz.quizTitle }}</td>
+											<td class="num">{{ quiz.numberOfQuestions }}</td>
+											<td class="num">{{ quiz.duration }} min</td>
+										<td class="muted nowrap">{{ quiz.closeDate ? (quiz.closeDate | philippineDate:'datetime':quiz.closeTime) : 'No due date' }}</td>
+											<td><span [class]="quizStatusClass(quiz)">{{ quizStatusLabel(quiz) }}</span></td>
+											<td class="row-actions">
+												<a class="link-action" [routerLink]="['/quiz-builder', quiz.id]">Edit</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+				</section>
+			}
+
+			@if (activeTab() === 'students') {
+				<section class="section">
+					<div class="section-head">
+						<h2>Students</h2>
+						<div class="roster-actions">
+							<span class="muted">{{ classroom()?.numberOfStudents }} enrolled</span>
+							<button type="button" class="btn-outline roster-refresh" (click)="refreshStudents()" [disabled]="studentsLoading() || rosterLoading()" aria-label="Refresh students" title="Refresh students"><mat-icon aria-hidden="true">refresh</mat-icon></button>
+							<button type="button" class="btn-primary roster-import" (click)="openRosterImport()"><mat-icon aria-hidden="true">upload_file</mat-icon>Import CSV</button>
+						</div>
+					</div>
+					@if (studentsError()) {
+						<p class="banner banner-error">{{ studentsError() }}</p>
+					}
+					@if (studentsLoading()) {
+						<p class="empty">Loading students…</p>
+					} @else if (students().length === 0) {
+						<p class="empty">No students enrolled yet.</p>
+					} @else {
+						<div class="table-wrap">
+							<table class="activity-table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Student ID</th>
+										<th>Section</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@for (student of students(); track student.id) {
+										<tr>
+											<td>{{ student.lastName.toUpperCase() }}, {{ student.firstName }}{{ student.middleName ? ' ' + student.middleName[0] + '.' : '' }}</td>
+											<td class="muted">{{ student.studentId }}</td>
+											<td class="muted">{{ student.section }}</td>
+											<td class="row-actions">
+												<button type="button" class="link-action link-action-danger" [disabled]="removingStudentId() === student.id" (click)="removeStudent(student)">
+													{{ removingStudentId() === student.id ? 'Removing…' : 'Remove' }}
+												</button>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+					@if (rosterError()) { <p class="banner banner-error" role="alert">{{ rosterError() }}</p> }
+					@if (rosterLoading()) { <p class="empty">Loading imported IDs...</p> }
+					@if (pendingRoster().length) {
+						<div class="pending-roster">
+							<h3>Awaiting registration <span class="muted">({{ pendingRoster().length }})</span></h3>
+							<ul>
+								@for (entry of pendingRoster(); track entry.studentNumber) {
+									<li><strong>{{ entry.studentNumber }}</strong><span class="muted">Added {{ entry.addedAt | timeAgo }}</span><button type="button" class="link-action link-action-danger" [disabled]="!!cancellingRosterId()" (click)="cancelRosterEntry(entry)" [attr.aria-label]="'Cancel enrollment for ' + entry.studentNumber" title="Cancel automatic enrollment"><mat-icon aria-hidden="true">person_remove</mat-icon>Cancel</button></li>
+								}
+							</ul>
+						</div>
+					}
+				</section>
+			}
+
+			@if (activeTab() === 'announcements') {
+				<section class="section">
+					<h2>Post an Announcement</h2>
+					<div class="announcement-compose">
+						<label class="announcement-field">
+							Content
+							<textarea rows="3" maxlength="2000" [ngModel]="newAnnouncementContent()" (ngModelChange)="newAnnouncementContent.set($event)" placeholder="Details for your students…"></textarea>
+						</label>
+						@if (announcementError()) {
+							<p class="banner banner-error">{{ announcementError() }}</p>
+						}
+						<div class="announcement-compose-actions">
+							<button type="button" class="btn-primary" [disabled]="postingAnnouncement()" (click)="postAnnouncement()">
+								{{ postingAnnouncement() ? 'Posting…' : 'Post Announcement' }}
+							</button>
+						</div>
+					</div>
+				</section>
+
+				<section class="section">
+					<h2>Posted Announcements</h2>
+					@if (announcementsLoading()) {
+						<p class="empty">Loading announcements…</p>
+					} @else if (announcements().length === 0) {
+						<p class="empty">No announcements posted yet.</p>
+					} @else {
+						<ul class="announcement-list">
+							@for (announcement of announcements(); track announcement.id) {
+								<li class="announcement-card">
+									<div class="announcement-card-top">
+										<div class="avatar announcement-avatar">{{ initialsFor(announcement.postedByName) }}</div>
+										<div class="announcement-header-text">
+											<span class="announcement-author">{{ announcement.postedByName }}</span>
+											<span class="announcement-time">{{ announcement.createdAt | timeAgo }}</span>
+										</div>
+									</div>
+									<p class="announcement-content">{{ announcement.content }}</p>
+									<div class="announcement-card-bottom">
+										<button type="button" class="link-action" (click)="toggleAcknowledgers(announcement.id)">
+											{{ announcement.acknowledgedCount }} of {{ announcement.totalStudentCount }} acknowledged
+											{{ expandedAnnouncementId() === announcement.id ? '▲' : '▼' }}
+										</button>
+									</div>
+									@if (expandedAnnouncementId() === announcement.id) {
+										@if (!announcement.acknowledgedBy || announcement.acknowledgedBy.length === 0) {
+											<p class="empty">No student has acknowledged this yet.</p>
+										} @else {
+											<ul class="acknowledger-list">
+												@for (ack of announcement.acknowledgedBy; track ack.studentId) {
+													<li>
+														<span>{{ ack.fullName }}</span>
+														<span class="muted">{{ ack.acknowledgedAt | timeAgo }}</span>
+													</li>
+												}
+											</ul>
+										}
+									}
+								</li>
+							}
+						</ul>
+					}
+				</section>
+			}
+
+			@if (activeTab() === 'performance') {
+				<section class="section">
+					<h2>Quiz Performance</h2>
+					@if (quizzesLoading()) {
+						<p class="empty">Loading performance…</p>
+					} @else if (performanceRows().length === 0) {
+						<p class="empty">Publish a quiz to see performance data here.</p>
+					} @else {
+						<div class="table-wrap">
+							<table class="activity-table">
+								<thead>
+									<tr>
+										<th>Quiz</th>
+										<th class="num">Avg Score</th>
+										<th class="num">Submissions</th>
+										<th class="num">Completion</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									@for (row of performanceRows(); track row.quiz.id) {
+										<tr>
+											<td>{{ row.quiz.quizTitle }}</td>
+											<td class="num">{{ row.quiz.averageScore != null ? (row.quiz.averageScore | number: '1.0-0') + '%' : '—' }}</td>
+											<td class="num">{{ row.quiz.submissions }}/{{ classroom()?.numberOfStudents }}</td>
+											<td class="num">{{ row.completion }}%</td>
+											<td><span [class]="quizStatusClass(row.quiz)">{{ quizStatusLabel(row.quiz) }}</span></td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+					<p class="small-note">For live proctoring and tab-switch alerts, open
+						<button type="button" class="link-action" (click)="goToMonitoring()">Monitoring</button>.
+					</p>
+				</section>
+			}
+
+			@if (activeTab() === 'results') {
+				<section class="section">
+					<div class="section-head">
+						<h2>Quiz Results</h2>
+						@if (resultsQuizOptions().length > 0) {
+							<div class="results-controls">
+								<label class="results-quiz-picker">
+									Quiz
+									<select [ngModel]="resultsQuizId()" (ngModelChange)="selectResultsQuiz($event)">
+										@for (quiz of resultsQuizOptions(); track quiz.id) {
+											<option [ngValue]="quiz.id">{{ quiz.quizTitle }}</option>
+										}
+									</select>
+								</label>
+								<button type="button" class="icon-btn" title="Refresh results" aria-label="Refresh results" [disabled]="leaderboardLoading()" (click)="refreshResults()"><mat-icon>refresh</mat-icon></button>
+							</div>
+						}
+					</div>
+
+					@if (quizzesLoading()) {
+						<p class="empty">Loading quizzes...</p>
+					} @else if (resultsQuizOptions().length === 0) {
+						<p class="empty">Publish a quiz to see results here.</p>
+					} @else if (leaderboardLoading()) {
+						<p class="empty">Loading results…</p>
+					} @else if (leaderboardError()) {
+						<p class="banner banner-error">{{ leaderboardError() }}</p>
+						<button type="button" class="btn-outline" (click)="refreshResults()"><mat-icon>refresh</mat-icon>Retry</button>
+					} @else if (leaderboard()) {
+						<div class="stat-grid results-stat-grid">
+							<div class="stat-card">
+								<div class="stat-value">{{ leaderboard()!.submittedCount }}/{{ leaderboard()!.enrolledCount }}</div>
+								<div class="stat-label">Submitted</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-value">{{ leaderboard()!.classAveragePercentage != null ? leaderboard()!.classAveragePercentage + '%' : '—' }}</div>
+								<div class="stat-label">Class Average</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-value">{{ leaderboard()!.passingScore }}%</div>
+								<div class="stat-label">Passing Score</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-value">{{ leaderboard()!.totalPoints }}</div>
+								<div class="stat-label">Total Points</div>
+							</div>
+						</div>
+
+						<app-quiz-results-analytics [results]="leaderboard()!" />
+
+						@if (leaderboard()!.rows.length === 0) {
+							<p class="empty">No submissions yet for this quiz.</p>
+						} @else {
+							@if (podiumRows().length > 0) {
+								<div class="podium">
+									@for (row of podiumRows(); track row.studentId) {
+										<div class="podium-card" [class]="'podium-rank-' + row.rank">
+											<div class="podium-rank-badge">{{ row.rank }}</div>
+											<div class="podium-name">{{ row.fullName }}</div>
+											<div class="podium-score">{{ row.score }}/{{ row.totalPoints }} <span class="podium-pct">({{ row.percentage }}%)</span></div>
+											<div class="podium-meta">{{ row.section }}</div>
+										</div>
+									}
+								</div>
+							}
+
+							<div class="results-toolbar">
+								<button type="button" class="btn-outline" (click)="downloadResultsCsv()">Download CSV</button>
+							</div>
+
+							<div class="table-wrap">
+								<table class="activity-table">
+									<thead>
+										<tr>
+											<th class="num">Rank</th>
+											<th>Student</th>
+											<th>Section</th>
+											<th class="num">Score</th>
+											<th class="num">vs Average</th>
+											<th>Status</th>
+											<th class="num">Time Taken</th>
+											<th>Submitted</th>
+										</tr>
+									</thead>
+									<tbody>
+										@for (row of remainingRows(); track row.studentId) {
+											<tr>
+												<td class="num">{{ row.rank }}</td>
+												<td>{{ row.fullName }} <span class="muted">({{ row.studentNumber }})</span></td>
+												<td class="muted">{{ row.section }}</td>
+												<td class="num">{{ row.score }}/{{ row.totalPoints }} ({{ row.percentage }}%)</td>
+												<td class="num" [class.delta-positive]="row.deltaFromAverage > 0" [class.delta-negative]="row.deltaFromAverage < 0">
+													{{ row.deltaFromAverage > 0 ? '+' : '' }}{{ row.deltaFromAverage }}%
+												</td>
+												<td><span [class]="row.passed ? 'status-pill status-completed' : 'status-pill status-danger'">{{ row.passed ? 'Passed' : 'Failed' }}</span></td>
+												<td class="num">{{ formatTimeTaken(row.timeTakenSeconds) }}</td>
+												<td class="muted nowrap">{{ row.submittedAt | timeAgo }}</td>
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						}
+					}
+				</section>
+			}
+
+			@if (activeTab() === 'settings') {
+				<section class="section settings-section">
+					<h2>Classroom Settings</h2>
+					<div class="settings-card">
+						<div class="settings-row">
+							<span class="settings-label">Title</span>
+							<span>{{ classroom()?.classroomTitle }}</span>
+						</div>
+						<div class="settings-row">
+							<span class="settings-label">Description</span>
+							<span>{{ classroom()?.description || '—' }}</span>
+						</div>
+						<div class="settings-row">
+							<span class="settings-label">Class Code</span>
+							<span class="code-row">
+								<span class="code-pill">{{ classroom()?.classCode }}</span>
+								<button type="button" class="link-action" (click)="copyClassCode()">Copy</button>
+								@if (copyMessage()) {
+									<span class="copy-confirm">{{ copyMessage() }}</span>
+								}
+							</span>
+						</div>
+						<div class="settings-row">
+							<span class="settings-label">Approval to join</span>
+							<span>{{ classroom()?.requiresApproval ? 'Required' : 'Not required' }}</span>
+						</div>
+						<button type="button" class="btn-secondary settings-edit-btn" (click)="openEditDialog()">Edit Classroom</button>
+					</div>
+				</section>
+
+				<section class="section danger-zone">
+					<h2>Danger Zone</h2>
+					@if (dangerZoneError()) {
+						<p class="banner banner-error">{{ dangerZoneError() }}</p>
+					}
+					<div class="danger-card">
+						@if (classroom()?.isArchived) {
+							<div class="danger-row">
+								<div class="danger-row-text">
+									<strong>This classroom is archived</strong>
+									<p>It's hidden from your dashboard. Nothing was deleted — your students still have full access.</p>
+								</div>
+								<button type="button" class="btn-outline" [disabled]="leavingClassroom()" (click)="rejoinClassroom()">
+									{{ leavingClassroom() ? 'Rejoining…' : 'Rejoin Classroom' }}
+								</button>
+							</div>
+						} @else {
+							<div class="danger-row">
+								<div class="danger-row-text">
+									<strong>Leave this classroom</strong>
+									<p>Hides it from your dashboard. Reversible — your students are unaffected, and nothing is deleted.</p>
+								</div>
+								<button type="button" class="btn-outline" [disabled]="leavingClassroom() || deletingClassroom()" (click)="leaveClassroom()">
+									{{ leavingClassroom() ? 'Leaving…' : 'Leave Classroom' }}
+								</button>
+							</div>
+						}
+						<div class="danger-row">
+							<div class="danger-row-text">
+								<strong>Delete this classroom</strong>
+								<p>Permanent. Every quiz, student roster entry, announcement, and result becomes inaccessible.</p>
+							</div>
+							<button type="button" class="btn-danger" [disabled]="leavingClassroom() || deletingClassroom()" (click)="deleteClassroom()">
+								{{ deletingClassroom() ? 'Deleting…' : 'Delete Classroom' }}
+							</button>
+						</div>
+					</div>
+				</section>
+			}
+		}
+	</div>
+</div>

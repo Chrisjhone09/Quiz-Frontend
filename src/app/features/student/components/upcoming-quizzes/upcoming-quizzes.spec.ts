@@ -13,6 +13,7 @@ describe('UpcomingQuizzes', () => {
 
     fixture = TestBed.createComponent(UpcomingQuizzes);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('upcomingQuizzes', []);
     await fixture.whenStable();
   });
 

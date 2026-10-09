@@ -8,7 +8,7 @@
 	position: relative;
 	overflow: hidden;
 	background: #fff;
-	border: 1px solid #e6ebf2;
+	border: 1px solid #dce9df;
 	border-radius: 8px;
 	box-shadow: 0 2px 7px rgba(15, 23, 42, 0.08);
 	display: flex;
@@ -22,26 +22,33 @@
 	position: absolute;
 	inset: 0 0 auto;
 	height: 6px;
-	background: #155cff;
+	background: #198754;
 }
 
 .classroom-card--1::before {
-	background: #5b2eff;
+	background: #2f855a;
 }
 
 .classroom-card--2::before {
-	background: #0798b4;
+	background: #2f855a;
 }
 
 .classroom-card--3::before {
-	background: #049f70;
+	background: #198754;
+}
+
+.class-card-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
 }
 
 .class-subjectcode {
 	align-self: flex-start;
-	background: #f0f4f9;
+	background: #ffffff;
 	border-radius: 5px;
-	color: #020817;
+	color: #12372a;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 	font-size: 10px;
 	font-weight: 800;
@@ -50,10 +57,21 @@
 	text-transform: uppercase;
 }
 
+.active-badge {
+	flex: 0 0 auto;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: #fce7f3;
+	color: #be185d;
+	font-size: 11px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
 
 
 .class-title {
-	color: #020817;
+	color: #12372a;
 	font-size: 17px;
 	line-height: 1.25;
 	font-weight: 700;
@@ -62,7 +80,7 @@
 
 .instructor,
 .classroom-meta {
-	color: #4e6281;
+	color: #4b705f;
 	font-size: 14px;
 	line-height: 1.25;
 }
@@ -94,10 +112,10 @@ svg {
 .btn {
 	margin-top: auto;
 	height: 35px;
-	border: 1px solid #dfe7f1;
+	border: 1px solid #dce9df;
 	border-radius: 5px;
-	background: #f3f7fc;
-	color: #020817;
+	background: #ffffff;
+	color: #12372a;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -108,16 +126,16 @@ svg {
 }
 
 .btn svg {
-	color: #8aa0bc;
+	color: #86a194;
 	width: 16px;
 	height: 16px;
 }
 
 .empty {
 	grid-column: 1 / -1;
-	color: #4e6281;
+	color: #4b705f;
 	background: #ffffff;
-	border: 1px solid #e6ebf2;
+	border: 1px solid #dce9df;
 	border-radius: 8px;
 	padding: 22px;
 }
@@ -128,3 +146,22 @@ svg {
 	}
 }
 
+
+/* ---- pending enrolment requests ---- */
+
+.pending-badge {
+	display: inline-block;
+	margin: 2px 0 6px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: #fef3c7;
+	border: 1px solid #fde68a;
+	color: #92400e;
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.pending-badge:hover {
+	background: #fde68a;
+}

@@ -1,0 +1,99 @@
+@if (loading()) {
+	<main class="result-page"><p class="empty">Loading your result…</p></main>
+} @else if (errorMessage()) {
+	<main class="result-page">
+		<p class="banner banner-error">{{ errorMessage() }}</p>
+		<a class="back-link" routerLink="/student-dashboard">Back to dashboard</a>
+	</main>
+} @else if (result(); as r) {
+	<main class="result-page">
+		<nav class="breadcrumbs">
+			<a routerLink="/student-dashboard">My Classrooms</a>
+			<span>›</span>
+			<strong>{{ r.title }}</strong>
+		</nav>
+
+		<section class="summary-card" [class.summary-pass]="r.passed" [class.summary-fail]="!r.passed">
+			<div class="summary-verdict">
+				<span class="verdict-pill">{{ r.passed ? 'Passed' : 'Did not pass' }}</span>
+				<h1>{{ r.title }}</h1>
+				@if (r.submittedAt) {
+					<p class="submitted">Submitted {{ r.submittedAt | timeAgo }}</p>
+				}
+			</div>
+
+			<div class="summary-figures">
+				<div class="figure figure-lead">
+					<span class="figure-value">{{ r.percentage }}%</span>
+					<span class="figure-label">Score · {{ r.passingScore }}% to pass</span>
+				</div>
+				<div class="figure">
+					<span class="figure-value">{{ r.score }}<small>/{{ r.totalPoints }}</small></span>
+					<span class="figure-label">Points</span>
+				</div>
+				<div class="figure">
+					<span class="figure-value">{{ r.correctCount }}<small>/{{ r.totalQuestions }}</small></span>
+					<span class="figure-label">Correct answers</span>
+				</div>
+				<div class="figure">
+					<span class="figure-value">{{ incorrectCount() }}</span>
+					<span class="figure-label">Incorrect</span>
+				</div>
+			</div>
+		</section>
+
+		<h2 class="section-title">Question breakdown</h2>
+
+		<ol class="question-list">
+			@for (question of r.questions; track question.id) {
+				<li class="question-card" [class.is-correct]="question.isCorrect" [class.is-wrong]="!question.isCorrect">
+					<header class="question-head">
+						<span class="mark">{{ question.isCorrect ? '✓' : '✗' }}</span>
+						<div>
+							<p class="question-text">{{ question.text }}</p>
+							<p class="question-meta">
+								{{ questionTypeLabel(question.questionType) }} ·
+								{{ question.isCorrect ? question.points : 0 }}/{{ question.points }}
+								{{ question.points === 1 ? 'point' : 'points' }}
+							</p>
+						</div>
+					</header>
+
+					@if (question.questionType === 'multiple_choice') {
+						<ul class="choice-list">
+							@for (choice of question.choices; track choice.id) {
+								<li
+									class="choice"
+									[class.choice-correct]="choice.id === question.correctChoiceId"
+									[class.choice-yours-wrong]="choice.id === question.yourChoiceId && choice.id !== question.correctChoiceId">
+									<span class="choice-text">{{ choice.text }}</span>
+									@if (choice.id === question.correctChoiceId) {
+										<span class="choice-tag tag-correct">Correct answer</span>
+									}
+									@if (choice.id === question.yourChoiceId) {
+										<span class="choice-tag tag-yours">Your answer</span>
+									}
+								</li>
+							}
+						</ul>
+					} @else {
+						<dl class="answer-compare">
+							<div>
+								<dt>Your answer</dt>
+								<dd [class.wrong-text]="!question.isCorrect">{{ displayedAnswer(question) }}</dd>
+							</div>
+							@if (!question.isCorrect) {
+								<div>
+									<dt>Correct answer</dt>
+									<dd class="right-text">{{ displayedCorrectAnswer(question) }}</dd>
+								</div>
+							}
+						</dl>
+					}
+				</li>
+			}
+		</ol>
+
+		<a class="back-link" routerLink="/student-dashboard">Back to dashboard</a>
+	</main>
+}

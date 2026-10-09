@@ -34,8 +34,20 @@ export class Auth {
     return this.http.post(`${environment.apiUrl}/api/account/register`, credentials);
   }
 
-  verifyEmail(data: ResetPasswordModel): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/account/verify-email`, data);
+  resetPassword(data: ResetPasswordModel): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${environment.apiUrl}/api/account/reset-password`, data);
+  }
+
+  /**
+   * Confirms a newly-registered account's email address (the link sent by
+   * RegisterAsync). The API reads email/token from the query string regardless
+   * of verb, so this is a POST with no body — kept separate from verifyEmail()
+   * above, which is actually used by the password-reset form for a different
+   * endpoint/payload shape.
+   */
+  confirmEmailVerification(email: string, token: string): Observable<any> {
+    const params = `email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
+    return this.http.post(`${environment.apiUrl}/api/account/verify-email?${params}`, {});
   }
 
   storeToken(token: string): void {
@@ -43,8 +55,12 @@ export class Auth {
 
   }
 
-  forgotPassword(email: FieldTree<ForgotPasswordModel>): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/account/forgot-password`, email);
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.apiUrl}/api/account/send-reset-code`,
+      {},
+      { params: { email } }
+    );
   }
 
   getToken(): string | null {
@@ -52,7 +68,21 @@ export class Auth {
   }
 
   logout(): void {
+    // Best-effort audit-trail write ("who logged out, and when") — fired before the
+    // token is cleared since the call needs it, but never awaited: the client wipes
+    // its own state immediately regardless of whether the request reaches the server.
+    const token = this.getToken();
+
+    if (token) {
+      this.http
+        .post(`${environment.apiUrl}/api/account/logout`, {}, { headers: this.getAuthHeaders() })
+        .subscribe({ next: () => {}, error: () => {} });
+    }
+
     localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    this.user.set(null);
   }
 
   storeUserDetails(user: User): void {
@@ -78,7 +108,11 @@ export class Auth {
       return null;
     }
 
-    return jwtDecode<JwtPayloadModel>(token).role;
+    try {
+      return jwtDecode<JwtPayloadModel>(token).role ?? null;
+    } catch {
+      return null;
+    }
   }
 
   getAuthHeaders(): HttpHeaders {

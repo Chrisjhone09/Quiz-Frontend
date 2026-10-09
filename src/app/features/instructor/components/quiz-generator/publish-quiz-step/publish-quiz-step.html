@@ -25,7 +25,7 @@
       </div>
 
       <span>Difficulty</span>
-      <strong>{{ summary().difficulty || 'Mixed' }}</strong>
+      <strong>{{ summary().difficulty || 'Hard' }}</strong>
 
       <span>Schedule</span>
       <strong>{{ scheduleDuration() }}</strong>
@@ -121,7 +121,7 @@
               <input type="date" [formField]="publishSettingsForm.openDate" />
             </label>
             <label>
-              <span>Open Time</span>
+              <span>Open Time (PHT)</span>
               <input type="time" [formField]="publishSettingsForm.openTime" />
             </label>
             <label>
@@ -129,13 +129,13 @@
               <input type="date" [formField]="publishSettingsForm.closeDate" />
             </label>
             <label>
-              <span>Close Time</span>
+              <span>Close Time (PHT)</span>
               <input type="time" [formField]="publishSettingsForm.closeTime" />
             </label>
           </div>
         } @else {
           <label class="expires-field">
-            <span>Expires At</span>
+            <span>Expires At (PHT)</span>
             <input type="time" [formField]="publishSettingsForm.expiresAt" />
           </label>
         }

@@ -1,5 +1,5 @@
 <div class="classroom-dialog">
-	<h3>Create Classroom</h3>
+	<h3>{{ isEditing ? 'Edit Classroom' : 'Create Classroom' }}</h3>
     <form [formRoot]="classroomForm">
         <label class="field">
 		<span>Title</span>
@@ -21,10 +21,28 @@
 	</label>
 	<div class="meta">{{ classroomModel().description.length }}/100</div>
 
+	<label class="checkbox-field">
+		<input
+			type="checkbox"
+			[checked]="classroomModel().requiresApproval"
+			(change)="toggleRequiresApproval($event)"
+		/>
+		<span>
+			<strong>Require my approval to join</strong>
+			<small>
+				Students who enter the class code will wait in a request queue until you admit
+				them. Leave this off to let anyone with the code join immediately.
+			</small>
+		</span>
+	</label>
+
+	@if (errorMessage()) {
+		<p class="dialog-error">{{ errorMessage() }}</p>
+	}
+
 	<div class="actions">
-		<button type="submit">Create</button>
+		<button type="submit">{{ isEditing ? 'Save changes' : 'Create' }}</button>
 	</div>
     </form>
-	
-</div>
 
+</div>

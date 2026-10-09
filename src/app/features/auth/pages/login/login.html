@@ -1,19 +1,47 @@
-<form [formRoot]="loginForm" class="auth-form">
-    <h2>Sign in</h2>
-
-    <label class="field full">
-        Email
-        <input type="email" placeholder="you@school.edu" [formField]="loginForm.email" />
+<section class="auth-shell login-shell">
+  <div class="auth-brand">
+    <img
+      src="itLogo.png"
+      width="76"
+      height="76"
+      alt="Information Technology Education department logo"
+    />
+    <p>Information Technology Education</p>
+  </div>
+  <form [formRoot]="loginForm" class="auth-form">
+    <h1>Sign in</h1>
+    <p class="form-subtitle">Welcome back to your department learning portal.</p>
+    <label class="field">
+      <span>Email or student ID</span>
+      <input
+        type="text"
+        autocomplete="username"
+        placeholder="Email or student ID"
+        [formField]="loginForm.email"
+      />
     </label>
-
-    <label class="field full">
-        Password
-        <input type="password" placeholder="Password" [formField]="loginForm.password" />
+    <label class="field">
+      <span>Password</span>
+      <input
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your password"
+        [formField]="loginForm.password"
+      />
     </label>
-
-    <div class="actions">
-        <button type="submit" class="primary">Sign in</button>
+    <div class="form-links"><a routerLink="/forgot-password">Forgot password?</a></div>
+    @if (successMessage()) {
+      <p class="banner banner-success" role="status">{{ successMessage() }}</p>
+    }
+    @if (errorMessage()) {
+      <p class="banner banner-error" role="alert">{{ errorMessage() }}</p>
+    }
+    <button type="submit" class="primary" [disabled]="submitting()">
+      {{ submitting() ? 'Signing in...' : 'Sign in' }}
+    </button>
+    <div class="auth-footer">
+      <span>Don't have an account?</span>
+      <a class="secondary" routerLink="/register">Sign up</a>
     </div>
-
-    <p class="muted">Don't have an account? <a href="/register">Register</a></p>
-</form>
+  </form>
+</section>

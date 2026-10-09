@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/enviroment.developement';
 import {
   ApiResult,
+  QuizResult,
   QuizSubmission,
   QuizSubmissionResult,
   StudentQuiz,
@@ -30,6 +31,27 @@ export class StudentQuizService {
     return this.http.post<ApiResult<QuizSubmissionResult>>(
       `${environment.apiUrl}/api/classroom/submit`,
       payload
+    );
+  }
+
+  /** Per-question breakdown of a submitted attempt. 400s if results aren't released. */
+  getResult(quizId: number): Observable<ApiResult<QuizResult>> {
+    const params = new HttpParams().set('studentId', this.auth.getUserId());
+
+    return this.http.get<ApiResult<QuizResult>>(
+      `${environment.apiUrl}/api/classroom/result/${quizId}`,
+      { params }
+    );
+  }
+
+  recordTabSwitch(studentId: string, quizId: number): Observable<ApiResult<unknown>> {
+    return this.http.post<ApiResult<unknown>>(
+      `${environment.apiUrl}/api/classroom/monitoring/tab-switch`,
+      {
+        studentId,
+        quizId,
+        action: 'Tab switched',
+      }
     );
   }
 }
