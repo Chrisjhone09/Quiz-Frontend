@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiUrl:  'https://localhost:7075' 
+    apiUrl:  'https://personal-project.runasp.net' 
 }
 
 //https://localhost:7075
